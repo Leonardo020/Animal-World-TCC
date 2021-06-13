@@ -1,0 +1,217 @@
+﻿
+@{
+    ViewBag.Title = "DadosEntrega";
+}
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <script type="text/javascript" src="@Url.Content("/Scripts/script.js")"></script>
+    <style>
+        h4 {
+            margin-top:1.2rem;
+            font-size: 1.5rem;
+            text-align: center;
+            margin-bottom: 1.6rem;
+        }
+
+        #contDadosEntrega {
+            height:400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .cardEnd {
+            height:6rem;
+            background-color: white;
+            box-shadow: 0px 2px 5px #1f232b5e;
+            width: 80%;
+            display: flex;
+            flex-direction: row;
+            align-items:center;
+            justify-content: space-around;
+            border: 1px solid #000;
+        }
+
+        .TextoEnde {
+            display: flex;
+            flex-direction: column;
+            align-content: space-between;
+        }
+
+        .EndeIcon {
+            width: 4rem;
+            height: 4rem;
+        }
+
+        .cardProd {
+            height: 6rem;
+            background-color: white;
+            width: 80%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            border: 1px solid #000;
+        }
+
+        .conteudoProd {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #000;
+            width: 20%;
+            height: 6rem;
+        }
+
+        .ProdIcon {
+            width: 4rem;
+            height: 4rem;
+        }
+
+        .TextoProd {
+            margin-left:2.0rem;
+        }
+
+        .cardPagamento {
+            height: 6rem;
+            background-color: white;
+            width: 80%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        .RetireAlt {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around;
+            border: 1px solid #000;
+            width: 40%;
+            height: 6rem;
+        }
+
+
+        .conteudoFP {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #000;
+            height: 6rem;
+            width: 30%;
+            background-color: #73af94;
+        }
+
+        .Total {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #000;
+            height: 3rem;
+            width: 100%;
+            background-color: white;
+        }
+
+        #ConfirmaPedido {
+            background-color: #73af94;
+            border-radius: 50%;
+            margin-left: 10rem;
+        }
+
+        .BotaoConf {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+        }
+
+        #confirmaDE {
+            background-color: #43b581;
+            color: white;
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            margin-left:2rem;
+        }
+
+        .FP1 {
+            display:flex;
+            flex-direction:row;
+            padding:1rem;
+        }
+    </style>
+</head>
+
+<div>
+    <h4>Dados da entrega</h4>
+</div>
+
+<div id="contDadosEntrega">
+    <div class="cardEnd">
+        <span>
+            <img src="~/img/casa-de-animais.png"
+                 alt="Casa"
+                 class="EndeIcon" />
+        </span>
+        <div class="TextoEnde">
+            <p>
+                Rua Wilson das Neves, 420, Helena Maria, Osasko, SP
+            </p>
+            <p>
+                CEP: 04016788
+            </p>
+        </div>
+        <a href="#">Editar</a>
+    </div>
+
+    <div class="cardProd">
+        <div class="conteudoProd">
+            <span>
+                <img src="~/img/calops.png"
+                     alt="Produto"
+                     class="ProdIcon" />
+            </span>
+        </div>
+        <div class="TextoProd">
+            <p>
+                1 - Ração de Calopsita Qualquer.
+            </p>
+        </div>
+    </div>
+    <div class="cardPagamento">
+        <div class="RetireAlt">
+            <p>
+                Ou, se preferir
+            </p>
+            <a href="#">Retire na Loja</a>
+        </div>
+        <div class="conteudoFP">
+            <div class="FP1">
+                <p>
+                    Forma de Pagamento:
+                </p>
+                <select name="select">
+                    <option value="valor1">Debito</option>
+                    <option value="valor2" selected>Credito</option>
+                    <option value="valor2" selected>Dinheiro</option>
+                </select>
+                </p>
+            </div>
+
+            <div class="Total">
+                <p>
+                    Total: RS15,00
+                </p>
+            </div>
+        </div>
+        <div class="BotaoConf">
+            <input type="submit" class="btn button-a button-big button-rouded btn-success" id="confirmaDE" value="Confirmar">
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,176 @@
+﻿@model ProjetoAW.Models.Animal
+
+@{
+    ViewBag.Title = "DadosPet";
+}
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <script type="text/javascript" src="@Url.Content("/Scripts/script.js")"></script>
+    <style>
+
+        h2 {
+            margin-top: 1.2rem;
+            font-size: 1.5rem;
+            text-align: center;
+            margin-bottom: 1.6rem;
+        }
+
+        .contDadosPet {
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .cardDP {
+            display: flex;
+            align-items: center;
+            width: 68%;
+            margin-bottom: 1rem;
+            box-shadow: 0px 2px 5px #1f232b5e;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .avatar {
+            vertical-align: middle;
+            width: 185px;
+            height: 25vh;
+            border-radius: 50%;
+            padding: 1rem;
+        }
+
+        .avatarDP {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 26%;
+        }
+
+        .dadosCP {
+            width: 80%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .linhaDP1 {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+            width: 100%
+        }
+
+            .linhaDP1 p {
+                width: 100%;
+            }
+
+        #EditarCP {
+            background-color: #73af94;
+            color: white;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        #labelFile {
+            font-size: 14px;
+            padding: 10px 8px;
+            width: auto;
+            background-color: #43b581;
+            color: #FFF;
+            text-transform: uppercase;
+            text-align: center;
+            display: block;
+            margin-top: 10px;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<div>
+    <h2>Dados do Pet</h2>
+</div>
+
+@using (Html.BeginForm("DadosPet", "Animal", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="contDadosPet">
+        <div class="cardDP">
+            <div class="avatarDP">
+                <img src="@ViewBag.imagem" id="preview-img" class="avatar" />
+                <label id="labelFile" for="default-button"><i class="fas fa-paw"></i> Modificar imagem</label>
+                <input type="file" name="file" id="default-button">
+            </div>
+            <div class="dadosCP">
+                @Html.EditorFor(model => model.codAnimal, new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom: 5px", @hidden="true" } })
+                @Html.EditorFor(model => model.imagemAnimal, new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom: 5px", @hidden="true" } })
+                <div class="linhaDP1">
+                    <p>@Html.LabelFor(model => model.nomeAnimal, htmlAttributes: new { @class = "control-label " }): @Html.EditorFor(model => model.nomeAnimal, new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom: 5px" } })</p>
+                    <p> @Html.LabelFor(model => model.codRaca, htmlAttributes: new { @class = "control-label " }): @Html.EditorFor(model => model.nomeRaca, new { htmlAttributes = new { @class = "form-control", @disabled = "true" } })</p>
+                </div>
+
+                <div class="linhaDP1">
+                    <p>@Html.LabelFor(model => model.codEspecie, htmlAttributes: new { @class = "control-label " }): @Html.EditorFor(model => model.nomeEspecie, new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom: 5px", @disabled = "true" } })</p>
+                    <p>@Html.LabelFor(model => model.temperamento, htmlAttributes: new { @class = "control-label " }): @Html.EditorFor(model => model.temperamento, new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom: 5px", @disabled = "true" } })</p>
+                </div>
+
+                <div class="linhaDP1">
+                    <p> @Html.LabelFor(model => model.idade, htmlAttributes: new { @class = "control-label " }): @Html.EditorFor(model => model.idade, new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom: 5px" } })</p>
+                    <p> @Html.LabelFor(model => model.sexo, htmlAttributes: new { @class = "control-label " }): @Html.EditorFor(model => model.sexo, new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom: 5px", @disabled = "true" } })</p>
+                </div>
+
+                <div class="linhaDP1">
+                    <p>@Html.LabelFor(model => model.descricaoAnimal, htmlAttributes: new { @class = "control-label " }): @Html.TextArea("descAnimal", (string)ViewBag.desc, new { @class = "form-control", placeholder = "Digite a descrição do animal", rows = "4", style = "resize:none; margin-bottom: 5px", name = "descAnimal" })</p>
+                    <p> @Html.LabelFor(model => model.codPorte, htmlAttributes: new { @class = "control-label " }): @Html.EditorFor(model => model.nomePorte, new { htmlAttributes = new { @class = "form-control", @disabled = "true", @style = "margin-bottom: 5px" } })</p>
+                </div>
+                <div class="linhaDP1">
+                    <button class="btn button-a button-big button-rouded btn-success" id="EditarCP"><i class="fas fa-pencil-alt"></i> Editar Dados</button>
+                </div>
+                    <p>@ViewBag.Message</p>
+
+            </div>
+        </div>
+
+    </div>
+}
+
+<script type="text/javascript">
+    const wrapper = document.querySelector(".wrapper");
+    const fileName = document.querySelector(".file-name");
+    const defaultBtn = document.querySelector("#default-button");
+    const customBtn = document.querySelector("#custom-btn");
+    const cancelBtn = document.querySelector("#cancel-btn i");
+    const img = document.querySelector("#preview-img");
+    let regExp = /[0-9a-zA-Z\^\&\'\{\}\[\]\,\$\=\!\-\#\(\)\.\%\+\~\_ ]+$/;
+    defaultBtn.addEventListener("change", function () {
+        img.src = "";
+        const file = this.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function () {
+                const result = reader.result;
+                img.src = result;
+                wrapper.classList.add("active");
+            }
+            reader.readAsDataURL(file);
+        }
+        if (this.value) {
+            let valueStore = this.value.match(regExp);
+            fileName.textContent = valueStore;
+        }
+    });
+
+</script>
+

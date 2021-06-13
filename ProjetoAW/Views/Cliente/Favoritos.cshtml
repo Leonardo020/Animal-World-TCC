@@ -1,0 +1,159 @@
+﻿
+@{
+    ViewBag.Title = "Favoritos";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <script type="text/javascript" src="@Url.Content("/Scripts/script.js")"></script>
+    <style>
+
+        h3 {
+            margin-top: 1.2rem;
+            font-size: 1.5rem;
+            text-align: center;
+            margin-bottom: 1.6rem;
+            color: #43b581;
+        }
+
+        .CardFav {
+            background-color: white;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            border: 1px solid #000;
+            margin-right:2rem;
+        }
+
+        .blocoFav {
+            width:90%;
+            display: flex;
+            flex-direction: column;
+            align-items:center;
+            justify-content: space-between;
+            border: 1px solid #000;
+            box-shadow: 0px 2px 5px #1f232b5e;
+            border-radius: 10px;
+        }
+
+        #acessoFavoritos {
+            background-color: #43b581;
+            color: white;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        #contFavoritos {
+            margin-bottom: 1.6rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .favImg {
+            width: 150px;
+            height:150px;
+        }
+
+        .favIcon {
+            margin-top:1rem;
+            margin-left:10rem;
+            height: 20px;
+            width: 20px;
+        }
+
+        #txtFav{
+            padding:1rem;
+        }
+
+        .linhaFav {
+            display:flex;
+            flex-direction:row;
+            align-items:center;
+            justify-content:space-between;
+            margin: 2rem 0 2rem 0;
+        }
+
+    </style>
+</head>
+
+<div>
+    <h3>Favoritos</h3>
+</div>
+
+<div id="contFavoritos">
+    <div class="blocoFav">
+        <div class="linhaFav">
+            <div class="CardFav">
+                <img class="favIcon" src="~/img/favoritepre.png">
+                <img class="favImg" src="~/img/calops.png">
+                <p id="txtFav">Ração de Calopsita Qualquer</p>
+                <p id="txtFav">R$12,00</p>
+                <input type="submit" class="btn button-a button-big button-rouded btn-success" id="acessoFavoritos" value="Adicionar ao Carrinho">
+            </div>
+            <div class="CardFav">
+                <img class="favIcon" src="~/img/favoritepre.png">
+                <img class="favImg" src="~/img/marcas2.png">
+                <p id="txtFav">Ração de Calopsita Qualquer</p>
+                <p id="txtFav">R$12,00</p>
+                <input type="submit" class="btn button-a button-big button-rouded btn-success" id="acessoFavoritos" value="Adicionar ao Carrinho">
+            </div>
+            <div class="CardFav">
+                <img class="favIcon" src="~/img/favoritepre.png">
+                <img class="favImg" src="~/img/marcas2.png">
+                <p id="txtFav">Ração de Calopsita Qualquer</p>
+                <p id="txtFav">R$12,00</p>
+                <input type="submit" class="btn button-a button-big button-rouded btn-success" id="acessoFavoritos" value="Adicionar ao Carrinho">
+            </div>
+            <div class="CardFav">
+                <img class="favIcon" src="~/img/favoritepre.png">
+                <img class="favImg" src="~/img/marcas2.png">
+                <p id="txtFav">Ração de Calopsita Qualquer</p>
+                <p id="txtFav">R$12,00</p>
+                <input type="submit" class="btn button-a button-big button-rouded btn-success" id="acessoFavoritos" value="Adicionar ao Carrinho">
+            </div>
+        </div>
+        <div class="linhaFav">
+            <div class="CardFav">
+                <img class="favIcon" src="~/img/favoritepre.png">
+                <img class="favImg" src="~/img/calops.png">
+                <p id="txtFav">Ração de Calopsita Qualquer</p>
+                <p id="txtFav">R$12,00</p>
+                <input type="submit" class="btn button-a button-big button-rouded btn-success" id="acessoFavoritos" value="Adicionar ao Carrinho">
+            </div>
+            <div class="CardFav">
+                <img class="favIcon" src="~/img/favoritepre.png">
+                <img class="favImg" src="~/img/marcas2.png">
+                <p id="txtFav">Ração de Calopsita Qualquer</p>
+                <p id="txtFav">R$12,00</p>
+                <input type="submit" class="btn button-a button-big button-rouded btn-success" id="acessoFavoritos" value="Adicionar ao Carrinho">
+            </div>
+            <div class="CardFav">
+                <img class="favIcon" src="~/img/favoritepre.png">
+                <img class="favImg" src="~/img/marcas2.png">
+                <p id="txtFav">Ração de Calopsita Qualquer</p>
+                <p id="txtFav">R$12,00</p>
+                <input type="submit" class="btn button-a button-big button-rouded btn-success" id="acessoFavoritos" value="Adicionar ao Carrinho">
+            </div>
+            <div class="CardFav">
+                <img class="favIcon" src="~/img/favoritepre.png">
+                <img class="favImg" src="~/img/marcas2.png">
+                <p id="txtFav">Ração de Calopsita Qualquer</p>
+                <p id="txtFav">R$12,00</p>
+                <input type="submit" class="btn button-a button-big button-rouded btn-success" id="acessoFavoritos" value="Adicionar ao Carrinho">
+            </div>
+        </div>
+    </div>
+</div>
+</html>
+

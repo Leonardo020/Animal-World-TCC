@@ -1,0 +1,189 @@
+﻿@model IEnumerable<ProjetoAW.Models.Produto>
+
+@{
+    ViewBag.Title = "Vitrine";
+}
+
+<head>
+    <style>
+        h2 {
+            font-size: 1.2rem;
+        }
+
+        h6 {
+            margin-top: 1.2rem;
+            font-size: 1.6rem;
+            padding-right: 40rem;
+        }
+
+        .contVitrine {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+        }
+
+        .cbcVit {
+            padding: 1rem;
+            width: 90%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+        }
+
+        .linhaVitrine {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            padding-bottom: 2rem;
+            padding-top: 1.6rem
+        }
+
+        .cardVitrine {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: auto;
+            font-size: 1rem;
+            box-shadow: 0 2px 5px #000;
+            border-radius: 10px;
+            align-content: stretch;
+            padding: 15px;
+            margin-right: 50px;
+        }
+
+        .filtrarVit {
+            display: flex;
+            flex-direction: row;
+            width: auto;
+            align-items: center;
+            justify-content: center;
+            border-radius: 15px;
+        }
+
+        #imgVit {
+            height: 100px;
+            width: 80px;
+        }
+
+        .actionProduto {
+            color: #000;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+            .actionProduto:link {
+                text-decoration: none;
+            }
+
+        .precoVit {
+            color: #43b581;
+            font-weight: 600;
+        }
+
+        .addCarrinho {
+            background-color: #43b581;
+            color: white;
+            font-size: 0.8rem;
+            margin-top: 1rem;
+        }
+
+        .favVit {
+            margin-top: 0.6rem;
+            margin-left: 10rem;
+            height: 20px;
+            width: 20px;
+            cursor: pointer
+        }
+
+        .paginaVit {
+            margin-bottom: 40px;
+        }
+
+            .paginaVit span {
+                display: inline-block;
+                border: 1px solid #000;
+                margin-left: 10px;
+                width: 40px;
+                height: 40px;
+                text-align: center;
+                line-height: 40px;
+                cursor: pointer;
+            }
+    </style>
+</head>
+<div class="container">
+
+    <div class="contVitrine">
+        <div class="cbcVit">
+            <h6>Os melhores produtos:</h6>
+            <div class="filtrarVit">
+                <h2>Filtrar por: </h2>@Html.DropDownList("groups", null, "Opção", new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="linhaVitrine">
+            @foreach (var item in Model)
+            {
+                var id = item.codProduto;
+
+
+                <div class="cardVitrine">
+                    <i class="far fa-heart favVit" name="favVit"></i>
+                    <br />
+                    @if (@item.imagemProduto != null)
+                    {
+                        <a href="/Produto/DetalheProd/@id"><img src="@item.imagemProduto" id="imgVit" /></a>
+                    }
+                    else
+                    {
+                        <img class="card-img-right flex-auto d-none d-md-block" data-src=" " alt="Thumbnail [300x300]" style="width: 300px; height: 300px;" src="~/Images/image-not-found.jpg" data-holder-rendered="true">
+                    }
+
+                    <hr />
+                    @Html.ActionLink(item.nomeProduto, "DetalheProd", new { id = item.codProduto }, new { @class = "actionProduto" })
+                    <br />
+                    <h5 class="precoVit"> @Html.DisplayFor(modelItem => item.valorUnitario)</h5>
+                    @using (Html.BeginForm("adicionarItemCarrinho", "Venda", FormMethod.Post))
+                    {
+                        <input type="hidden" name="id" value="@item.codProduto" />
+                        <input type="hidden" name="preco" value="@item.valorUnitario" />
+                        <input type="hidden" name="quantidade" value="1" />
+                        <button class="btn btn-success addCarrinho"><i class="fas fa-shopping-cart"></i> Adicionar ao Carrinho</button>
+                    }
+                </div>
+            }
+        </div>
+        <div class="paginaVit">
+            <span>1</span>
+            <span>2</span>
+            <span>3</span>
+            <span>&#8594;</span>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#groups').change(function () {
+            var filtro = $('#groups').val();
+            if (filtro != null) {
+                $.post('@Url.Action("Vitrine", "Produto")', { 'filtro': filtro });
+            };
+        });
+    });
+
+    var isFavorite = false;
+    var favoriteToggle = document.querySelector('.favVit');
+
+    favoriteToggle.addEventListener('click', function () {
+        if (!isFavorite) {
+            favoriteToggle.setAttribute('style', 'color:#43b581;')
+            favoriteToggle.setAttribute('class', 'fas fa-heart favVit')
+        }
+        else {
+            favoriteToggle.setAttribute('style', 'color:#000;')
+            favoriteToggle.setAttribute('class', 'far fa-heart favVit')
+        }
+        isFavorite = !isFavorite;
+    });
+</script>

@@ -1,0 +1,80 @@
+﻿
+@{
+    ViewBag.Title = "Marcas";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <script type="text/javascript" src="@Url.Content("/Scripts/script.js")"></script>
+    <style>
+        h3 {
+            font-size: 1.5rem;
+            margin-top: 15px;
+            margin-left: 60px;
+        }
+
+        .CardMarc {
+            height: 23rem;
+            margin: 1.6rem auto;
+            background-color: white;
+            box-shadow: 0px 2px 5px #1f232b5e;
+            border-radius: 10px;
+            width: 18rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            border: 2px solid #000;
+        }
+
+        #acessoMarca {
+            background-color: #43b581;
+            color: white;
+            font-size: 1rem;
+        }
+
+        #contMarcas {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-evenly;
+            flex-wrap: wrap;
+        }
+
+        .marcaImg {
+            width: 200px;
+        }
+    </style>
+</head>
+
+<div>
+    <h3> Principais Marcas:</h3>
+</div>
+
+<div id="contMarcas">
+    <div class="CardMarc">
+        <img class="marcaImg" src="~/img/marca1.png">
+        <input type="submit" class="btn button-a button-big button-rouded btn-success" id="acessoMarca" value="Confira os produtos!">
+    </div>
+    <div class="CardMarc">
+        <img class="marcaImg" src="~/img/marcas2.png">
+        <input type="submit" class="btn button-a button-big button-rouded btn-success" id="acessoMarca" value="Confira os produtos!">
+    </div><div class="CardMarc">
+        <img class="marcaImg" src="~/img/marca1.png">
+        <input type="submit" class="btn button-a button-big button-rouded btn-success" id="acessoMarca" value="Confira os produtos!">
+    </div>
+    <div class="CardMarc">
+        <img class="marcaImg" src="~/img/marcas2.png">
+        <input type="submit" class="btn button-a button-big button-rouded btn-success" id="acessoMarca" value="Confira os produtos!">
+    </div>
+</div>
+</html>
+
+

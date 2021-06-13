@@ -1,0 +1,123 @@
+﻿
+@{
+    ViewBag.Title = "DadosPedido";
+}
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <script type="text/javascript" src="@Url.Content("/Scripts/script.js")"></script>
+    <style>
+
+        h2 {
+            font-size: 24px;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        #contDadosPedido {
+            height:380px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top:2rem;
+        }
+
+        .cardPed {
+            height: 9rem;
+            background-color: white;
+            width: 80%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content:space-between;
+            border: 1px solid #000;
+        }
+
+        .ProdInfo {
+            display: flex;
+            flex-direction: row;
+            width: 40%;
+            margin-left:1.5rem;
+        }
+
+        .ProdInfo1 {
+            display: flex;
+            flex-direction: column;
+            align-items:center;
+            justify-content:center;
+            width: 10%;
+        }
+
+        .ProdInfo2 {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            width: 20%;
+            height:100%;
+        }
+
+        .TotalInfo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height:40%;
+            border: 1px solid #000;
+        }
+
+        .Status {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height:10rem;
+        }
+
+        .ProdIcon {
+            width: 4rem;
+            height: 4rem;
+        }
+
+        h6 {
+            margin-top:1.5rem;
+        }
+
+    </style>
+</head>
+    <h2>Meus Pedidos</h2>
+
+    <div id="contDadosPedido">
+        <div class="cardPed">
+            <div class="ProdInfo">
+                <img src="~/img/calops.png"
+                     alt="Produto"
+                     class="ProdIcon" />
+                <h6>Ração de Calopsita Qualquer</h6>
+            </div>
+            <div class="ProdInfo1">
+                <h5>Quantidade</h5>
+                </br>
+                <h5>1</h5>
+            </div>
+            <div class="ProdInfo1">
+                <h5>Data de Confirmação</h5>
+                </br>
+                <h5>20/01/2021</h5>
+            </div>
+            <div class="ProdInfo2">
+                <div class="TotalInfo">
+                    <h5>Total: R$24,00</h5>
+                </div>
+                <div class="Status">
+                    <p>Status</p>
+                    <p>Enviado aos correios.</p>
+                </div>
+            </div>
+        </div>

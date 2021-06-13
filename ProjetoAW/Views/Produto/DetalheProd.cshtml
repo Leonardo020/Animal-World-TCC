@@ -1,0 +1,111 @@
+﻿@model ProjetoAW.Models.Produto
+
+@{
+    ViewBag.Title = "DetalheProd";
+}
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <script type="text/javascript" src="@Url.Content("/Scripts/script.js")"></script>
+
+    <style>
+        h2 {
+            margin-top: 1.2rem;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+
+        contDetalhe {
+            margin-top: 80px;
+        }
+
+        .detalhes {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+            height: 450px;
+            background-color: white;
+            border-radius: 10px;
+            border: 1px solid #000;
+            margin-top: 2rem;
+        }
+
+        .cardDetalhe img {
+            padding-left: 16rem;
+        }
+
+        .cardDetalhe {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cardDetalhe1 {
+            margin: 2rem;
+            width: 40%;
+        }
+
+        #addCarrinho {
+            background-color: #43b581;
+            color: white;
+            font-size: 0.8rem;
+            margin-top: 1rem;
+            margin-bottom: 2rem;
+            margin-left: 2rem;
+        }
+
+        #preco {
+            margin: 20px 0;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        #detalheImg {
+            height: 300px;
+            width: 200px;
+        }
+
+        #qntDet {
+            width: 3rem;
+        }
+
+        h6 {
+            margin-top: 1.2rem;
+            font-size: 1.8rem;
+        }
+    </style>
+</head>
+
+
+@using (Html.BeginForm("adicionarItemCarrinho", "Venda", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="contDetalhe">
+        <div>
+            <h2> Detalhes do produto:</h2>
+        </div>
+        <div class="detalhes">
+            <div class="cardDetalhe">
+                <img src="@ViewBag.imagemProduto" id="detalheImg">
+            </div>
+            <div class="cardDetalhe1">
+                <h6>@Model.nomeProduto</h6>
+                <p id="preco">@Model.valorUnitario</p>
+                <input type="number" value="1" id="qntDet" />
+                <button type="submit" class="btn btn-success" id="addCarrinho"><i class="fas fa-shopping-cart"></i>Adicionar ao Carrinho</button>
+                <h3>Detalhe do Produto:</h3>
+                <br/>
+                <p>
+                    @Model.descProduto
+                </p>
+                <br/>
+                <a href="/Produto/Vitrine">Voltar para a vitrine.</a>
+            </div>
+        </div>
+    </div>
+}

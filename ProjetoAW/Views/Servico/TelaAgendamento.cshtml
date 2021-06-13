@@ -1,0 +1,124 @@
+﻿
+@{
+    ViewBag.Title = "TelaAgendamento";
+}
+
+<head>
+    <style>
+        h2 {
+            margin-top: 1.2rem;
+            font-size: 1.5rem;
+            text-align: center;
+            margin-bottom: 1.6rem;
+        }
+
+        .contTA {
+            height:395px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .cardTA {
+            border-radius: 5px;
+            padding: 1.2rem 0;
+            background-color: #73af94;
+            width: 80%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .titulo {
+            padding-bottom:1.2rem;
+            text-align:center;
+            font-size:1.5rem;
+        }
+
+        .conteudoTA {
+            height:100%;
+            width:80%;
+            background-color:white;
+            display:flex;
+            flex-direction:column;
+            justify-content:space-around;
+        }
+
+        .linhaTA1 {
+            padding-left:1.2rem;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            width: 85%;
+        }
+
+        .linhaDados{
+            display:flex;
+            flex-direction:row;
+        }
+
+        .linhaTA2 {
+            text-align: center;
+            border: 1px solid #000;
+            height: 70px;
+            display: flex;
+            width: 50%;
+        }
+
+        .linhaTA3 {
+            text-align: center;
+            border: 1px solid #000;
+            height: 60%;
+            padding:1.2rem;
+        }
+
+        #btnAgendar {
+            margin-top:1.2rem;
+            font-size:1.2rem;
+        }
+    </style>
+</head>
+<div>
+    <h2>Agendamento</h2>
+</div>
+
+<div class="contTA">
+    <div class="cardTA">
+        <div class="titulo">
+            <h3>Banho e Tosa</h3>
+        </div>
+        <div class="conteudoTA">
+            <div class="linhaTA1">
+                <p>Data:20/01/2021</p>
+                <p>*Dados do animal*</p>
+            </div>
+            <div class="linhaTA1">
+                <p>Horário: 17:00hrs</p>
+                <p>
+                    Selecione o animal cadastrado
+                    <img src="~/img/expand_more_black_24dp.svg"
+                         class="header__content__subtitle__image" />
+                </p>
+            </div>
+            <div class="linhaDados">
+                <div class="linhaTA2">
+                    <p>Dados do cliente:</p>
+                </div>
+
+                <div class="linhaTA2">
+                    <p>Dados do animal:</p>
+                </div>
+            </div>
+
+            <div class="linhaTA3">
+                <label>Tipo de Serviço:</label>
+                <INPUT TYPE="radio" NAME="OPCAO" VALUE="op1" checked> Premium
+                <INPUT TYPE="radio" NAME="OPCAO" VALUE="op2"> Serviço Padrão
+            </div>
+        </div>
+        <div>
+            <input type="submit" value="Agendar" id="btnAgendar" />
+        </div>
+    </div>
+</div>
+

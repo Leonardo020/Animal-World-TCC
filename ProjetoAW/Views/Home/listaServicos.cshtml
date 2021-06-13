@@ -1,0 +1,63 @@
+﻿@model IEnumerable<ProjetoAW.Models.Servico>
+
+@{
+    ViewBag.Title = "listaServicos";
+}
+
+<h2>listaServicos</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.codServico)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nomeServico)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.valorServico)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.descServico)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.imagemServico)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.horaServico)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.codServico)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nomeServico)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.valorServico)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.descServico)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.imagemServico)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.horaServico)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

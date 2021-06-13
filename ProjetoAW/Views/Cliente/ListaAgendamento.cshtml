@@ -1,0 +1,82 @@
+﻿
+@{
+    ViewBag.Title = "ListaAgendamento";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <script type="text/javascript" src="@Url.Content("/Scripts/script.js")"></script>
+    <style>
+        h2 {
+            margin-top: 1.2rem;
+            font-size: 1.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .contLA {
+            height: 390px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .cardLA {
+            height:125px;
+            border-radius:10px;
+            background-color: #43b581;
+            width: 60%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around;
+        }
+
+        .linhaLA {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .linhaLA p {
+            padding:2rem;
+        }
+
+        #btnLA {
+            border-radius:15px;
+            font-size: 1rem;
+            background-color: white;
+            color: black;
+        }
+
+    </style>
+</head>
+
+<div>
+    <h2> Lista de Agendamentos</h2>
+</div>
+
+<div class="contLA">
+    <div class="cardLA">
+        <div class="linhaLA">
+            <p>Data:00/00/0000</p>
+            <p>Horário: 17:00</p>
+            <p>Total: R$30,00</p>
+        </div>
+        <div class="linhaLA">
+            <p>Banho e Tosa de Thor</p>
+            <input type="submit" value="Cancelar" id="btnLA" />
+        </div>
+    </div>
+</div>
+
+
+</html>

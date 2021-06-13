@@ -1,0 +1,100 @@
+﻿@model IEnumerable<ProjetoAW.Models.Animal>
+
+@{
+    ViewBag.Title = "ListaPet";
+}
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <script type="text/javascript" src="@Url.Content("/Scripts/script.js")"></script>
+
+    <style>
+
+        h2 {
+            margin-top: 1.2rem;
+            font-size: 1.6rem;
+            text-align: center;
+        }
+
+        .contLP {
+            padding-top: 2rem;
+            height: 390px;
+        }
+
+        .avatarLP {
+            vertical-align: middle;
+            width: 245px;
+            height: 255px;
+            border-radius: 50%;
+        }
+
+        .background {
+            vertical-align: middle;
+            width: 255px;
+            height: 255px;
+            border-radius: 50%;
+            background-color: #73af94
+        }
+
+        .linhaPets {
+            padding-top: 3rem;
+            display: flex;
+            flex-direction: row;
+            align-content: center;
+            justify-content: space-around;
+            flex-flow: row wrap;
+        }
+
+        .circuloPet {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+            .circuloPet p {
+                font-size: 1.6rem;
+                padding-top: 2rem;
+            }
+
+        .actionPet {
+            color: #000;
+            margin-top: 10px;
+            font-size: 30px;
+        }
+
+            .actionPet:hover {
+                color: #43b581;
+                transition-duration: 0.6s;
+            }
+
+            .actionPet:link {
+                text-decoration: none;
+            }
+        }
+    </style>
+</head>
+<div class="container">
+    <h2>Lista de Pets</h2>
+    <!--<button class="btn btn-success" style="float:right;"><i class="fas fa-plus"></i> <a href="cadastroPet" class="actionLink">Cadastrar novo pet</a> </button>-->
+    <div class="contLP">
+        <div class="linhaPets">
+            @foreach (var item in Model)
+            {
+                <div class="circuloPet">
+                    <div class="background">
+                        <img class="avatarLP" data-src=" " alt="Thumbnail [300x300]" src="@item.imagemAnimal" data-holder-rendered="true">
+                    </div>   
+                    @Html.ActionLink(item.nomeAnimal, "DadosPet", new { id = item.codAnimal }, new { @class = "actionPet" })
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+

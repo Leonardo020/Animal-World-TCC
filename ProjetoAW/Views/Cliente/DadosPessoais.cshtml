@@ -1,0 +1,172 @@
+﻿@model ProjetoAW.Models.Cliente
+
+@{
+    ViewBag.Title = "DadosPessoais";
+}
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <script type="text/javascript" src="@Url.Content("/Scripts/script.js")"></script>
+
+    <style>
+        h2 {
+            margin-top: 1.2rem;
+            font-size: 1.5rem;
+            text-align: center;
+            margin-bottom: 1.6rem;
+            color: #43b581;
+        }
+
+        .contDadosPessoais {
+            margin-top: 80px;
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cardDadosPessoais {
+            margin-bottom: 1.5rem;
+            width: 80%;
+            border: 1px solid #000;
+            display: flex;
+            flex-direction: column;
+            align-content: center;
+            justify-content: center;
+        }
+
+        .linhaDados1 {
+            display: flex;
+            flex-direction: row;
+        }
+
+        #divDP {
+            width: 50%;
+        }
+
+        #divDP2 {
+            width: 25%;
+        }
+
+        .cardDadosPessoais p {
+            border: 1px solid #000;
+            padding: 1rem;
+        }
+
+        #btnED {
+            font-size: 1.5rem;
+            background-color: #43b581;
+            color: white;
+        }
+    </style>
+</head>
+
+<h2>Dados Pessoais</h2>
+
+@using (Html.BeginForm("DadosPessoais", "Cliente", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="contDadosPessoais">
+        @Html.EditorFor(model => model.codCli, new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom: 5px", @hidden = "true" } })
+        <div class="cardDadosPessoais">
+            <div class="linhaDados1">
+                <p id="divDP">@Html.LabelFor(model => model.nomeCli, htmlAttributes: new { @class = "control-label " }): @Html.EditorFor(model => model.nomeCli, new { htmlAttributes = new { @class = "form-control" } })</p>
+                <p id="divDP"> @Html.LabelFor(model => model.emailCli, htmlAttributes: new { @class = "control-label" }): @Html.EditorFor(model => model.emailCli, new { htmlAttributes = new { @class = "form-control" } })</p>
+            </div>
+            <div class="linhaDados1">
+                <p id="divDP">@Html.LabelFor(model => model.cpfCli, htmlAttributes: new { @class = "control-label " }): @Html.EditorFor(model => model.cpfCli, new { htmlAttributes = new { @class = "form-control" } })</p>
+                <p id="divDP">@Html.LabelFor(model => model.telefoneCli, htmlAttributes: new { @class = "control-label " }): @Html.EditorFor(model => model.telefoneCli, new { htmlAttributes = new { @class = "form-control" } })</p>
+            </div>
+            <div class="linhaDados1">
+                <p id="divDP"> @Html.LabelFor(model => model.logradouroCli, htmlAttributes: new { @class = "control-label " }): @Html.EditorFor(model => model.logradouroCli, new { htmlAttributes = new { @class = "form-control", @id = "rua" } })</p>
+                <p id="divDP2"> @Html.LabelFor(model => model.numeroCli, htmlAttributes: new { @class = "control-label " }): @Html.EditorFor(model => model.numeroCli, new { htmlAttributes = new { @class = "form-control" } })</p>
+                <p id="divDP2">  @Html.LabelFor(model => model.cepCli, htmlAttributes: new { @class = "control-label " }): @Html.EditorFor(model => model.cepCli, new { htmlAttributes = new { @class = "form-control", @id = "cep", @name = "cep", @onblur = "pesquisacep(this.value);" } })</p>
+            </div>
+            <div class="linhaDados1">
+                <p id="divDP">@Html.LabelFor(model => model.estadoCli, htmlAttributes: new { @class = "control-label " }): @Html.EditorFor(model => model.estadoCli, new { htmlAttributes = new { @class = "form-control", @id = "uf" } })</p>
+                <p id="divDP">@Html.LabelFor(model => model.cidadeCli, htmlAttributes: new { @class = "control-label " }): @Html.EditorFor(model => model.cidadeCli, new { htmlAttributes = new { @class = "form-control", @id = "cidade" } })</p>
+                <p id="divDP">@Html.LabelFor(model => model.bairroCli, htmlAttributes: new { @class = "control-label " }): @Html.EditorFor(model => model.bairroCli, new { htmlAttributes = new { @class = "form-control", @id = "bairro" } })</p>
+            </div>
+            <div class="linhaDados1">
+                <p id="divDP">@Html.LabelFor(model => model.usuarioCli, htmlAttributes: new { @class = "control-label " }): @Html.EditorFor(model => model.usuarioCli, new { htmlAttributes = new { @class = "form-control" } })</p>
+                <p id="divDP">@Html.LabelFor(model => model.senhaCli, htmlAttributes: new { @class = "control-label " }):@Html.EditorFor(model => model.senhaCli, new { htmlAttributes = new { @class = "form-control" } })</p>
+            </div>
+        </div>
+        <p> @ViewBag.Message </p>
+        <button class="btn button-a button-big button-rouded btn-success" id="btnED"><i class="fas fa-pencil-alt"></i> Editar Dados</button>
+    </div>
+}
+
+<script>
+    function limpa_formulário_cep() {
+        //Limpa valores do formulário de cep.
+        document.getElementById('rua').value = ("");
+        document.getElementById('bairro').value = ("");
+        document.getElementById('cidade').value = ("");
+        document.getElementById('uf').value = ("");
+        document.getElementById('ibge').value = ("");
+    }
+
+    function meu_callback(conteudo) {
+        if (!("erro" in conteudo)) {
+            //Atualiza os campos com os valores.
+            document.getElementById('rua').value = (conteudo.logradouro);
+            document.getElementById('bairro').value = (conteudo.bairro);
+            document.getElementById('cidade').value = (conteudo.localidade);
+            document.getElementById('uf').value = (conteudo.uf);
+            document.getElementById('ibge').value = (conteudo.ibge);
+        } //end if.
+        else {
+            //CEP não Encontrado.
+            limpa_formulário_cep();
+            alert("CEP não encontrado.");
+        }
+    }
+
+    function pesquisacep(valor) {
+
+        //Nova variável "cep" somente com dígitos.
+        var cep = valor.replace(/\D/g, '');
+
+        //Verifica se campo cep possui valor informado.
+        if (cep != "") {
+
+            //Expressão regular para validar o CEP.
+            var validacep = /^[0-9]{8}$/;
+
+            //Valida o formato do CEP.
+            if (validacep.test(cep)) {
+
+                //Preenche os campos com "..." enquanto consulta webservice.
+                document.getElementById('rua').value = "...";
+                document.getElementById('bairro').value = "...";
+                document.getElementById('cidade').value = "...";
+                document.getElementById('uf').value = "...";
+
+                //Cria um elemento javascript.
+                var script = document.createElement('script');
+
+                //Sincroniza com o callback.
+                script.src = 'https://viacep.com.br/ws/' + cep + '/json/?callback=meu_callback';
+
+                //Insere script no documento e carrega o conteúdo.
+                document.body.appendChild(script);
+
+            } //fim if.
+            else {
+                //cep é inválido.
+                limpa_formulário_cep();
+                alert("Formato de CEP inválido.");
+            }
+        } //fim if.
+        else {
+            //cep sem valor, limpa formulário.
+            limpa_formulário_cep();
+        }
+    }
+</script>

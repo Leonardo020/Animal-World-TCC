@@ -1,0 +1,361 @@
+﻿
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+/* modifiers */
+.--hidden {
+    visibility:hidden;
+}
+
+.--border {
+    border: 1px solid black;
+}
+
+.--border-bottom {
+    border-bottom: 1px solid black;
+}
+
+/* fonts */
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+
+/* colors */
+.--color_primary {
+    color: white;
+}
+
+.--background_primary {
+    background-color: #43b581;
+}
+
+
+/* header */
+
+.header {
+    height: 10vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.header__image {
+    position: relative;
+    bottom: 4px;
+    height: 5rem;
+    width: auto;
+}
+
+.header__content {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.header__title {
+    margin-left: 10px;
+    font-size: 2rem;
+    display: inline-block;
+    justify-self: flex-start;
+}
+
+.header__content__search {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: white;
+}
+
+.header__content__search__input {
+    background-color: transparent;
+    border: 0;
+    outline: none;
+    padding: 0.5rem;
+    height: 100%;
+    width: 100%;
+}
+
+.header__content__search__button {
+    background-color: transparent;
+    border: none;
+}
+
+.header__content__search__button__icon {
+    height: 2rem;
+    width: auto;
+    cursor: pointer;
+}
+
+.header__content__navcontainer {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.header__content__navcontainer_nav {
+    transition: opacity 0.5s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    position: absolute;
+    width: 100%;
+    top: 100%;
+    padding: 0.2rem;
+}
+
+.header__content__navcontainer__item {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0.2rem 0.75rem;
+    width: 100%;
+}
+
+.header__content__navcontainer_item__icon {
+    height: auto;
+    width: 24px;
+}
+
+.header__content__navcontainer_item_link {
+    flex-grow: 1;
+    text-align: center;
+    color: #000;
+    text-decoration:none;
+}
+
+    .header__content__navcontainer_item_link:hover {
+        color: #43b581;
+        transition-duration: 0.6s;
+    }
+
+.header__content__navcontainer__subtitle,
+.header__content__subtitle {
+    font-size: 1.50rem;
+    display: inline-block;
+}
+
+.header__content__subtitle__image {
+    vertical-align: top;
+    cursor: pointer;
+}
+
+.header__content__cart {
+    width: auto;
+    height: 40px;
+}
+
+/* body */
+
+.body {
+    background-color: white;
+}
+
+.content {
+    margin-top: 60px;
+}
+
+
+ul {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    background-color: #73af94;
+    padding: 0px;
+    margin: 0px;
+}
+
+    ul li {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 12px;
+        font-size: 17px;
+    }
+
+    ul a {
+        font-size: 18px;
+        margin-left: 25px;
+        text-decoration: none;
+        color: white;
+    }
+
+        ul a:hover {
+            color: none;
+        }
+
+
+
+.image_subnav {
+    width: 45%;
+    cursor: pointer;
+    float: left;
+}
+
+/*
+    func DD
+*/
+
+#categoria {
+    font-size: 18px;
+    margin-left: 25px;
+    text-decoration: none;
+    color: white;
+}
+
+#menu input[type=checkbox] {
+  display:none;
+}
+#menu input[type=checkbox] + label {
+    background-size:cover;
+    background-position:center;
+    background-repeat: no-repeat;
+    height: 25px;
+    width: 25px;
+    display:inline-block;
+}
+
+.multi-level , .item ul {
+    display:none;
+}
+
+#menu:checked ~ .multi-level, .item input:checked ~ ul {
+    display:block;
+}
+
+#categoria label:hover {
+    cursor:pointer;
+}
+
+#categoria label {
+    width:100%;
+    display:block;
+    position:relative;
+}
+
+
+.item ul {
+    padding:0 0.25em;
+}
+ /**/
+
+.card {
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: white;
+    box-shadow: 0px 2px 5px #1f232b5e;
+    border-radius: 10px;
+    width: 35rem;
+    border: 2px solid #FFF;
+}
+
+    .card > h2 {
+        font-size: 25px;
+        margin-top: 2.2rem;
+        margin-bottom: 1.2rem;
+        text-align: center;
+        color: #43b581;
+    }
+
+.input-group {
+    font-size: 26px;
+}
+
+.card > .btn {
+    font-size: 20px;
+    margin-top: 2.5rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#botao{
+    margin-top: 15px;
+    text-align: center;
+}
+
+#botaoLogin {
+    background-color: #43b581;
+    color: white;
+    margin-bottom: 15px;
+}
+
+    #botaoLogin:hover {
+        border-color: white;
+        color: azure;
+        transition-duration: 0.6s;
+    }
+
+
+.actionLink {
+    color: #fff;
+    font-family: Arial;
+}
+
+    .actionLink:hover {
+        color: #e8e4e4;
+    }
+
+    .actionLink:link {
+        text-decoration: none;
+    }
+
+
+#labelFile {
+    font-size: 16px;
+    padding: 15px 10px;
+    width: auto;
+    background-color: #43b581;
+    color: #FFF;
+    text-transform: uppercase;
+    text-align: center;
+    display: block;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.container-image img {
+    height: 100%;
+    width: 100%;
+}
+
+/* footer */
+
+footer {
+    color: white;
+    position: relative;
+    width: 100%;
+    text-align: center;
+    background-color: #73af94;
+}
+
+    footer p {
+        margin: auto;
+    }

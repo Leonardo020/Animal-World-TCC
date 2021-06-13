@@ -1,0 +1,122 @@
+﻿
+@{
+    ViewBag.Title = "Home";
+}
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Home</title>
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <script type="text/javascript" src="@Url.Content("/Scripts/script.js")"></script>
+    <style>
+        .conteudoHome {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        section {
+            margin: 0 30px;
+        }
+
+        .containerCar {
+            max-width: 1000px;
+            padding: 5px;
+            background: #fff;
+            margin: 15px auto;
+            box-shadow: 0 15px 35px -15px #656565;
+            border-radius: 1rem;
+        }
+
+        .slider {
+            margin: 0 auto;
+            width: 100%;
+            height: 100%;
+            border-radius: 0.7rem;
+            display: flex;
+            overflow: hidden;
+            scroll-behavior: smooth;
+        }
+
+            .slider img {
+                min-width: 100%;
+                max-width: 100%;
+                height: auto;
+                object-fit: contain;
+                border-radius: 0.7rem;
+            }
+
+        #previous, #next {
+            cursor: pointer;
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            border-radius: 16px;
+            background: #2770ff;
+            color: #73af94;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            top: calc(50% - 25px);
+            left: -20px;
+            box-shadow: 0 12px 25px -9px #0041ac;
+        }
+
+        #next {
+            left: unset;
+            right: -30px;
+        }
+
+        .sobre {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #73af94;
+            border-radius: 16px;
+            color: white;
+            width: 60%;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+
+            .sobre h2 {
+                font-size: 30px;
+                margin-bottom: 1.6rem;
+                margin-top: 1.6rem;
+            }
+
+            .sobre h3 {
+                font-size: 18px;
+                width: 60%;
+                margin-bottom: 1.6rem;
+            }
+    </style>
+</head>
+<div class="conteudoHome">
+    <div class="containerCar">
+        <!--<span id="previous"><i data-feather="chevron-left"></i></span>
+        <span id="next"><i data-feather="chevron-right"></i></span>-->
+
+        <div id="slider" class="slider">
+            <img src="~/img/dicas-pet.jpg" />
+            <img src="~/img/dicas-pet.jpg" />
+            <img src="~/img/dicas-pet.jpg" />
+            <img src="~/img/dicas-pet.jpg" />
+            <img src="~/img/dicas-pet.jpg" />
+        </div>
+    </div>
+    <div class="sobre">
+        <h2>Sobre a Loja:</h2>
+        <h3>
+            A Animal World nasceu com o intuito de viabilizar um tipo de serviço único, de qualidade, e acessível, tanto para seus clientes,
+            quanto a todos os Pets que cuidamos.
+        </h3>
+        <h3>A idéia é mesclar uma equipe competente, com fornecedores de materiais de qualidade, para que possamos cativar à todos os envolvidos no processo.</h3>
+    </div>
+</div>
+

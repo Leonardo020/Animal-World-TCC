@@ -1,0 +1,36 @@
+﻿@model ProjetoAW.Models.Login
+
+@{
+    ViewBag.Title = "Login";
+}
+
+@using (Html.BeginForm("Login", "Home", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="content">
+        <div class="card">
+            <br />
+            <h2>Faça seu Login!</h2>
+            <p style="color: red; text-align:center">@ViewBag.message</p>
+            <br />
+            <div class="form-group">
+                <div class="wrap" style="margin-left: 125px;">
+                    @Html.LabelFor(model => model.usuarioLogin, htmlAttributes: new { @class = "control-label col-md-2", @style="margin-bottom: 5px" })
+                    @Html.EditorFor(model => model.usuarioLogin, new { htmlAttributes = new { @class = "form-control input-login" } })
+                    @Html.ValidationMessageFor(model => model.usuarioLogin, "", new { @class = "text-danger" })
+                <br/>
+                    @Html.LabelFor(model => model.senhaLogin, htmlAttributes: new { @class = "control-label col-md-2", @style = "margin-bottom: 5px" })
+                    @Html.EditorFor(model => model.senhaLogin, new { htmlAttributes = new { @class = "form-control input-login", @type = "password" } })
+                    @Html.ValidationMessageFor(model => model.senhaLogin, "", new { @class = "text-danger" })
+                </div>
+                <div id="botao">
+                    <input type="submit" class="btn button-a button-big button-rouded btn-success" id="botaoLogin" value="Entrar">
+                </div>
+            </div>
+            <br />
+        </div>
+    </div>
+}
+
+

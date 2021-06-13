@@ -1,0 +1,69 @@
+﻿@model IEnumerable<ModelsAnimalWorld.Models.Venda>
+
+@{
+    ViewBag.Title = "ListaPedido";
+}
+
+<h2>ListaPedido</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.codVenda)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.situacao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dataVenda)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.codPagamento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.codCli)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.codServico)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.codProduto)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.codVenda)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.situacao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dataVenda)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.codPagamento)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.codCli)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.codServico)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.codProduto)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

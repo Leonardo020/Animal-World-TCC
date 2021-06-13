@@ -1,0 +1,105 @@
+﻿@model IEnumerable<ProjetoAW.Models.Servico>
+
+@{
+    ViewBag.Title = "Servicos";
+}
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <script type="text/javascript" src="@Url.Content("/Scripts/script.js")"></script>
+    <style>
+        h5 {
+            margin-top: 1.2rem;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+
+        #acessoServico {
+            margin-top: 4rem;
+            background-color: #43b581;
+            color: white;
+            font-size: 1rem;
+        }
+
+        #contServicos {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .CardServico {
+            height: 18rem;
+            margin: 1.6rem auto;
+            background-color: white;
+            box-shadow: 0px 2px 5px #1f232b5e;
+            border-radius: 10px;
+            width: 50rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 2px solid #000;
+        }
+
+        .servicoImg {
+            width: 250px;
+            margin-top: 1.6rem;
+        }
+
+        .ConteudoServ {
+            display: flex;
+            flex-direction: row;
+            justify-content:;
+            align-items: center;
+            margin: 1.6rem auto;
+        }
+
+        .textoServ {
+            padding-left: 4rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 2;
+            align-content: space-between;
+        }
+
+        h2 {
+            font-weight: bold;
+            margin-bottom: 2rem;
+        }
+    </style>
+</head>
+<div>
+    <h5> Agende seu serviço:</h5>
+</div>
+
+@foreach (var item in Model)
+{
+    <div id="contServicos">
+        <div class="CardServico">
+            <div class="ConteudoServ">
+                <img class="servicoImg" src=" @Html.DisplayFor(modelItem => item.imagemServico)">
+                <div class="textoServ">
+                    <h2>@Html.DisplayFor(modelItem => item.nomeServico)</h2>
+                    <p>
+                        @Html.DisplayFor(modelItem => item.descServico)
+                    </p>
+
+                    <p>
+                        @Html.DisplayFor(modelItem => item.valorServico)
+                    </p>
+                    @using (Html.BeginForm("TelaAgendamento", "Servico", FormMethod.Post))
+                    {
+                        <input type="hidden" name="idServico" value=@item.codServico>
+                        <button class="btn button-a button-big button-rouded btn-success" id="acessoServico">Agende já!</button>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}
+

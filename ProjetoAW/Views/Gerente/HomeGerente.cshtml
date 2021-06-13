@@ -1,0 +1,118 @@
+﻿
+@{
+    ViewBag.Title = "HomeGerente";
+}
+
+<head>
+    <style>
+
+        h2 {
+            text-align: center;
+            margin: 1.2rem 0 1.2rem 0;
+            font-size: 1.2rem;
+        }
+
+        h3 {
+            text-align:center;
+            margin-top: 2rem;
+            font-size: 1.6rem;
+        }
+
+        h5 {
+            font-size: 1.6rem;
+        }
+
+        .contAG {
+            display:flex;
+            flex-direction:row;
+            justify-content:space-around;
+            align-items:center;
+            height:450px;
+        }
+
+        .cardAG {
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            justify-content:space-between;
+            border: 1px solid #000;
+            width:20%;
+            height:50%;
+        }
+
+        .cardTitulo {
+            width:90.6%;
+            display: flex;
+            flex-direction: row;
+            justify-content:center;
+            background-color: #73af94;
+            color: white;
+            padding: 0.8rem;
+            text-align:center;
+        }
+
+        .conteudoHG {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: 2rem;
+        }
+
+        #iconHG {
+            height: 30px;
+            width: 30px;
+            padding-right: 1.2rem;
+        }
+    </style>
+</head>
+
+<div>
+    <h3>Área do Gerente</h3>
+</div>
+
+<div class="contAG">
+    <div class="cardAG">
+        <div class="cardTitulo">
+            <img src="~/img/cadastro.png" id="iconHG" />
+            <h5>Cadastro</h5>
+        </div>
+        <div class="conteudoHG">
+            <h2>Produto</h2>
+            <h2>Funcionário</h2>
+            <h2>Serviço</h2>
+        </div>
+    </div>
+    <div class="cardAG">
+        <div class="cardTitulo">
+            <img src="~/img/consulta.png" id="iconHG" />
+            <h5>Consulta</h5>
+        </div>
+        <div class="conteudoHG">
+            <h2>Produto</h2>
+            <h2>Clientes</h2>
+            <h2>Funcionário</h2>
+        </div>
+    </div>
+    <div class="cardAG">
+        <div class="cardTitulo">
+            <img src="~/img/agendamento.png" id="iconHG" />
+            <h5>Agendamento</h5>
+        </div>
+        <div class="conteudoHG">
+            <h2>Serviço</h2>
+            <h2>Agenda</h2>
+        </div>
+    </div>
+    <div class="cardAG">
+        <div class="cardTitulo">
+            <img src="~/img/pedido.png" id="iconHG" />
+            <h5>Pedido</h5>
+        </div>
+        <div class="conteudoHG">
+            <h2>Entrega</h2>
+            <h2>Descontos</h2>
+        </div>
+    </div>
+</div>
+
