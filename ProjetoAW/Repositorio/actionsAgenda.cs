@@ -135,13 +135,10 @@ namespace ProjetoAW.Repositorio
                     codAgenda = Convert.ToInt32(dr["cod_agenda"]),
                     dataAgenda = Convert.ToDateTime(dr["data_agenda"]),
                     horarioAgenda = dr["horario_agenda"].ToString(),
-                    codServico = Convert.ToInt32(dr["cod_servico"]),
-                    codAnimal = Convert.ToInt32(dr["cod_animal"]),
-                    codCli = Convert.ToInt32(dr["cod_cli"]),
                     situacaoAgenda = dr["situacao_agenda"].ToString(),
                     nomeServico = dr["nome_servico"].ToString(),
                     nomeAnimal = dr["nome_animal"].ToString(),
-                    nomeCli = dr["nome_cli"].ToString(),
+                    valorServico = Convert.ToDouble(dr["valor_servico"]),
                 });
             }
 

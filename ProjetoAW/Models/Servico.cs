@@ -9,6 +9,7 @@ namespace ProjetoAW.Models
         [Display(Name = "Nome do Serviço")]
         public string nomeServico { get; set; }
         [Display(Name = "Valor do Serviço")]
+        [DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = true)]
         public double valorServico { get; set; }
         [Display(Name = "Descrição do Serviço")]
         public string descServico { get; set; }

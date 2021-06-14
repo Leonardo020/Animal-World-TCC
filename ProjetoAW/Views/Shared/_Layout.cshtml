@@ -18,8 +18,8 @@
 <body>
 
     <header class="header --background_primary">
-        <img class="header__image" src="~/img/logopetshop.png" alt="logo" />
-        <h1 class="header__title --color_primary">Animal World</h1>
+        <a href="/Home/Home"><img class="header__image" src="~/img/logopetshop.png" alt="logo" /></a>
+        <h1 class="header__title --color_primary"><a href="/Home/Home" class="actionLink">Animal World</a></h1>
         <div class="header__content">
             <form class="header__content__search">
                 <input class="header__content__search__input"
@@ -32,7 +32,7 @@
                          alt="logo" />
                 </button>
             </form>
-            <a href="#">
+            <a href="/Venda/DadosPedido">
                 <h4 class="header__content__subtitle --color_primary">
                     Meus Pedidos
                     <img src="~/img/shopping_bag_white_24dp.svg"
@@ -70,7 +70,7 @@
                         <span class="header__content__navcontainer__item --border-bottom">
                             <img class="header__content__navcontainer_item__icon"
                                  src="~/img/calendar.png"
-                                 alt="" /><a href="/Servico/ListaAgendamento" class="header__content__navcontainer_item_link">Agendamentos</a>
+                                 alt="" /><a href="/Cliente/ListaAgendamento" class="header__content__navcontainer_item_link">Agendamentos</a>
                         </span>
                         <span class="header__content__navcontainer__item">
                             <img class="header__content__navcontainer_item__icon"
@@ -84,7 +84,8 @@
                     <h4 class="header__content__navcontainer__subtitle --color_primary"> <i class="fas fa-user"></i> @Html.ActionLink("Login", "Login", "Home", null, new { @class = "actionLink" })</h4>
                 }
             </div>
-            <a href="#">
+            <a href="/Venda/MeuCarrinho" class="actionLink">
+                <div class="circulo-carrinho">0</div>
                 <img class="header__content__cart"
                      src="~/img/shopping_cart_white_24dp.svg"
                      alt="carrinho" />
@@ -98,79 +99,25 @@
                 <img src="~/img/home.png"
                      alt="home"
                      class="image_subnav" />
-                @Html.ActionLink("Home", "Home", "Home")
+                @Html.ActionLink("Home", "Home", "Home", null, new { @class="actionLink"})
             </li>
             <li>
                 <img src="~/img/categoria.png"
                      alt="categoria"
                      class="image_subnav" />
-                <a href="#"> Categorias </a> <i class="fas fa-chevron-down" style="color: #fff; margin-left: 5px;"></i>
-                <!--<input type="checkbox" id="menu" />
-                <img src="~/img/expand_more_white_24dp.svg" class="seta" /><label for="menu" id="categoria">Categoria</label>
-                <div class="multi-level">
-                    <div class="item">
-                        <input type="checkbox" id="A" />
-                        <img src="~/img/expand_more_white_24dp.svg" class="seta" /><label for="A">Cachorro</label>
-                        <ul>
-                            <li><a href="#">Coleiras</a></li>
-                            <li><a href="#">Ração</a></li>
-                            <li><a href="#">Brinquedos</a></li>
-                            <li><a href="#">Higiene</a></li>
-                        </ul>
-                    </div>
-                    <div class="item">
-                        <input type="checkbox" id="B" />
-                        <img src="~/img/expand_more_white_24dp.svg" class="seta" /><label for="B">Gato</label>
-                        <ul>
-                            <li><a href="#">Coleiras</a></li>
-                            <li><a href="#">Ração</a></li>
-                            <li><a href="#">Brinquedos</a></li>
-                            <li><a href="#">Higiene</a></li>
-                        </ul>
-                    </div>
-                    <div class="item">
-                        <input type="checkbox" id="C" />
-                        <img src="~/img/expand_more_white_24dp.svg" class="seta" /><label for="C">Pássaros</label>
-                        <ul>
-                            <li><a href="#">Gaiolas</a></li>
-                            <li><a href="#">Ração</a></li>
-                            <li><a href="#">Brinquedos</a></li>
-                            <li><a href="#">Higiene</a></li>
-                        </ul>
-                    </div>
-                    <div class="item">
-                        <input type="checkbox" id="D" />
-                        <img src="~/img/expand_more_white_24dp.svg" class="seta" /><label for="D">Roedores</label>
-                        <ul>
-                            <li><a href="#">Gaiolas</a></li>
-                            <li><a href="#">Ração</a></li>
-                            <li><a href="#">Brinquedos</a></li>
-                            <li><a href="#">Higiene</a></li>
-                        </ul>
-                    </div>
-                    <div class="item">
-                        <input type="checkbox" id="B" />
-                        <img src="~/img/expand_more_white_24dp.svg" class="seta" /><label for="B">Répteis</label>
-                        <ul>
-                            <li><a href="#">Gaiolas</a></li>
-                            <li><a href="#">Ração</a></li>
-                            <li><a href="#">Brinquedos</a></li>
-                            <li><a href="#">Higiene</a></li>
-                        </ul>
-                    </div>
-                </div>-->
+                <a href="#" class="actionLink"> Categorias </a> <i class="fas fa-chevron-down" style="color: #fff; margin-left: 5px;"></i>
             </li>
             <li>
                 <img src="~/img/marcas.png"
                      alt="marcas"
                      class="image_subnav" />
-                @Html.ActionLink("Marcas", "Marcas", "Home")
+                @Html.ActionLink("Marcas", "Marcas", "Home", null, new { @class = "actionLink" })
             </li>
             <li>
                 <img src="~/img/servicos.png"
                      alt="servicos"
                      class="image_subnav" />
-                @Html.ActionLink("Serviços", "Servicos", "Home")
+                @Html.ActionLink("Serviços", "Servicos", "Home", null, new { @class = "actionLink" })
             </li>
         </ul>
     </div>

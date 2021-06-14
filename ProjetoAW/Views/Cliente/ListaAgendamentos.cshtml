@@ -1,0 +1,93 @@
+﻿@model IEnumerable<ProjetoAW.Models.Agenda>
+
+@{
+    ViewBag.Title = "ListaAgendamentos";
+}
+
+<h2>ListaAgendamentos</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.codAgenda)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dataAgenda)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.horarioAgenda)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.codServico)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.codCli)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.codAnimal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.situacaoAgenda)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nomeServico)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nomeCli)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nomeAnimal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.confAgendamento)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.codAgenda)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dataAgenda)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.horarioAgenda)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.codServico)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.codCli)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.codAnimal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.situacaoAgenda)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nomeServico)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nomeCli)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nomeAnimal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.confAgendamento)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

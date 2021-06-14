@@ -22,6 +22,7 @@ namespace ProjetoAW.Models
 
         //atributos extras
         public string nomeServico { get; set; }
+        public double valorServico { get; set; }
         public string nomeCli { get; set; }
         public string nomeAnimal { get; set; }
         public int confAgendamento { get; set; }

@@ -222,6 +222,7 @@
     <Content Include="img\favoritepre.png" />
     <Content Include="img\firstslide.png" />
     <Content Include="img\free-heart-icon.png" />
+    <Content Include="img\fundo1.jpg" />
     <Content Include="img\home.png" />
     <Content Include="img\logopetshop.png" />
     <Content Include="img\marca1.png" />
@@ -343,6 +344,8 @@
     <Content Include="Views\Animal\CadastroAnimal.cshtml" />
     <Content Include="Views\Home\listaServicos.cshtml" />
     <Content Include="Views\Cliente\Dados.cshtml" />
+    <Content Include="Views\Home\Marca.cshtml" />
+    <Content Include="Views\Cliente\ListaAgendamentos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

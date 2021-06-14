@@ -86,6 +86,8 @@ body {
     flex-direction: row;
     align-items: center;
     background-color: white;
+    width: 300px;
+    border-radius: 10px;
 }
 
 .header__content__search__input {
@@ -168,11 +170,20 @@ body {
     height: 40px;
 }
 
-/* body */
-
-.body {
-    background-color: white;
+.circulo-carrinho {
+    height: 1.2rem;
+    width: 1.2rem;
+    position: absolute;
+    background-color: #fff;
+    border-radius: 100%;
+    color: #43b581;
+    font-weight: 700;
+    font-size: 1.2rem;
+    text-align: center;
+    margin-left: 2.6%;
 }
+
+/* body */
 
 .content {
     margin-top: 60px;
@@ -308,9 +319,16 @@ ul {
 
     #botaoLogin:hover {
         border-color: white;
-        color: azure;
+        color: aliceblue;
         transition-duration: 0.6s;
     }
+
+.linkCadastro{
+    text-align: center;
+    color: #43b581;
+    text-decoration: none;
+    cursor:pointer;
+}
 
 
 .actionLink {

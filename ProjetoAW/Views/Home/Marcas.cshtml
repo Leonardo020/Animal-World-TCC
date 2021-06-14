@@ -1,18 +1,10 @@
-﻿
+﻿@model IEnumerable<ProjetoAW.Models.Fornecedor>
+
 @{
     ViewBag.Title = "Marcas";
 }
 
-<!DOCTYPE html>
-<html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-    <script type="text/javascript" src="@Url.Content("/Scripts/script.js")"></script>
     <style>
         h3 {
             font-size: 1.5rem;
@@ -51,30 +43,25 @@
         .marcaImg {
             width: 200px;
         }
+
+        .marcaTxt{
+            margin-top: 25px;
+        }
     </style>
 </head>
 
 <div>
     <h3> Principais Marcas:</h3>
 </div>
-
 <div id="contMarcas">
-    <div class="CardMarc">
-        <img class="marcaImg" src="~/img/marca1.png">
-        <input type="submit" class="btn button-a button-big button-rouded btn-success" id="acessoMarca" value="Confira os produtos!">
-    </div>
-    <div class="CardMarc">
-        <img class="marcaImg" src="~/img/marcas2.png">
-        <input type="submit" class="btn button-a button-big button-rouded btn-success" id="acessoMarca" value="Confira os produtos!">
-    </div><div class="CardMarc">
-        <img class="marcaImg" src="~/img/marca1.png">
-        <input type="submit" class="btn button-a button-big button-rouded btn-success" id="acessoMarca" value="Confira os produtos!">
-    </div>
-    <div class="CardMarc">
-        <img class="marcaImg" src="~/img/marcas2.png">
-        <input type="submit" class="btn button-a button-big button-rouded btn-success" id="acessoMarca" value="Confira os produtos!">
-    </div>
+    @foreach (var item in Model)
+    {
+        <div class="CardMarc">
+            <img class="marcaImg" src="@item.imagemFornecedor">
+            <h2 class="marcaTxt">@item.nomeFornecedor</h2>
+            <input type="submit" class="btn button-a button-big button-rouded btn-success" id="acessoMarca" value="Confira os produtos!">
+        </div>
+    }
 </div>
-</html>
 
 
