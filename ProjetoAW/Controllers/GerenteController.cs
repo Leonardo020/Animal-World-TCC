@@ -8,6 +8,7 @@ namespace ProjetoAW.Controllers
     public class GerenteController : Controller
     {
         actionsFuncionario acFunc = new actionsFuncionario();
+        actionsAgenda acAgenda = new actionsAgenda();
 
         actionsProduto acProd = new actionsProduto();
         public ActionResult HomeGerente()
@@ -15,6 +16,12 @@ namespace ProjetoAW.Controllers
             return View();
         }
 
+        public ActionResult CadastroFunc()
+        {
+            return View();
+        }
+
+        [HttpPost]
         public ActionResult CadastroFunc(Funcionario func)
         {
             try
@@ -30,6 +37,12 @@ namespace ProjetoAW.Controllers
             return View();
         }
 
+        public ActionResult CadastroDesc()
+        {
+            return View();
+        }  
+
+        [HttpPost]        
         public ActionResult CadastroDesc(Desconto desc)
         {
             try
@@ -44,5 +57,12 @@ namespace ProjetoAW.Controllers
             }
             return View();
         }
+
+        public ActionResult ListaAgendamentos()
+        {
+            var agendamentos = acAgenda.consultaAgendamento();
+            return View(agendamentos);
+        }
+
     }
 }

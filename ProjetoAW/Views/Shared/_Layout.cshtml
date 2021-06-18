@@ -44,40 +44,49 @@
 
                 @if (Session["usuario"] != null && Session["senha"] != null)
                 {
-                <h4 class="header__content__navcontainer__subtitle --color_primary">
-                    Bem vindo(a), @Session["usuario"]!
+                    if (Session["nivel0"] != null)
+                    {
+                        <h4 class="header__content__navcontainer__subtitle --color_primary">
+                            @Html.ActionLink("Área do Gerente", "HomeGerente","Gerente", null, new { @class = "actionLink" })
+                        </h4>
+                    }
 
-                    <img src="~/img/expand_more_white_24dp.svg"
-                         class="header__content__subtitle__image"
-                         onclick="toggleDropdown()" />
-                </h4>
-                    <nav class="header__content__navcontainer_nav --hidden --border">
-                        <span class="header__content__navcontainer__item --border-bottom">
-                            <img class="header__content__navcontainer_item__icon"
-                                 src="~/img/meus-dados.png"
-                                 alt="" /><a href="/Cliente/DadosPessoais" class="header__content__navcontainer_item_link">Meus Dados</a>
-                        </span>
-                        <span class="header__content__navcontainer__item --border-bottom">
-                            <img class="header__content__navcontainer_item__icon"
-                                 src="~/img/pets.png"
-                                 alt="" /><a href="/Animal/ListaPet" class="header__content__navcontainer_item_link">Pets</a>
-                        </span>
-                        <span class="header__content__navcontainer__item --border-bottom">
-                            <img class="header__content__navcontainer_item__icon"
-                                 src="~/img/amor.png"
-                                 alt="" /><a href="/Cliente/Favoritos" class="header__content__navcontainer_item_link">Favoritos</a>
-                        </span>
-                        <span class="header__content__navcontainer__item --border-bottom">
-                            <img class="header__content__navcontainer_item__icon"
-                                 src="~/img/calendar.png"
-                                 alt="" /><a href="/Cliente/ListaAgendamento" class="header__content__navcontainer_item_link">Agendamentos</a>
-                        </span>
-                        <span class="header__content__navcontainer__item">
-                            <img class="header__content__navcontainer_item__icon"
-                                 src="~/img/sair.png"
-                                 alt="" /><a href="/Home/Logout" class="header__content__navcontainer_item_link">Sair</a>
-                        </span>
-                    </nav>
+                    else {
+                        <h4 class="header__content__navcontainer__subtitle --color_primary">
+                            Bem vindo(a), @Session["usuario"]!
+
+                            <img src="~/img/expand_more_white_24dp.svg"
+                                 class="header__content__subtitle__image"
+                                 onclick="toggleDropdown()" />
+                        </h4>
+                        <nav class="header__content__navcontainer_nav --hidden --border">
+                            <span class="header__content__navcontainer__item --border-bottom">
+                                <img class="header__content__navcontainer_item__icon"
+                                     src="~/img/meus-dados.png"
+                                     alt="" /><a href="/Cliente/DadosPessoais" class="header__content__navcontainer_item_link">Meus Dados</a>
+                            </span>
+                            <span class="header__content__navcontainer__item --border-bottom">
+                                <img class="header__content__navcontainer_item__icon"
+                                     src="~/img/pets.png"
+                                     alt="" /><a href="/Animal/ListaPet" class="header__content__navcontainer_item_link">Pets</a>
+                            </span>
+                            <span class="header__content__navcontainer__item --border-bottom">
+                                <img class="header__content__navcontainer_item__icon"
+                                     src="~/img/amor.png"
+                                     alt="" /><a href="/Cliente/Favoritos" class="header__content__navcontainer_item_link">Favoritos</a>
+                            </span>
+                            <span class="header__content__navcontainer__item --border-bottom">
+                                <img class="header__content__navcontainer_item__icon"
+                                     src="~/img/calendar.png"
+                                     alt="" /><a href="/Cliente/ListaAgendamento" class="header__content__navcontainer_item_link">Agendamentos</a>
+                            </span>
+                            <span class="header__content__navcontainer__item">
+                                <img class="header__content__navcontainer_item__icon"
+                                     src="~/img/sair.png"
+                                     alt="" /><a href="/Home/Logout" class="header__content__navcontainer_item_link">Sair</a>
+                            </span>
+                        </nav>
+                    }
                 }
                 else
                 {
@@ -99,7 +108,7 @@
                 <img src="~/img/home.png"
                      alt="home"
                      class="image_subnav" />
-                @Html.ActionLink("Home", "Home", "Home", null, new { @class="actionLink"})
+                @Html.ActionLink("Home", "Home", "Home", null, new { @class = "actionLink" })
             </li>
             <li>
                 <img src="~/img/categoria.png"

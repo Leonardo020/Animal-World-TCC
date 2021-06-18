@@ -119,7 +119,12 @@
             <h6>Os melhores produtos:</h6>
             <div class="filtrarVit">
                 <h2>Filtrar por: </h2>@Html.DropDownList("groups", null, "Opção", new { @class = "form-control" })
-            </div>
+                @using (Html.BeginForm("Vitrine", "Produto", FormMethod.Post))
+                {
+                    <input type="hidden" value="" id="filtro" name="filtro"/>
+                    <button type="submit" class="btn btn-success" onclick="selecionaFiltro()"><i class="fas fa-sync-alt"></i></button>
+                }
+                </div>
         </div>
         <div class="linhaVitrine">
             @foreach (var item in Model)
@@ -163,14 +168,18 @@
 </div>
 
 <script type="text/javascript">
+
+    var filtro = document.getElementById('filtro');
+
     $(document).ready(function () {
         $('#groups').change(function () {
-            var filtro = $('#groups').val();
-            if (filtro != null) {
-                $.post('@Url.Action("Vitrine", "Produto")', { 'filtro': filtro });
-            };
+            $('#filtro').val = $('#groups').val();
         });
     });
+
+    function selecionaFiltro() {
+        filtro.setAttribute('value', $('#groups').val());
+    }
 
     var isFavorite = false;
     var favoriteToggle = document.querySelector('.favVit');

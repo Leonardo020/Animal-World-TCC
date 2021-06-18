@@ -1,0 +1,135 @@
+﻿@model ProjetoAW.Models.Funcionario
+
+@{ ViewBag.Title = "CadastroFunc"; }
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <script type="text/javascript" src="@Url.Content("/Scripts/script.js")"></script>
+
+    <style>
+
+        h2 {
+            margin-top: 1.2rem;
+            font-size: 1.5rem;
+            text-align: center;
+            margin-bottom: 1.6rem;
+        }
+
+        .contCadastroFunc {
+            height: 350px;
+            padding-top: 3.4rem;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .formCF {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .dadosCF {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        p {
+            margin-bottom: 15px;
+            margin-right: 15px;
+        }
+
+        .cadastroFunc {
+            top: 0px;
+            padding: 18px 6% 20px 6%;
+            margin: 0 0 35px 0;
+            background: rgb(247, 247, 247);
+            border: 1px solid rgba(147, 184, 189,0.8);
+            border-radius: 5px;
+        }
+
+        #linha1Func {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        #input1 {
+            width: 20%;
+        }
+
+        #input2 {
+            width: 70%;
+        }
+
+        .botaoCF {
+            padding-top: 1.2rem;
+        }
+
+        #btnCF {
+            font-size: 1.2rem;
+            background-color: #43b581;
+            color: white;
+        }
+    </style>
+</head>
+
+<div>
+    <h2>Cadastro de Funcionário</h2>
+</div>
+
+
+@using (Html.BeginForm("CadastroFunc", "Gerente", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="contCadastroFunc">
+        <div class="cadastroFunc">
+            <div class="dadosCF">
+                <div id="linha1Func">
+                    <p>
+                        @Html.LabelFor(model => model.nomeFunc, htmlAttributes: new { @class = "control-label" })
+
+                        @Html.EditorFor(model => model.nomeFunc, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.codFunc, "", new { @class = "text-danger" })
+
+                    </p>
+                    <p>
+                        @Html.LabelFor(model => model.emailFunc, htmlAttributes: new { @class = "control-label" })
+
+                        @Html.EditorFor(model => model.emailFunc, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.emailFunc, "", new { @class = "text-danger" })
+                    </p>
+                </div>
+
+
+                <div id="linha1Func">
+                    <p>
+                        @Html.LabelFor(model => model.usuarioFunc, htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.usuarioFunc, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.usuarioFunc, "", new { @class = "text-danger" })
+                    </p>
+
+                    <p>
+                        @Html.LabelFor(model => model.senhaFunc, htmlAttributes: new { @class = "control-label" })
+
+                        @Html.EditorFor(model => model.senhaFunc, new { htmlAttributes = new { @class = "form-control", @type="password"} })
+                        @Html.ValidationMessageFor(model => model.senhaFunc, "", new { @class = "text-danger" })
+
+                    </p>
+                </div>
+                <div class="botaoCF">
+                    <input type="submit" class="btn btn-success" value="Confirmar Cadastro" id="btnCF" />
+                </div>
+                <p>@ViewBag.Message</p>
+            </div>
+        </div>
+    </div>
+}

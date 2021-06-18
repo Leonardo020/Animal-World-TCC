@@ -2,12 +2,15 @@
 using ProjetoAW.Models;
 using System;
 using System.Collections.Generic;
+using System.Web.Mvc;
 
 namespace ProjetoAW.Repositorio
 {
     public class actionsProduto
     {
         Conexao cn = new Conexao();
+        List<SelectListItem> categorias = new List<SelectListItem>();
+        List<SelectListItem> fornecedores = new List<SelectListItem>();
         public void cadastraProduto(Produto produto)
         {
             MySqlCommand cmd = new MySqlCommand("call cadastroProduto(@nome, @desc, @quantidade, @valor, false, true, @imagem, @fornecedor, @categoria, @especie);", cn.Conectar());
@@ -32,7 +35,7 @@ namespace ProjetoAW.Repositorio
                                                     inner join fornecedor frn on pr.cod_fornecedor = frn.cod_fornecedor
                                                     inner join categoria ca on pr.cod_categoria = ca.cod_categoria
                                                     inner join especie es on pr.cod_especie = es.cod_especie
-                                                   order by " + filtro, cn.Conectar());
+                                                    order by " + filtro ?? string.Empty, cn.Conectar());
             MySqlDataReader dr = cmd.ExecuteReader();
 
             while (dr.Read())
@@ -51,31 +54,6 @@ namespace ProjetoAW.Repositorio
                     /*codFornecedor = Convert.ToInt32(dr["cod_fornecedor"]),
                     codCategoria = Convert.ToInt32(dr["cod_categoria"]),
                     codEspecie = Convert.ToInt32(dr["cod_especie"]),*/
-                });
-            }
-
-            cn.Desconectar();
-
-            return produtos;
-        }
-
-        public List<Produto> selecionaProdutoPorFiltro(string filtro)
-        {
-            List<Produto> produtos = new List<Produto>();
-
-            MySqlCommand cmd = new MySqlCommand("select * from produto order by " + filtro, cn.Conectar());
-            MySqlDataReader dr = cmd.ExecuteReader();
-
-            while (dr.Read())
-            {
-                produtos.Add(new Produto
-                {
-                    codProduto = Convert.ToInt32(dr["cod_produto"]),
-                    nomeProduto = dr["nome_produto"].ToString(),
-                    descProduto = dr["desc_produto"].ToString(),
-                    quantidadeEstoque = Convert.ToInt32(dr["quantidade_estoque"]),
-                    valorUnitario = Convert.ToDouble(dr["valor_unitario"]),
-                    imagemProduto = dr["imagem_produto"].ToString(),
                 });
             }
 
@@ -165,20 +143,17 @@ namespace ProjetoAW.Repositorio
             return produtos;
         }
 
-        public List<Fornecedor> consultaFornecedores()
+        public List<SelectListItem> consultaFornecedores()
         {
-            List<Fornecedor> fornecedores = new List<Fornecedor>();
             MySqlCommand cmd = new MySqlCommand("select * from fornecedor", cn.Conectar());
             MySqlDataReader dr = cmd.ExecuteReader();
 
             while (dr.Read())
             {
-                fornecedores.Add(new Fornecedor
+                fornecedores.Add(new SelectListItem
                 {
-                    codFornecedor = Convert.ToInt32(dr["cod_fornecedor"]),
-                    nomeFornecedor = dr["nome_fornecedor"].ToString(),
-                    emailFornecedor = dr["email_fornecedor"].ToString(),
-                    imagemFornecedor = dr["imagem_fornecedor"].ToString(),
+                    Text = dr["nome_fornecedor"].ToString(),
+                    Value = dr["cod_fornecedor"].ToString(),
                 });
             }
 
@@ -187,19 +162,17 @@ namespace ProjetoAW.Repositorio
             return fornecedores;
         }
 
-        public List<Categoria> consultaCategorias()
+        public List<SelectListItem> consultaCategorias()
         {
-            List<Categoria> categorias = new List<Categoria>();
             MySqlCommand cmd = new MySqlCommand("select * from categoria", cn.Conectar());
             MySqlDataReader dr = cmd.ExecuteReader();
 
             while (dr.Read())
             {
-                categorias.Add(new Categoria
+                categorias.Add(new SelectListItem
                 {
-                    codCategoria = Convert.ToInt32(dr["cod_categoria"]),
-                    nomeCategoria = dr["nome_categoria"].ToString(),
-                    codEspecie = Convert.ToInt32(dr["cod_especie"])
+                    Text = dr["nome_categoria"].ToString(),
+                    Value = dr["cod_categoria"].ToString(),
                 });
             }
 

@@ -3,8 +3,6 @@
     ViewBag.Title = "ListaAgendamento";
 }
 
-<!DOCTYPE html>
-<html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
@@ -29,8 +27,8 @@
         }
 
         .cardLA {
-            height:125px;
-            border-radius:10px;
+            height: 125px;
+            border-radius: 10px;
             background-color: #43b581;
             width: 60%;
             display: flex;
@@ -46,37 +44,38 @@
             justify-content: space-between;
         }
 
-        .linhaLA p {
-            padding:2rem;
-        }
+            .linhaLA p {
+                padding: 2rem;
+            }
 
         #btnLA {
-            border-radius:15px;
+            border-radius: 15px;
             font-size: 1rem;
             background-color: white;
             color: black;
         }
-
     </style>
 </head>
 
 <div>
     <h2> Lista de Agendamentos</h2>
 </div>
+@foreach (var item in Model)
+{
 
-<div class="contLA">
-    <div class="cardLA">
-        <div class="linhaLA">
-            <p> @Html.DisplayNameFor(model => model.dataAgenda): @Html.DisplayFor(modelItem => item.dataAgenda)</p>
-            <p> @Html.DisplayNameFor(model => model.horarioAgenda):  @Html.DisplayFor(modelItem => item.horarioAgenda)</p>
-            <p>Total: R$30,00</p>
-        </div>
-        <div class="linhaLA">
-            <p>Banho e Tosa de Thor</p>
-            <input type="submit" value="Cancelar" id="btnLA" />
+    <div class="contLA">
+        <div class="cardLA">
+            <div class="linhaLA">
+                <p> @Html.DisplayNameFor(model => model.dataAgenda): @Html.DisplayFor(modelItem => item.dataAgenda)</p>
+                <p> @Html.DisplayNameFor(model => model.horarioAgenda):  @Html.DisplayFor(modelItem => item.horarioAgenda)</p>
+                <p>Total: R$30,00</p>
+            </div>
+            <div class="linhaLA">
+                <p>Banho e Tosa de Thor</p>
+                <input type="submit" value="Cancelar" id="btnLA" />
+            </div>
         </div>
     </div>
-</div>
+}
 
 
-</html>

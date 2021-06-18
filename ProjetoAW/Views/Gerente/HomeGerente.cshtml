@@ -31,38 +31,53 @@
         }
 
         .cardAG {
-            display:flex;
-            flex-direction:column;
-            align-items:center;
-            justify-content:space-between;
-            border: 1px solid #000;
-            width:20%;
-            height:50%;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0px 2px 5px #1f232b5e;
+            width: auto;
+            height: 55%;
         }
 
         .cardTitulo {
-            width:90.6%;
             display: flex;
             flex-direction: row;
-            justify-content:center;
+            justify-content: center;
             background-color: #73af94;
             color: white;
             padding: 0.8rem;
-            text-align:center;
+            text-align: center;
+            align-items: center;
+            border-radius: 5px 5px 0 0;
         }
 
         .conteudoHG {
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: space-between;
+            justify-content: space-around;
             padding-bottom: 2rem;
         }
 
         #iconHG {
-            height: 30px;
-            width: 30px;
-            padding-right: 1.2rem;
+            height: 50px;
+            padding-right: 0.5rem;
+        }
+
+        .actionLinkGerente {
+            font-size: 21px;
+            color: #43b581;
+            font-weight: 300;
+        }
+
+        .actionLinkGerente:link{
+            text-decoration: none;
+        }
+
+        .actionLinkGerente:hover{
+            color:#43b581;
         }
     </style>
 </head>
@@ -75,43 +90,43 @@
     <div class="cardAG">
         <div class="cardTitulo">
             <img src="~/img/cadastro.png" id="iconHG" />
-            <h5>Cadastro</h5>
+            <h5>Cadastros</h5>
         </div>
         <div class="conteudoHG">
-            <h2>Produto</h2>
-            <h2>Funcionário</h2>
-            <h2>Serviço</h2>
+            <h2><a href="/Produto/CadastroProd" class="actionLinkGerente">Produtos</a></h2>
+            <h2><a href="/Gerente/CadastroFunc" class="actionLinkGerente">Funcionários</a></h2>
+            <h2><a href="/Servico/CadServico" class="actionLinkGerente">Serviços</a></h2>
         </div>
     </div>
     <div class="cardAG">
         <div class="cardTitulo">
             <img src="~/img/consulta.png" id="iconHG" />
-            <h5>Consulta</h5>
+            <h5>Consultas</h5>
         </div>
         <div class="conteudoHG">
-            <h2>Produto</h2>
-            <h2>Clientes</h2>
-            <h2>Funcionário</h2>
+            <h2><a href="/Produto/ListaProd" class="actionLinkGerente">Produtos</a></h2>
+            <h2><a href="/Cliente/ListaClientes" class="actionLinkGerente">Clientes</a></h2>
+            <h2><a href="/Home/ListaFunc" class="actionLinkGerente">Funcionários</a></h2>
         </div>
     </div>
     <div class="cardAG">
         <div class="cardTitulo">
             <img src="~/img/agendamento.png" id="iconHG" />
-            <h5>Agendamento</h5>
+            <h5>Agendamentos</h5>
         </div>
         <div class="conteudoHG">
-            <h2>Serviço</h2>
-            <h2>Agenda</h2>
+            <h2><a href="/Servico/ListaServicos" class="actionLinkGerente">Serviços</a></h2>
+            <h2><a href="/Gerente/ListaAgendamentos" class="actionLinkGerente">Agenda</a></h2>
         </div>
     </div>
     <div class="cardAG">
         <div class="cardTitulo">
             <img src="~/img/pedido.png" id="iconHG" />
-            <h5>Pedido</h5>
+            <h5>Pedidos</h5>
         </div>
         <div class="conteudoHG">
-            <h2>Entrega</h2>
-            <h2>Descontos</h2>
+            <h2><a href="/Venda/ListaPedido" class="actionLinkGerente">Entregas</a></h2>
+            <h2><a href="#" class="actionLinkGerente">Descontos</a></h2>
         </div>
     </div>
 </div>

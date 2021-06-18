@@ -342,10 +342,16 @@
     <Content Include="Views\Venda\ListaPedido.cshtml" />
     <Content Include="Views\Animal\ListaPet.cshtml" />
     <Content Include="Views\Animal\CadastroAnimal.cshtml" />
-    <Content Include="Views\Home\listaServicos.cshtml" />
+    <Content Include="Views\Servico\ListaServicos.cshtml" />
     <Content Include="Views\Cliente\Dados.cshtml" />
     <Content Include="Views\Home\Marca.cshtml" />
-    <Content Include="Views\Cliente\ListaAgendamentos.cshtml" />
+    <Content Include="Views\Gerente\ListaAgendamentos.cshtml" />
+    <Content Include="Views\Produto\CadastroProd.cshtml" />
+    <Content Include="Views\Gerente\CadastrosFunc.cshtml" />
+    <Content Include="Views\Gerente\CadastroFunc.cshtml" />
+    <Content Include="Views\Produto\AlterarProd.cshtml" />
+    <Content Include="Views\Servico\CadServicos.cshtml" />
+    <Content Include="Views\Servico\CadServico.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

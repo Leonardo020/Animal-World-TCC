@@ -76,7 +76,7 @@ namespace ProjetoAW.Repositorio
             cmd.Parameters.Add("@valor", MySqlDbType.Float).Value = servico.valorServico;
             cmd.Parameters.Add("@imagem", MySqlDbType.VarChar).Value = servico.imagemServico;
             cmd.Parameters.Add("@hora", MySqlDbType.VarChar).Value = servico.horaServico;
-            cmd.Parameters.Add("@desc", MySqlDbType.VarChar).Value = servico.nomeServico;
+            cmd.Parameters.Add("@desc", MySqlDbType.VarChar).Value = servico.descServico;
             cmd.ExecuteNonQuery();
             cn.Desconectar();
         }

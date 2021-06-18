@@ -44,5 +44,23 @@ namespace ProjetoAW.Controllers
             var agendamentos = acAgenda.consultaAgendamento();
             return View(agendamentos);
         }
+
+        public ActionResult CadServico()
+        {
+            return View();
+        }
+        
+        [HttpPost]
+        public ActionResult CadServico(Servico servico)
+        {
+            acServico.cadastraServico(servico);
+            return View();
+        }
+
+        public ActionResult ListaServicos()
+        {
+            var servicos = acServico.consultaServico();
+            return View(servicos);
+        }
     }
 }

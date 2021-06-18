@@ -12,7 +12,8 @@ namespace ProjetoAW.Controllers
     public class ProdutoController : Controller
     {
         actionsProduto acProd = new actionsProduto();
-        AnimalController animalCon = new AnimalController();
+        actionsAnimal acAnimal = new actionsAnimal();
+
 
         public void carregaGroups()
         {
@@ -37,10 +38,19 @@ namespace ProjetoAW.Controllers
 
             ViewBag.groups = new SelectList(groups, "Value", "Text");
         }
+
+
+
         public void carregaFornecedores()
         {
             var fornecedores = acProd.consultaFornecedores();
             ViewBag.fornecedores = new SelectList(fornecedores, "Value", "Text");
+        }  
+        
+        public void carregaEspecies()
+        {
+            var especies = acAnimal.carregaEspecie();
+            ViewBag.especies = new SelectList(especies, "Value", "Text");
         }
 
         public void carregaCategorias()
@@ -57,18 +67,18 @@ namespace ProjetoAW.Controllers
         }
         
         [HttpPost]
-        public ActionResult Vitrine(string filtro)
+        public ActionResult Vitrine(FormCollection frm)
         {
+            var filtro = frm["filtro"];
             var produtos = acProd.consultaProduto(filtro);
             carregaGroups();
             return View(produtos);
         }
 
-        [HttpPost]
         public ActionResult FiltrarProduto(string filtro)
         {
-            var produtoFiltrado = acProd.selecionaProdutoPorFiltro(filtro);
-            return RedirectToAction("Vitrine", produtoFiltrado);
+            var produtoFiltrado = acProd.consultaProduto(filtro);
+            return View(produtoFiltrado);
         }
 
         public ActionResult DetalheProd(int id)
@@ -79,7 +89,7 @@ namespace ProjetoAW.Controllers
 
         public ActionResult CadastroProd()
         {
-            animalCon.carregaEspecies();
+            carregaEspecies();
             carregaFornecedores();
             carregaCategorias();
             return View();
@@ -88,10 +98,9 @@ namespace ProjetoAW.Controllers
         [HttpPost]
         public ActionResult CadastroProd(Produto prod, HttpPostedFileBase file, FormCollection frm)
         {
-            animalCon.carregaEspecies();
+            carregaEspecies();
             carregaFornecedores();
             carregaCategorias();
-
             try
             {
                 string arquivo = Path.GetFileName(file.FileName);

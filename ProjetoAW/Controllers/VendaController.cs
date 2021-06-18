@@ -6,6 +6,7 @@ namespace ProjetoAW.Controllers
     public class VendaController : Controller
     {
         actionsEntrega acEntrega = new actionsEntrega();
+        actionsPedido acPedido = new actionsPedido();
         // GET: Venda
         public ActionResult DadosEntrega()
         {
@@ -30,7 +31,8 @@ namespace ProjetoAW.Controllers
 
         public ActionResult ListaPedido()
         {
-            return View();
+            var pedidos = acPedido.consultaPedido();
+            return View(pedidos);
         }
     }
 }
