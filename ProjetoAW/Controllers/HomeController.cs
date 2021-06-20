@@ -12,7 +12,7 @@ namespace ProjetoAW.Controllers
         actionsServico acServico = new actionsServico();
         public ActionResult Home()
         {
-            var categorias = acProd.consultaCategorias();
+            var categorias = acProd.carregaCategorias();
 
             ViewBag.categorias = categorias;
             return View();

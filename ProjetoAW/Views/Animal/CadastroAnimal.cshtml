@@ -13,18 +13,50 @@
     <!-- <title>Preview Image Before Upload | CodingNepal</title> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <style>
+
+        h2 {
+            margin-top: 1.2rem;
+            font-size: 1.5rem;
+            text-align: center;
+            margin-bottom: 1.6rem;
+        }
+
         * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
             font-family: 'Poppins', sans-serif;
         }
 
-        html, body {
-            display: grid;
-            height: 100%;
-            place-items: center;
-            text-align: center;
+        .contCadastroPet {
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .cardCP {
+            display: flex;
+            align-items: center;
+            width: 68%;
+            margin-bottom: 1rem;
+            box-shadow: 0px 2px 5px #1f232b5e;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .avatar {
+            vertical-align: middle;
+            width: 185px;
+            height: 25vh;
+            border-radius: 50%;
+            padding: 1rem;
+        }
+
+        .avatarCP {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 26%;
         }
 
         .container {
@@ -32,6 +64,27 @@
             width: 450px;
             position: relative;
         }
+
+        .dadosCP {
+            width: 80%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+
+        .linhaCP1 {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+            width: 100%
+        }
+
+
+            .linhaCP1 p {
+                width: 100%;
+            }
 
             .container .wrapper {
                 position: relative;
@@ -45,6 +98,11 @@
                 justify-content: center;
                 overflow: hidden;
             }
+
+        #CadastrarCP {
+            background-color: #73af94;
+            color: white;
+        }
 
         .wrapper.active {
             border: none;

@@ -1,6 +1,8 @@
 ﻿using ProjetoAW.Models;
 using ProjetoAW.Repositorio;
 using System;
+using System.IO;
+using System.Web;
 using System.Web.Mvc;
 
 namespace ProjetoAW.Controllers
@@ -51,8 +53,14 @@ namespace ProjetoAW.Controllers
         }
         
         [HttpPost]
-        public ActionResult CadServico(Servico servico)
+        public ActionResult CadServico(Servico servico, HttpPostedFileBase file, FormCollection frm)
         {
+            string arquivo = Path.GetFileName(file.FileName);
+            string file2 = "/img/" + arquivo;
+            string path = Path.Combine(Server.MapPath("~/img"), arquivo);
+            file.SaveAs(path);
+            servico.imagemServico = file2;
+            servico.descServico = frm["descServico"];
             acServico.cadastraServico(servico);
             return View();
         }

@@ -372,7 +372,6 @@ C:\Users\leona\OneDrive - Etec Centro Paula Souza\Etec\3º Módulo\TCC\Sistema\P
 C:\Users\leona\OneDrive - Etec Centro Paula Souza\Etec\3º Módulo\TCC\Sistema\ProjetoAW\ProjetoAW\bin\K4os.Compression.LZ4.xml
 C:\Users\leona\OneDrive - Etec Centro Paula Souza\Etec\3º Módulo\TCC\Sistema\ProjetoAW\ProjetoAW\bin\K4os.Compression.LZ4.Streams.xml
 C:\Users\leona\OneDrive - Etec Centro Paula Souza\Etec\3º Módulo\TCC\Sistema\ProjetoAW\ProjetoAW\bin\K4os.Hash.xxHash.xml
-C:\Users\leona\OneDrive - Etec Centro Paula Souza\Etec\3º Módulo\TCC\Sistema\ProjetoAW\ProjetoAW\bin\MySql.Data.xml
 C:\Users\leona\OneDrive - Etec Centro Paula Souza\Etec\3º Módulo\TCC\Sistema\ProjetoAW\ProjetoAW\bin\System.Buffers.xml
 C:\Users\leona\OneDrive - Etec Centro Paula Souza\Etec\3º Módulo\TCC\Sistema\ProjetoAW\ProjetoAW\bin\System.Memory.xml
 C:\Users\leona\OneDrive - Etec Centro Paula Souza\Etec\3º Módulo\TCC\Sistema\ProjetoAW\ProjetoAW\bin\System.Numerics.Vectors.xml

@@ -206,6 +206,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="img\agendamento.jpg" />
     <Content Include="img\agendamento.png" />
     <Content Include="img\amor.png" />
     <Content Include="img\avatarpet1.png" />
@@ -232,9 +233,12 @@
     <Content Include="img\pedido.png" />
     <Content Include="img\pets.png" />
     <Content Include="img\petwalker1.png" />
+    <Content Include="img\produtos.jpg" />
     <Content Include="img\sair.png" />
     <Content Include="img\search_black_24dp.svg" />
     <Content Include="img\search_white_24dp.svg" />
+    <Content Include="img\services1.jpg" />
+    <Content Include="img\services2.jpg" />
     <Content Include="img\servicos.png" />
     <Content Include="img\shopping_bag_black_24dp.svg" />
     <Content Include="img\shopping_bag_white_24dp.svg" />
@@ -344,7 +348,6 @@
     <Content Include="Views\Animal\CadastroAnimal.cshtml" />
     <Content Include="Views\Servico\ListaServicos.cshtml" />
     <Content Include="Views\Cliente\Dados.cshtml" />
-    <Content Include="Views\Home\Marca.cshtml" />
     <Content Include="Views\Gerente\ListaAgendamentos.cshtml" />
     <Content Include="Views\Produto\CadastroProd.cshtml" />
     <Content Include="Views\Gerente\CadastrosFunc.cshtml" />

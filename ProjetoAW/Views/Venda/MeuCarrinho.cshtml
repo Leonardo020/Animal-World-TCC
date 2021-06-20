@@ -1,4 +1,4 @@
-﻿
+﻿@model ProjetoAW.Models.Venda
 @{
     ViewBag.Title = "MeuCarrinho";
 }
@@ -11,26 +11,27 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <script type="text/javascript" src="@Url.Content("/Scripts/script.js")"></script>
-    
+
     <style>
 
         h2 {
-            font-size:24px;
-            text-align:center
+            font-size: 24px;
+            text-align: center
         }
+
         .MeuCarrinho {
-        margin-top:2rem;
+            margin-top: 2rem;
         }
 
         .carrinho2 {
-            width:80%;
-            margin:60px auto;
+            width: 80%;
+            margin: 60px auto;
         }
 
         #carrinhoInfo {
-            display:flex;
-            flex-direction:row;
-            align-items:center;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
         }
 
         table {
@@ -40,31 +41,31 @@
         }
 
         th {
-            color:white;
+            color: white;
             background-color: #73af94;
-            text-align:left;
+            text-align: left;
             padding: 5px;
             font-weight: normal;
         }
 
-        td{
+        td {
             padding: 10px 5px;
         }
 
-        td input {
-            width:40px;
-            height:30px;
-            padding:5px;
-        }
+            td input {
+                width: 40px;
+                height: 30px;
+                padding: 5px;
+            }
 
             td a {
                 color: #73af94;
-                font-size:12px;
+                font-size: 12px;
             }
 
         #removerBtn {
-            font-size:1rem;
-            margin-right:4rem;
+            font-size: 1rem;
+            margin-right: 4rem;
         }
 
         #continuarBtn {
@@ -74,31 +75,31 @@
         }
 
         .preçoTotal {
-            display:flex;
-            justify-content:flex-end;
+            display: flex;
+            justify-content: flex-end;
         }
 
             .preçoTotal table {
                 border: 1px solid #000;
-                width:100%;
-                max-width:340px;
+                width: 100%;
+                max-width: 340px;
             }
 
-        td:last-child{
-            text-align:right;
+        td:last-child {
+            text-align: right;
         }
 
         th:last-child {
             text-align: right;
         }
 
-            #ProdImg {
-                height: 80px;
-                width: 80px;
-            }
-        
-        #content-cart{
-            height:2rem;
+        #ProdImg {
+            height: 80px;
+            width: 80px;
+        }
+
+        #content-cart {
+            height: 2rem;
         }
 
         #btnMC {
@@ -107,88 +108,56 @@
             font-size: 0.8rem;
             margin-bottom: 2rem;
             margin-left: 2rem;
-            padding:2rem;
-            font-size:1rem;
+            padding: 2rem;
+            font-size: 1rem;
         }
-
     </style>
 </head>
 
 <div class="MeuCarrinho">
-   <h2>Meu Carrinho</h2>
-   <div class="carrinho2">
-       <table>
-           <tr>
-               <th>Produto</th>
-               <th>Preço</th>
-               <th>Quantidade</th>
-               <th>Subtotal</th>
-               <th></th>
-           </tr>
-           <tr id="content-cart">
-               <td>
-                   <div id="carrinhoInfo">
-                       <img src="~/img/calops.png" id="ProdImg" />
-                       <div>
-                           <p>Ração de Calopsita Qualquer</p>
-                       </div>
-                   </div>
-               </td>
-               <td>R$12,00</td>
-               <td><input type="number" value="2"</td>
-               <td>R$24,00</td>
-               <td><a href="#" id="removerBtn">Remover</a></td>
-           </tr>
-           <tr id="content-cart">
-               <td>
-                   <div id="carrinhoInfo">
-                       <img src="~/img/calops.png" id="ProdImg" />
-                       <div>
-                           <p>Ração de Calopsita Qualquer</p>
-                       </div>
-                   </div>
-               </td>
-               <td>R$12,00</td>
-               <td><input type="number" value="2"</td>
-               <td>R$24,00</td>
-               <td><a href="#" id="removerBtn">Remover</a></td>
-           </tr>
-           <tr id="content-cart">
-               <td>
-                   <div id="carrinhoInfo">
-                       <img src="~/img/calops.png" id="ProdImg" />
-                       <div>
-                           <p>Ração de Calopsita Qualquer</p>
-                       </div>
-                   </div>
-               </td>
-               <td>R$12,00</td>
-               <td><input type="number" value="2"</td>
-               <td>R$24,00</td>
-               <td><a href="#" id="removerBtn">Remover</a></td>
-           </tr>
-       </table>
+    <h2>Meu Carrinho</h2>
+    <div class="carrinho2">
+        <table>
+            <tr>
+                <th> @Html.DisplayNameFor(model => model.codProduto)</th>
+                <th> @Html.DisplayNameFor(model => model.valorProduto)</th>
+                <th> @Html.DisplayNameFor(model => model.qtdItensVenda)</th>
+                <th> @Html.DisplayNameFor(model => model.valorTotal)</th>
+                <th></th>
+            </tr>
+            @foreach (var item in Model.itemPedido)
+            {
+                <tr id="content-cart">
+                    <td>
+                        <div id="carrinhoInfo">
+                            <img src="@Html.DisplayFor(modelItem => item.imagemProduto)" id="ProdImg" />
+                            <div>
+                                <p>@Html.DisplayFor(modelItem => item.produto)</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>@Html.DisplayFor(modelItem => item.valorProduto)</td>
+                    <td><input type="number" value="@Html.DisplayFor(modelItem => item.quantidadePedido)" /></td>
+                    <td>@Html.DisplayFor(modelItem => item.valorTotal)</td>
 
-       <div class="preçoTotal">
-           <table>
-               <tr>
-                   <td>Subtotal</td>
-                   <td>R$24,00</td>
-               </tr>
-               <tr>
-                   <td>Desconto</td>
-                   <td>0,00</td>
-               </tr>
-               <tr>
-                   <td>Total</td>
-                   <td>R$24,00</td>
-               </tr>
-               <input type="submit" id="btnMC" value="Continuar">
-            </table>
-        </div>
+                    <td>
+                        @using (Html.BeginForm("ExcluirItemCarrinho", "Venda", FormMethod.Post))
+                        {
+                            <input type="hidden" name="id" value=@item.codPedido>
+                            <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                        }
+                    </td>
+                </tr>
+            }
+
+        </table>
+        @using (Html.BeginForm("DadosEntrega", "Venda", FormMethod.Post))
+        {
+            <button class="btn btn-success">Finalizar compra</button>
+        }
     </div>
-
 </div>
+
 
 
 

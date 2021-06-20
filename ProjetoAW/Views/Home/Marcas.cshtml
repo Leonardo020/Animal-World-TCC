@@ -44,7 +44,7 @@
             width: 200px;
         }
 
-        .marcaTxt{
+        .marcaTxt {
             margin-top: 25px;
         }
     </style>
@@ -59,7 +59,11 @@
         <div class="CardMarc">
             <img class="marcaImg" src="@item.imagemFornecedor">
             <h2 class="marcaTxt">@item.nomeFornecedor</h2>
-            <input type="submit" class="btn button-a button-big button-rouded btn-success" id="acessoMarca" value="Confira os produtos!">
+            @using(Html.BeginForm("Vitrine", "Produto", FormMethod.Post))
+            {
+                <input type="hidden" value="@item.codFornecedor"/>
+                <input type="submit" class="btn button-a button-big button-rouded btn-success" id="acessoMarca" value="Confira os produtos!">
+            }
         </div>
     }
 </div>

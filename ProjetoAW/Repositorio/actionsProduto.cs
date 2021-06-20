@@ -35,7 +35,7 @@ namespace ProjetoAW.Repositorio
                                                     inner join fornecedor frn on pr.cod_fornecedor = frn.cod_fornecedor
                                                     inner join categoria ca on pr.cod_categoria = ca.cod_categoria
                                                     inner join especie es on pr.cod_especie = es.cod_especie
-                                                    order by " + filtro ?? string.Empty, cn.Conectar());
+                                                    order by " + filtro ?? "desc", cn.Conectar());
             MySqlDataReader dr = cmd.ExecuteReader();
 
             while (dr.Read())
@@ -143,7 +143,7 @@ namespace ProjetoAW.Repositorio
             return produtos;
         }
 
-        public List<SelectListItem> consultaFornecedores()
+        public List<SelectListItem> carregaFornecedores()
         {
             MySqlCommand cmd = new MySqlCommand("select * from fornecedor", cn.Conectar());
             MySqlDataReader dr = cmd.ExecuteReader();
@@ -162,7 +162,28 @@ namespace ProjetoAW.Repositorio
             return fornecedores;
         }
 
-        public List<SelectListItem> consultaCategorias()
+
+        public List<Fornecedor> consultaFornecedores()
+        {
+            List<Fornecedor> fornecedores = new List<Fornecedor>();
+            MySqlCommand cmd = new MySqlCommand("select * from fornecedor", cn.Conectar());
+            MySqlDataReader dr = cmd.ExecuteReader();
+
+            while (dr.Read())
+            {
+                fornecedores.Add(new Fornecedor
+                {
+                    codFornecedor = Convert.ToInt32(dr["cod_fornecedor"]),
+                    nomeFornecedor = dr["nome_fornecedor"].ToString(),
+                    emailFornecedor = dr["email_fornecedor"].ToString(),
+                    imagemFornecedor = dr["imagem_fornecedor"].ToString(),
+                });
+            }
+
+            return fornecedores;
+        }
+
+        public List<SelectListItem> carregaCategorias()
         {
             MySqlCommand cmd = new MySqlCommand("select * from categoria", cn.Conectar());
             MySqlDataReader dr = cmd.ExecuteReader();

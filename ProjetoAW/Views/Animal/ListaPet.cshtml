@@ -28,21 +28,20 @@
 
         .avatarLP {
             vertical-align: middle;
-            width: 245px;
-            height: 255px;
+            width: 220px;
+            height: 225px;
             border-radius: 50%;
         }
 
         .background {
             vertical-align: middle;
-            width: 255px;
-            height: 255px;
+            width: 225px;
+            height: 230px;
             border-radius: 50%;
             background-color: #73af94
         }
 
         .linhaPets {
-            padding-top: 3rem;
             display: flex;
             flex-direction: row;
             align-content: center;
@@ -55,6 +54,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: space-between;
+            margin-top: 10px;
         }
 
             .circuloPet p {
@@ -76,6 +76,17 @@
             .actionPet:link {
                 text-decoration: none;
             }
+
+        .icon-button {
+            align-items: center;
+            align-content: center;
+            margin: 93px;
+            font-size: 45px;
+            color: #fff;
+        }
+
+        #txtCadastro {
+            display: none;
         }
     </style>
 </head>
@@ -89,12 +100,29 @@
                 <div class="circuloPet">
                     <div class="background">
                         <img class="avatarLP" data-src=" " alt="Thumbnail [300x300]" src="@item.imagemAnimal" data-holder-rendered="true">
-                    </div>   
+                    </div>
                     @Html.ActionLink(item.nomeAnimal, "DadosPet", new { id = item.codAnimal }, new { @class = "actionPet" })
                 </div>
             }
+
+        <div class="circuloPet">
+            <div class="background">
+                <a href="/Animal/CadastroPet"><i class="fas fa-plus icon-button"></i></a>
+            </div>
+            @Html.ActionLink("Cadastrar novo pet", "CadastroPet", null, new { @class = "actionPet", @id="txtCadastro"})
+        </div>
         </div>
     </div>
 </div>
 
+<script text="javascript">
+    $('.icon-button').mouseover(function () {
+        $('#txtCadastro').css('display', 'block');
+
+    });
+
+    $('.icon-button').mouseout(function () {
+        $('#txtCadastro').css('display', 'none');
+    });
+</script>
 

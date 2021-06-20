@@ -20,7 +20,7 @@ namespace ProjetoAW.Repositorio
             cn.Desconectar();
         }
 
-        public List<Pedido> consultaPedido()
+        /*public List<Pedido> consultaPedido()
         {
             List<Pedido> pedidos = new List<Pedido>();
 
@@ -41,9 +41,9 @@ namespace ProjetoAW.Repositorio
             cn.Desconectar();
 
             return pedidos;
-        }
+        }*/
 
-        public Pedido selecionaPedidoPorId(int id)
+        /*public Pedido selecionaPedidoPorId(int id)
         {
             Pedido pedido = new Pedido();
             MySqlCommand cmd = new MySqlCommand("call selecionaPedidoPorId(@id)", cn.Conectar());
@@ -62,7 +62,7 @@ namespace ProjetoAW.Repositorio
             cn.Desconectar();
 
             return pedido;
-        }
+        }*/
 
         public void atualizaPedido(Pedido pedido)
         {

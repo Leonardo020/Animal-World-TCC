@@ -43,7 +43,7 @@ namespace ProjetoAW.Controllers
 
         public void carregaFornecedores()
         {
-            var fornecedores = acProd.consultaFornecedores();
+            var fornecedores = acProd.carregaFornecedores();
             ViewBag.fornecedores = new SelectList(fornecedores, "Value", "Text");
         }  
         
@@ -55,7 +55,7 @@ namespace ProjetoAW.Controllers
 
         public void carregaCategorias()
         {
-            var categorias = acProd.consultaCategorias();
+            var categorias = acProd.carregaCategorias();
             ViewBag.categorias = new SelectList(categorias, "Value", "Text");
         }
 
@@ -182,10 +182,10 @@ namespace ProjetoAW.Controllers
         {
             var produtos = acProd.consultaProduto();
 
-            produtos = produtos.Where(x => x.nomeProduto.ToLower().Contains(search)).Select(x => new Produto
+            produtos = produtos.Where(x => x.nomeProduto.ToLower().Contains(search)).Select(prod => new Produto
             {
-                codProduto = x.codProduto,
-                nomeProduto = x.nomeProduto
+                codProduto = prod.codProduto,
+                nomeProduto = prod.nomeProduto
             }).ToList();
 
             return new JsonResult { Data = produtos, JsonRequestBehavior = JsonRequestBehavior.AllowGet };

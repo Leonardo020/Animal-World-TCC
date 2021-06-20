@@ -24,51 +24,45 @@
         }
 
         .containerCar {
-            max-width: 1000px;
-            padding: 5px;
             background: #fff;
-            margin: 15px auto;
-            box-shadow: 0 15px 35px -15px #656565;
-            border-radius: 1rem;
+            width: 100%;
+            height: 45vh;
         }
 
         .slider {
             margin: 0 auto;
             width: 100%;
             height: 100%;
-            border-radius: 0.7rem;
             display: flex;
             overflow: hidden;
             scroll-behavior: smooth;
         }
 
             .slider img {
-                min-width: 100%;
-                max-width: 100%;
-                height: auto;
-                object-fit: contain;
-                border-radius: 0.7rem;
+                width: 100%;
+                height: 55vh;
+                object-fit: cover;
             }
 
-        #previous, #next {
-            cursor: pointer;
-            position: absolute;
-            width: 50px;
-            height: 50px;
-            border-radius: 16px;
-            background: #2770ff;
-            color: #73af94;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            top: calc(50% - 25px);
-            left: -20px;
-            box-shadow: 0 12px 25px -9px #0041ac;
+        .text-carousel {
+            padding-bottom: 15px;
+            font-size: 22px;
         }
 
-        #next {
-            left: unset;
-            right: -30px;
+        .title-caption {
+            padding-bottom: 25px;
+            font-size: 35px;
+        }
+
+        .carousel-caption {
+            margin-bottom: 135px;
+        }
+
+        .btn-caption:hover {
+            background-color: transparent;
+            border-color: #73af94;
+            color: #fff;
+            transition-duration: 0.6s;
         }
 
         .sobre {
@@ -99,15 +93,57 @@
 </head>
 <div class="conteudoHome">
     <div class="containerCar">
-        <!--<span id="previous"><i data-feather="chevron-left"></i></span>
-        <span id="next"><i data-feather="chevron-right"></i></span>-->
-
-        <div id="slider" class="slider">
-            <img src="~/img/dicas-pet.jpg" />
-            <img src="~/img/dicas-pet.jpg" />
-            <img src="~/img/dicas-pet.jpg" />
-            <img src="~/img/dicas-pet.jpg" />
-            <img src="~/img/dicas-pet.jpg" />
+        <div id="carroselPetShop" class="carousel slide carousel-fade slider" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carroselPetShop" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carroselPetShop" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carroselPetShop" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                <button type="button" data-bs-target="#carroselPetShop" data-bs-slide-to="3" aria-label="Slide 4"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="img-responsive img-carrosel" src="~/img/produtos.jpg" />
+                    <div class="carousel-caption d-none d-md-block">
+                        <h2 class="title-caption">Produtos</h2>
+                        <p class="text-carousel">Tenha acesso aos melhores produtos da loja clicando no botão abaixo!</p>
+                        <a href="/Produto/Vitrine">
+                            <button class="btn btn-success btn-caption">Lista de Produtos</button>
+                        </a>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img class="img-responsive img-carrosel" src="~/img/agendamento.jpg" />
+                    <div class="carousel-caption d-none d-md-block">
+                        <h2 class="title-caption">Agendamentos</h2>
+                        <p class="text-carousel">Consulte os agendamentos dos seus pets em nossa loja!</p>
+                        <button class="btn btn-success btn-caption">Conferir</button>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img class="img-responsive img-carrosel" src="~/img/services1.jpg" />
+                    <div class="carousel-caption d-none d-md-block">
+                        <h2 class="title-caption">Serviços</h2>
+                        <p class="text-carousel">Indeciso do que agendar? Confira antes a descrição dos nossos serviços!</p>
+                        <button class="btn btn-success btn-caption">Mostruário de Serviços</button>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img class="img-responsive img-carrosel" src="~/img/services2.jpg" />
+                    <div class="carousel-caption d-none d-md-block">
+                        <h2 class="title-caption">Teste</h2>
+                        <p class="text-carousel">Esse aqui ainda vou definir algo</p>
+                        <button class="btn btn-success btn-caption">É, pois é</button>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carroselPetShop" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden" style="color: #00ff90">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carroselPetShop" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true" style="color: #00ff90"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
     </div>
     <div class="sobre">

@@ -4,230 +4,68 @@
     ViewBag.Title = "CadServico";
 }
 
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-    <script type="text/javascript" src="@Url.Content("/Scripts/script.js")"></script>
-
-    <style>
-
-        .contCadServico {
-            height: 350px;
-            padding-top: 3.4rem;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .formCadServ {
-            display: flex;
-            flex-direction: row;
-        }
-
-        p {
-            margin-bottom: 15px;
-        }
-
-        label {
-            color: #405c60;
-        }
-
-        .cadServ {
-            height: 80%;
-            top: 0px;
-            width: 80%;
-            padding: 18px 6% 20px 6%;
-            margin: 0 0 35px 0;
-            background: rgb(247, 247, 247);
-            border: 1px solid rgba(147, 184, 189,0.8);
-            border-radius: 5px;
-        }
-
-        .dadosCS {
-            flex-grow: 1;
-            width: 70%;
-        }
-
-        #linha1 {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            width: 85%;
-        }
-
-        #linhaDesc {
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            width: 85%;
-        }
-
-        h2 {
-            margin-top: 1.2rem;
-            font-size: 1.5rem;
-            text-align: center;
-            margin-bottom: 1.6rem;
-        }
-
-        .botaoCS {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-around;
-        }
-
-        .avatar {
-            vertical-align: middle;
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-        }
-
-        #botaoCS {
-            font-size: 1.5rem;
-            background-color: #43b581;
-            color: white;
-        }
-
-        .container {
-            height: 300px;
-            width: 450px;
-            position: relative;
-            border-radius: 10px;
-        }
-
-            .container .wrapper {
-                position: relative;
-                height: 25vh;
-                width: 45%;
-                border-radius: 50%;
-                background: #fff;
-                border: 2px dashed #c2cdda;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                overflow: hidden;
-            }
-
-        .wrapper.active {
-            border: none;
-        }
-
-        .wrapper .image {
-            position: absolute;
-            height: 100%;
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .wrapper img {
-            height: 100%;
-            width: 100%;
-            object-fit: cover;
-        }
-
-        .wrapper .icon {
-            font-size: 100px;
-            color: #9658fe;
-        }
-
-        .wrapper .text {
-            font-size: 20px;
-            font-weight: 500;
-            color: #5B5B7B;
-        }
-
-        .wrapper #cancel-btn i {
-            position: absolute;
-            font-size: 20px;
-            right: 45px;
-            top: 25px;
-            color: #43b581;
-            cursor: pointer;
-            display: none;
-        }
-
-        .wrapper.active:hover #cancel-btn i {
-            display: block;
-        }
-
-        .wrapper #cancel-btn i:hover {
-            color: #e74c3c;
-        }
-
-        input[type="file"] {
-            display: none;
-        }
-
-        #labelFile {
-            font-size: 16px;
-            padding: 15px 10px;
-            width: auto;
-            background-color: #43b581;
-            color: #FFF;
-            text-transform: uppercase;
-            text-align: center;
-            display: block;
-            margin-top: 10px;
-            cursor: pointer;
-            border-radius: 10px;
-        }
-    </style>
-</head>
-
 <h2>Cadastro de Serviço</h2>
 
-@using (Html.BeginForm("CadServico", "Servico", FormMethod.Post))
+@using (Html.BeginForm("CadServico", "Servico", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-    <div class="contCadServico">
-        <div class="cadServ">
-            <div class="dadosCS">
-                <p>
-                    @Html.LabelFor(model => model.nomeServico, htmlAttributes: new { @class = "control-label col-md-2" })
-                    @Html.EditorFor(model => model.nomeServico, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.nomeServico, "", new { @class = "text-danger" })
-                </p>
+    @Html.AntiForgeryToken()
+    <div class="containerCadastro">
+        <div class="cardCadastro">
+            <div class="dadosCadastro">
+                <div class="linha">
+                    <p>
+                        @Html.LabelFor(model => model.nomeServico, htmlAttributes: new { @class = "control-label", @style = "margin-bottom: 5px" })
 
-                <div id="linhaDesc">
-                    @Html.LabelFor(model => model.descServico, htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.EditorFor(model => model.nomeServico, new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom: 5px" } })
+                        @Html.ValidationMessageFor(model => model.nomeServico, "", new { @class = "text-danger" })
+                    </p>
+                    <p>
+                        @Html.LabelFor(model => model.valorServico, htmlAttributes: new { @class = "control-label", @style = "margin-bottom: 5px" })
 
-                    @Html.TextArea("descServico", (string)ViewBag.desc, new { @class = "form-control", placeholder = "Digite a descrição do animal", rows = "4", style = "resize:none;", name = "descServico" })
-                    @Html.ValidationMessageFor(model => model.descServico, "", new { @class = "text-danger" })
+                        @Html.EditorFor(model => model.valorServico, new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom: 5px" } })
+                        @Html.ValidationMessageFor(model => model.valorServico, "", new { @class = "text-danger" })
+                    </p>
                 </div>
-                <div id="linha1">
-                    @Html.LabelFor(model => model.valorServico, htmlAttributes: new { @class = "control-label col-md-2" })
 
-                    @Html.EditorFor(model => model.valorServico, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.valorServico, "", new { @class = "text-danger" })
+                <div class="linha">
+                    <p>
+                        @Html.LabelFor(model => model.horaServico, htmlAttributes: new { @class = "control-label", @style = "margin-bottom: 5px" })
 
-                    @Html.LabelFor(model => model.horaServico, htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.EditorFor(model => model.horaServico, new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom: 5px" } })
+                        @Html.ValidationMessageFor(model => model.horaServico, "", new { @class = "text-danger" })
+                    </p>
+                    <p>
+                        @Html.LabelFor(model => model.descServico, htmlAttributes: new { @class = "control-label", @style = "margin-bottom: 5px" })
 
-                    @Html.EditorFor(model => model.horaServico, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.horaServico, "", new { @class = "text-danger" })
+                        @Html.TextArea("descServico", (string)ViewBag.desc, new { @class = "form-control text-area", placeholder = "Digite a descrição do serviço", rows = "4", style = "resize:none; margin-bottom: 5px;", name = "descServico" })
+                        @Html.ValidationMessageFor(model => model.descServico, "", new { @class = "text-danger" })
+                    </p>
                 </div>
-                <div id="linha1">
-                    <div class="container">
-                        <div class="wrapper">
-                            <div class="image">
+                <div class="linha">
+                    <button type="submit" class="btn btn-success btnCadServico"><i class="fas fa-plus-circle"></i> Cadastrar</button>
+                </div>
+                <p>@ViewBag.message</p>
+            </div>
+            <div class="avatarCadastro">
+                <div class="container">
+                    <div class="wrapper">
+                        <div class="image">
+                            @if (Html.LabelFor(model => model.imagemServico) != null)
+                            {
+                                <img id="preview-img" src="~/img/free-heart-icon.png" alt=""> }
+                            else
+                            {
+
                                 <img id="preview-img" src="" alt="">
-                            </div>
-                            <div id="cancel-btn">
-                                <i class="fas fa-times"></i>
-                            </div>
+                            }
                         </div>
-                        <label id="labelFile" for="default-button"><i class="fas fa-paw"></i> Escolha a imagem do pet</label>
-                        <input type="file" name="file" id="default-button">
+                        <div id="cancel-btn">
+                            <i class="fas fa-times"></i>
+                        </div>
                     </div>
+                    <label class="btnServ" id="labelFile" for="default-button"><i class="fas fa-upload"></i> Escolha a imagem do serviço</label>
+                    <input type="file" name="file" id="default-button">
                 </div>
-                <input type="submit" value="Cadastrar" class="btn btn-success" />
             </div>
         </div>
     </div>

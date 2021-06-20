@@ -1,4 +1,4 @@
-﻿
+﻿@model ProjetoAW.Models.Venda
 @{
     ViewBag.Title = "DadosEntrega";
 }
@@ -13,27 +13,27 @@
     <script type="text/javascript" src="@Url.Content("/Scripts/script.js")"></script>
     <style>
         h4 {
-            margin-top:1.2rem;
+            margin-top: 1.2rem;
             font-size: 1.5rem;
             text-align: center;
             margin-bottom: 1.6rem;
         }
 
         #contDadosEntrega {
-            height:400px;
+            height: 400px;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
         .cardEnd {
-            height:6rem;
+            height: 6rem;
             background-color: white;
             box-shadow: 0px 2px 5px #1f232b5e;
             width: 80%;
             display: flex;
             flex-direction: row;
-            align-items:center;
+            align-items: center;
             justify-content: space-around;
             border: 1px solid #000;
         }
@@ -74,7 +74,7 @@
         }
 
         .TextoProd {
-            margin-left:2.0rem;
+            margin-left: 2.0rem;
         }
 
         .cardPagamento {
@@ -136,13 +136,13 @@
             color: white;
             font-size: 1.6rem;
             margin-bottom: 1rem;
-            margin-left:2rem;
+            margin-left: 2rem;
         }
 
         .FP1 {
-            display:flex;
-            flex-direction:row;
-            padding:1rem;
+            display: flex;
+            flex-direction: row;
+            padding: 1rem;
         }
     </style>
 </head>
@@ -150,68 +150,69 @@
 <div>
     <h4>Dados da entrega</h4>
 </div>
+@using (Html.BeginForm("CadastrarVenda", "Venda", FormMethod.Post))
+{
 
-<div id="contDadosEntrega">
-    <div class="cardEnd">
-        <span>
-            <img src="~/img/casa-de-animais.png"
-                 alt="Casa"
-                 class="EndeIcon" />
-        </span>
-        <div class="TextoEnde">
-            <p>
-                Rua Wilson das Neves, 420, Helena Maria, Osasko, SP
-            </p>
-            <p>
-                CEP: 04016788
-            </p>
-        </div>
-        <a href="#">Editar</a>
-    </div>
+    <div id="contDadosEntrega">
 
-    <div class="cardProd">
-        <div class="conteudoProd">
+        <div class="cardEnd">
             <span>
-                <img src="~/img/calops.png"
-                     alt="Produto"
-                     class="ProdIcon" />
+                <img src="~/img/casa-de-animais.png"
+                     alt="Casa"
+                     class="EndeIcon" />
             </span>
-        </div>
-        <div class="TextoProd">
-            <p>
-                1 - Ração de Calopsita Qualquer.
-            </p>
-        </div>
-    </div>
-    <div class="cardPagamento">
-        <div class="RetireAlt">
-            <p>
-                Ou, se preferir
-            </p>
-            <a href="#">Retire na Loja</a>
-        </div>
-        <div class="conteudoFP">
-            <div class="FP1">
+            <div class="TextoEnde">
                 <p>
-                    Forma de Pagamento:
+                    @Html.DisplayFor(modelItem => Model.logradouro), @Html.DisplayFor(modelItem => Model.numero),  @Html.DisplayFor(modelItem => Model.bairro),  @Html.DisplayFor(modelItem => Model.cidade),  @Html.DisplayFor(modelItem => Model.estado)
                 </p>
-                <select name="select">
-                    <option value="valor1">Debito</option>
-                    <option value="valor2" selected>Credito</option>
-                    <option value="valor2" selected>Dinheiro</option>
-                </select>
+                <p>
+                    CEP:  @Html.DisplayFor(modelItem => Model.cep)
                 </p>
+            </div>
+            <a href="#">Editar</a>
+        </div>
+
+        @foreach (var item in Model.itemPedido)
+        {
+            <div class="cardProd">
+                <div class="conteudoProd">
+                    <span>
+                        <img src="@Html.DisplayFor(modelItem => item.imagemProduto)"
+                             alt="Produto"
+                             class="ProdIcon" />
+                    </span>
+                </div>
+                <div class="TextoProd">
+                    <p>
+                        @Html.DisplayFor(modelItem => item.quantidadePedido) - @Html.DisplayFor(modelItem => item.produto)
+                    </p>
+                </div>
             </div>
 
-            <div class="Total">
+        }
+        <div class="cardPagamento">
+            <div class="RetireAlt">
                 <p>
-                    Total: RS15,00
+                    Ou, se preferir
                 </p>
+                <a href="#">Retire na Loja</a>
+            </div>
+            <div class="conteudoFP">
+                <div class="FP1">
+                    @Html.DropDownList("pagamentos", null, "Selecione a forma de pagamento", new { @class = "form-control" })
+                </div>
+
+                <div class="Total">
+                    <p>
+                        Total: @Html.DisplayFor(modelItem => Model.valorTotal)
+                    </p>
+                </div>
+            </div>
+            <div class="BotaoConf">
+                <input type="submit" class="btn button-a button-big button-rouded btn-success" id="confirmaDE" value="Confirmar">
             </div>
         </div>
-        <div class="BotaoConf">
-            <input type="submit" class="btn button-a button-big button-rouded btn-success" id="confirmaDE" value="Confirmar">
-        </div>
     </div>
-</div>
+}
+
 
