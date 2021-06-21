@@ -12,7 +12,7 @@ namespace ProjetoAW.Repositorio
         public void verificaAgendamento(Agenda agenda)
         {
             MySqlCommand cmd = new MySqlCommand("select * from agenda where data_agenda = @data and horario_agenda = @horario", cn.Conectar());
-            cmd.Parameters.Add("@data", MySqlDbType.VarChar).Value = agenda.dataAgenda;
+            cmd.Parameters.Add("@data", MySqlDbType.DateTime).Value = agenda.dataAgenda;
             cmd.Parameters.Add("@horario", MySqlDbType.VarChar).Value = agenda.horarioAgenda;
             cmd.ExecuteNonQuery();
 
@@ -33,8 +33,8 @@ namespace ProjetoAW.Repositorio
 
         public void realizaAgendamento(Agenda agenda)
         {
-            MySqlCommand cmd = new MySqlCommand("call cadastroAgenda(@data, @horario, @servico, @cliente, @animal, 'Em Andamento');", cn.Conectar());
-            cmd.Parameters.Add("@data", MySqlDbType.VarChar).Value = agenda.dataAgenda;
+            MySqlCommand cmd = new MySqlCommand("call cadastroAgenda(@data, @horario,'Em Andamento', @servico, @cliente, @animal);", cn.Conectar());
+            cmd.Parameters.Add("@data", MySqlDbType.DateTime).Value = agenda.dataAgenda;
             cmd.Parameters.Add("@horario", MySqlDbType.VarChar).Value = agenda.horarioAgenda;
             cmd.Parameters.Add("@servico", MySqlDbType.Int32).Value = agenda.codServico;
             cmd.Parameters.Add("@cliente", MySqlDbType.Int32).Value = agenda.codCli;
@@ -145,6 +145,14 @@ namespace ProjetoAW.Repositorio
             cn.Desconectar();
 
             return agendamentos;
+        }
+
+        public void cancelaAgendamento(int id)
+        {
+            MySqlCommand cmd = new MySqlCommand("update Agenda set situacao_agenda = 'Cancelado' where cod_agenda = @id", cn.Conectar());
+            cmd.Parameters.AddWithValue("@id", id);
+            cmd.ExecuteNonQuery();
+            cn.Desconectar();
         }
 
     }

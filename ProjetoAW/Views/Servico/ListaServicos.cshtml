@@ -4,60 +4,48 @@
     ViewBag.Title = "ListaServicos";
 }
 
-<h2>listaServicos</h2>
+<h2>Lista de Serviços</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.codServico)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.nomeServico)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.valorServico)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.descServico)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.imagemServico)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.horaServico)
-        </th>
-        <th></th>
-    </tr>
+<div class="container">
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.codServico)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.nomeServico)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.valorServico)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.descServico)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.imagemServico)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.horaServico)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
+    <table class="table">
+        <tr>
+            <th style="text-align: center">
+                @Html.DisplayNameFor(model => model.imagemServico)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nomeServico)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.valorServico)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.horaServico)
+            </th>
+            <th></th>
+        </tr>
 
-</table>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="td-image">
+                    <img class="img-responsive" width="60" height="60" src="@Html.DisplayFor(modelItem => item.imagemServico)"/>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nomeServico)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.valorServico)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.horaServico)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "AlterarServico", new { id=item.codServico }) |
+                    @Html.ActionLink("Excluir", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

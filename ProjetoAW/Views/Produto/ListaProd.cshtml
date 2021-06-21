@@ -4,96 +4,66 @@
     ViewBag.Title = "ListaProd";
 }
 
-<h2>ListaProd</h2>
+<h2>Lista de Produtos</h2>
+<div class="container">
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.codProduto)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.nomeProduto)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.descProduto)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.quantidadeEstoque)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.valorUnitario)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.imagemProduto)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.codCategoria)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.codFornecedor)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.codEspecie)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.nomeCategoria)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.nomeFornecedor)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.nomeEspecie)
-        </th>
-        <th></th>
-    </tr>
+    <table class="table">
+        <tr>
+            <th style="text-align">
+                @Html.DisplayNameFor(model => model.imagemProduto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nomeProduto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.quantidadeEstoque)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.valorUnitario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.codCategoria)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.codFornecedor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.codEspecie)
+            </th>
+            <th></th>
+        </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.codProduto)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.nomeProduto)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.descProduto)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.quantidadeEstoque)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.valorUnitario)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.imagemProduto)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.codCategoria)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.codFornecedor)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.codEspecie)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.nomeCategoria)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.nomeFornecedor)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.nomeEspecie)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="td-image">
+                    <img class="img-responsive" width="80" height="80" src="@Html.DisplayFor(modelItem => item.imagemProduto)" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nomeProduto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.quantidadeEstoque)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.valorUnitario)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nomeCategoria)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nomeFornecedor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nomeEspecie)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Detalhes", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Excluir", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+        }
 
-</table>
+    </table>
+</div>

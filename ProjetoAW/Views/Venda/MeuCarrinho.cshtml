@@ -153,6 +153,7 @@
         </table>
         @using (Html.BeginForm("DadosEntrega", "Venda", FormMethod.Post))
         {
+            @Html.AntiForgeryToken()
             <button class="btn btn-success">Finalizar compra</button>
         }
     </div>

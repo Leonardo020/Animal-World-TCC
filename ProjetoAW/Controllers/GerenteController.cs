@@ -48,7 +48,7 @@ namespace ProjetoAW.Controllers
             try
             {
                 acProd.cadastraDesconto(desc);
-                ViewBag.Message = "Cadastro de desconto realizado com sucesso!";
+                ViewBag.Message = "Cadastro de desconto realizado com sucesso";
             }
 
             catch (Exception e)
@@ -62,6 +62,12 @@ namespace ProjetoAW.Controllers
         {
             var agendamentos = acAgenda.consultaAgendamento();
             return View(agendamentos);
+        }
+
+        public ActionResult ListaFunc()
+        {
+            var funcionarios = acFunc.consultaFuncionario();
+            return View(funcionarios);
         }
 
     }

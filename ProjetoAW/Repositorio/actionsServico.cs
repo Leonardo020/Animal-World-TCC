@@ -59,8 +59,8 @@ namespace ProjetoAW.Repositorio
                 servico.nomeServico = dr["nome_servico"].ToString();
                 servico.valorServico = Convert.ToDouble(dr["valor_servico"]);
                 servico.imagemServico = dr["imagem_servico"].ToString();
-                servico.horaServico = dr["horario_servico"].ToString();
                 servico.descServico = dr["desc_servico"].ToString();
+                servico.horaServico = dr["horario_servico"].ToString();
             }
 
             cn.Desconectar();

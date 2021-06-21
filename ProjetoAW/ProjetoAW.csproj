@@ -353,8 +353,10 @@
     <Content Include="Views\Gerente\CadastrosFunc.cshtml" />
     <Content Include="Views\Gerente\CadastroFunc.cshtml" />
     <Content Include="Views\Produto\AlterarProd.cshtml" />
-    <Content Include="Views\Servico\CadServicos.cshtml" />
     <Content Include="Views\Servico\CadServico.cshtml" />
+    <Content Include="Views\Servico\CadAgendamento.cshtml" />
+    <Content Include="Views\Gerente\ListaFunc.cshtml" />
+    <Content Include="Views\Servico\AlterarServico.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

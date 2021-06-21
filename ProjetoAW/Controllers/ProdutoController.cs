@@ -39,14 +39,12 @@ namespace ProjetoAW.Controllers
             ViewBag.groups = new SelectList(groups, "Value", "Text");
         }
 
-
-
         public void carregaFornecedores()
         {
             var fornecedores = acProd.carregaFornecedores();
             ViewBag.fornecedores = new SelectList(fornecedores, "Value", "Text");
-        }  
-        
+        }
+
         public void carregaEspecies()
         {
             var especies = acAnimal.carregaEspecie();
@@ -59,13 +57,30 @@ namespace ProjetoAW.Controllers
             ViewBag.categorias = new SelectList(categorias, "Value", "Text");
         }
 
-        public ActionResult Vitrine()
+        public ActionResult Vitrine(int id = 0, string searchField = "")
         {
+            List<Produto> produtos = new List<Produto>();
             carregaGroups();
-            var produtos = acProd.consultaProduto();
+            if (id != 0)
+            {
+                produtos = acProd.consultaProdutoPorCategoria(id);
+
+            }
+
+            else if (searchField != "")
+            {
+                produtos = acProd.consultaProdutoPorNome(searchField);
+
+            }
+
+            else
+            {
+                produtos = acProd.consultaProduto();
+            }
+
             return View(produtos);
         }
-        
+
         [HttpPost]
         public ActionResult Vitrine(FormCollection frm)
         {
@@ -143,11 +158,7 @@ namespace ProjetoAW.Controllers
                     file.SaveAs(path);
                     prod.imagemProduto = file2;
                 }
-
-                else
-                {
-                    prod.descProduto = frm["descProduto"];
-                }
+                prod.descProduto = frm["descProduto"];
                 acProd.atualizaProduto(prod);
                 ViewBag.Message = "Atualização do produto efetuado com sucesso";
             }

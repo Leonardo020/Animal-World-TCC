@@ -26,16 +26,16 @@
         <a href="/Home/Home"><img class="header__image" src="~/img/logopetshop.png" alt="logo" /></a>
         <h1 class="header__title --color_primary"><a href="/Home/Home" class="actionLink">Animal World</a></h1>
         <div class="header__content">
-            <form class="header__content__search">
-                <input class="header__content__search__input"
-                       placeholder="Digite o produto desejado"
-                       id="searchField"
-                       name="searchField" />
-                <button type="submit" class="header__content__search__button">
-                    <img class="header__content__search__button__icon"
-                         src="~/img/search_black_24dp.svg"
-                         alt="logo" />
-                </button>
+            <form action="/Produto/Vitrine" class="header__content__search">
+                    <input class="header__content__search__input"
+                           placeholder="Digite o produto desejado"
+                           id="searchField"
+                           name="searchField" />
+                    <button type="submit" class="header__content__search__button">
+                        <img class="header__content__search__button__icon"
+                             src="~/img/search_black_24dp.svg"
+                             alt="logo" />
+                    </button>
             </form>
             <a href="/Venda/DadosPedido">
                 <h4 class="header__content__subtitle --color_primary">
@@ -51,7 +51,7 @@
                     if (Session["nivel0"] != null)
                     {
                         <h4 class="header__content__navcontainer__subtitle --color_primary">
-                            @Html.ActionLink("Área do Gerente", "HomeGerente", "Gerente", null, new { @class = "actionLink" })
+                            <i class="fas fa-user-tie"></i> &nbsp;@Html.ActionLink("Área do Gerente", "HomeGerente", "Gerente", null, new { @class = "actionLink" })
                         </h4>
                     }
 
@@ -164,7 +164,7 @@
                 data: { search: $("#searchField").val() },
                 success: function (data) {
                     response($.map(data, function (item) {
-                        return { label: item.nomeProduto, value: item.nomeProduto};
+                        return { label: item.nomeProduto, value: item.nomeProduto };
                     }));
                 },
                 error: function (xhr, status, error) {

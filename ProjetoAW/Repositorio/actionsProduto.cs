@@ -27,7 +27,7 @@ namespace ProjetoAW.Repositorio
             cn.Desconectar();
         }
 
-        public List<Produto> consultaProduto(string filtro = "cod_produto")
+        public List<Produto> consultaProduto(string filtro = "cod_produto desc")
         {
             List<Produto> produtos = new List<Produto>();
 
@@ -35,7 +35,7 @@ namespace ProjetoAW.Repositorio
                                                     inner join fornecedor frn on pr.cod_fornecedor = frn.cod_fornecedor
                                                     inner join categoria ca on pr.cod_categoria = ca.cod_categoria
                                                     inner join especie es on pr.cod_especie = es.cod_especie
-                                                    order by " + filtro ?? "desc", cn.Conectar());
+                                                    order by " + filtro ?? string.Empty, cn.Conectar());
             MySqlDataReader dr = cmd.ExecuteReader();
 
             while (dr.Read())
@@ -162,7 +162,6 @@ namespace ProjetoAW.Repositorio
             return fornecedores;
         }
 
-
         public List<Fornecedor> consultaFornecedores()
         {
             List<Fornecedor> fornecedores = new List<Fornecedor>();
@@ -206,6 +205,62 @@ namespace ProjetoAW.Repositorio
         {
             MySqlCommand cmd = new MySqlCommand("call cadastroDesconto(@desc, 0);", cn.Conectar());
             cmd.Parameters.Add("@desc", MySqlDbType.Float).Value = desc.desconto;
+        }
+
+        public List<Produto> consultaProdutoPorCategoria(int id)
+        {
+            List<Produto> produtos = new List<Produto>();
+            MySqlCommand cmd = new MySqlCommand("call consultaProdutoPorCategoria(@id);", cn.Conectar());
+            cmd.Parameters.AddWithValue("@id", id);
+            MySqlDataReader dr = cmd.ExecuteReader();
+
+            while (dr.Read())
+            {
+                produtos.Add(new Produto
+                {
+                    codProduto = Convert.ToInt32(dr["cod_produto"]),
+                    nomeProduto = dr["nome_produto"].ToString(),
+                    descProduto = dr["desc_produto"].ToString(),
+                    quantidadeEstoque = Convert.ToInt32(dr["quantidade_estoque"]),
+                    valorUnitario = Convert.ToDouble(dr["valor_unitario"]),
+                    imagemProduto = dr["imagem_produto"].ToString(),
+                    nomeFornecedor = dr["nome_fornecedor"].ToString(),
+                    nomeCategoria = dr["nome_categoria"].ToString(),
+                    nomeEspecie = dr["nome_especie"].ToString(),
+                });
+            }
+
+            cn.Desconectar();
+
+            return produtos;
+        }
+
+        public List<Produto> consultaProdutoPorNome(string field)
+        {
+            List<Produto> produtos = new List<Produto>();
+            MySqlCommand cmd = new MySqlCommand("call consultaProdutoPorNome(@nome);", cn.Conectar());
+            cmd.Parameters.AddWithValue("@nome", field);
+            MySqlDataReader dr = cmd.ExecuteReader();
+
+            while (dr.Read())
+            {
+                produtos.Add(new Produto
+                {
+                    codProduto = Convert.ToInt32(dr["cod_produto"]),
+                    nomeProduto = dr["nome_produto"].ToString(),
+                    descProduto = dr["desc_produto"].ToString(),
+                    quantidadeEstoque = Convert.ToInt32(dr["quantidade_estoque"]),
+                    valorUnitario = Convert.ToDouble(dr["valor_unitario"]),
+                    imagemProduto = dr["imagem_produto"].ToString(),
+                    nomeFornecedor = dr["nome_fornecedor"].ToString(),
+                    nomeCategoria = dr["nome_categoria"].ToString(),
+                    nomeEspecie = dr["nome_especie"].ToString(),
+                });
+            }
+
+            cn.Desconectar();
+
+            return produtos;
         }
     }
 }

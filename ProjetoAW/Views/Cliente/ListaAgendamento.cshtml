@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<ProjetoAW.Models.Agenda>
 @{
     ViewBag.Title = "ListaAgendamento";
 }
@@ -51,31 +51,36 @@
         #btnLA {
             border-radius: 15px;
             font-size: 1rem;
-            background-color: white;
-            color: black;
+            color: #fff;
         }
     </style>
 </head>
 
 <div>
-    <h2> Lista de Agendamentos</h2>
+    <h2> Seus Últimos Agendamentos</h2>
 </div>
 @foreach (var item in Model)
 {
-
-    <div class="contLA">
-        <div class="cardLA">
-            <div class="linhaLA">
-                <p> @Html.DisplayNameFor(model => model.dataAgenda): @Html.DisplayFor(modelItem => item.dataAgenda)</p>
-                <p> @Html.DisplayNameFor(model => model.horarioAgenda):  @Html.DisplayFor(modelItem => item.horarioAgenda)</p>
-                <p>Total: R$30,00</p>
-            </div>
-            <div class="linhaLA">
-                <p>Banho e Tosa de Thor</p>
-                <input type="submit" value="Cancelar" id="btnLA" />
+    if(item.situacaoAgenda == "Em andamento") { 
+        <div class="contLA">
+            <div class="cardLA">
+                <div class="linhaLA">
+                    <p> @Html.DisplayNameFor(model => model.dataAgenda): @Html.DisplayFor(modelItem => item.dataAgenda)</p>
+                    <p> @Html.DisplayNameFor(model => model.horarioAgenda):  @Html.DisplayFor(modelItem => item.horarioAgenda)</p>
+                    <p>@Html.DisplayNameFor(model => model.valorServico): @Html.DisplayFor(modelItem => item.valorServico) </p>
+                    <p>@Html.DisplayNameFor(model => model.situacaoAgenda): @Html.DisplayFor(modelItem => item.situacaoAgenda) </p>
+                </div>
+                <div class="linhaLA">
+                    <p>@Html.DisplayFor(modelItem => item.nomeServico) de @Html.DisplayFor(modelItem => item.nomeAnimal)</p>
+                    @using (Html.BeginForm("CancelaAgendamento", "Servico", FormMethod.Post))
+                    {
+                        <input type="hidden" name="id" value="@item.codAgenda"/>
+                        <input type="submit" class="btn btn-danger" value="Cancelar" id="btnLA" />
+                    }
+                </div>
             </div>
         </div>
-    </div>
+    }
 }
 
 

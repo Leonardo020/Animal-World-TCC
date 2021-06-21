@@ -1,4 +1,4 @@
-﻿
+﻿@model ProjetoAW.Models.Agenda
 @{
     ViewBag.Title = "TelaAgendamento";
 }
@@ -13,7 +13,7 @@
         }
 
         .contTA {
-            height:395px;
+            height: 395px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -30,31 +30,31 @@
         }
 
         .titulo {
-            padding-bottom:1.2rem;
-            text-align:center;
-            font-size:1.5rem;
+            padding-bottom: 1.2rem;
+            text-align: center;
+            font-size: 1.5rem;
         }
 
         .conteudoTA {
-            height:100%;
-            width:80%;
-            background-color:white;
-            display:flex;
-            flex-direction:column;
-            justify-content:space-around;
+            height: 100%;
+            width: 80%;
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
         }
 
         .linhaTA1 {
-            padding-left:1.2rem;
+            padding-left: 1.2rem;
             display: flex;
             flex-direction: row;
             justify-content: space-between;
             width: 85%;
         }
 
-        .linhaDados{
-            display:flex;
-            flex-direction:row;
+        .linhaDados {
+            display: flex;
+            flex-direction: row;
         }
 
         .linhaTA2 {
@@ -69,12 +69,12 @@
             text-align: center;
             border: 1px solid #000;
             height: 60%;
-            padding:1.2rem;
+            padding: 1.2rem;
         }
 
         #btnAgendar {
-            margin-top:1.2rem;
-            font-size:1.2rem;
+            margin-top: 1.2rem;
+            font-size: 1.2rem;
         }
     </style>
 </head>
@@ -82,43 +82,46 @@
     <h2>Agendamento</h2>
 </div>
 
-<div class="contTA">
-    <div class="cardTA">
-        <div class="titulo">
-            <h3>Banho e Tosa</h3>
-        </div>
-        <div class="conteudoTA">
-            <div class="linhaTA1">
-                <p>Data:20/01/2021</p>
-                <p>*Dados do animal*</p>
+@using (Html.BeginForm("CadAgendamento", "Servico", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="contTA">
+        <div class="cardTA">
+            <div class="titulo">
+                <h3>@Html.DisplayFor(modelItem => Model.nomeServico)</h3>
             </div>
-            <div class="linhaTA1">
-                <p>Horário: 17:00hrs</p>
-                <p>
-                    Selecione o animal cadastrado
-                    <img src="~/img/expand_more_black_24dp.svg"
-                         class="header__content__subtitle__image" />
-                </p>
-            </div>
-            <div class="linhaDados">
-                <div class="linhaTA2">
-                    <p>Dados do cliente:</p>
+            <div class="conteudoTA">
+                <div class="linhaTA1">
+                    <p> @Html.LabelFor(model => model.dataAgenda, htmlAttributes: new { @class = "control-label", @style = "margin-bottom: 5px" }): @Html.EditorFor(model => model.dataAgenda, new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom: 5px", @type = "date" } })</p>
+                </div>
+                <div class="linhaTA1">
+                    <p> @Html.LabelFor(model => model.horarioAgenda, htmlAttributes: new { @class = "control-label", @style = "margin-bottom: 5px" }):  @Html.EditorFor(model => model.horarioAgenda, new {htmlAttributes = new { @class = "form-control", @style = "margin-bottom: 5px", @type = "time"} })</p>
+                    <p>
+                        @Html.LabelFor(model => model.codAnimal, htmlAttributes: new { @class = "control-label", @style = "margin-bottom: 5px" })
+                        @Html.DropDownList("animais", null, "Selecione o animal", new { @class = "form-control", @style = "margin-bottom: 5px" })
+                    </p>
+                </div>
+                <div class="linhaDados">
+                    <div class="linhaTA2">
+                        <p id="animal">Animal escolhido: </p>
+                        <p>
+                            Valor total do serviço: @Html.DisplayFor(modelItem => Model.valorServico) 
+                        </p>
+                    </div>
                 </div>
 
-                <div class="linhaTA2">
-                    <p>Dados do animal:</p>
-                </div>
+                <!--<div class="linhaTA3">
+                    <label>Tipo de Serviço:</label>
+                    <input type="radio" name="opcao" value="op1" checked> Premium
+                    <input type="radio" name="opcao" value="op2"> Serviço Padrão
+                </div>-->
             </div>
-
-            <div class="linhaTA3">
-                <label>Tipo de Serviço:</label>
-                <INPUT TYPE="radio" NAME="OPCAO" VALUE="op1" checked> Premium
-                <INPUT TYPE="radio" NAME="OPCAO" VALUE="op2"> Serviço Padrão
+            <div>
+                @Html.EditorFor(model => model.cod, new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom: 5px", @type = "hidden" } })
+                <input type="submit" value="Agendar" id="btnAgendar" />
+                @ViewBag.Message
             </div>
-        </div>
-        <div>
-            <input type="submit" value="Agendar" id="btnAgendar" />
         </div>
     </div>
-</div>
+}
 

@@ -4,121 +4,55 @@
     ViewBag.Title = "ListaClientes";
 }
 
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-    <script type="text/javascript" src="@Url.Content("/Scripts/script.js")"></script>
-    <style>
-        h2 {
-            margin-top: 1.2rem;
-            font-size: 1.6rem;
-            text-align: center;
-        }
-        </style>
-</head>
-
 <div>
-    <h2>ListaClientes</h2>
+    <h2>Lista de Clientes</h2>
 </div>
+<div class="container">
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.codCli)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.nomeCli)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.emailCli)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.cpfCli)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.telefoneCli)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.logradouroCli)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.numeroCli)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.cepCli)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.estadoCli)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.cidadeCli)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.usuarioCli)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.senhaCli)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.nivelCli)
-        </th>
-        <th></th>
-    </tr>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.nomeCli)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.emailCli)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.cpfCli)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.telefoneCli)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.cepCli)
+            </th>
+            <th></th>
+        </tr>
 
-@foreach (var item in Model) { 
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.codCli)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.nomeCli)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.emailCli)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.cpfCli)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.telefoneCli)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.logradouroCli)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.numeroCli)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.cepCli)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.estadoCli)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.cidadeCli)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.usuarioCli)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.senhaCli)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.nivelCli)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nomeCli)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.emailCli)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cpfCli)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.telefoneCli)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cepCli)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Ver Pets", "Details", new { /* id=item.PrimaryKey */ }) 
+                </td>
+            </tr>
+        }
 
-</table>
+    </table>
+</div>

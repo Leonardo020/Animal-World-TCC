@@ -1,16 +1,37 @@
 ﻿@model ProjetoAW.Models.Servico
 
 @{
-    ViewBag.Title = "CadServico";
+    ViewBag.Title = "AlterarServico";
 }
 
-<h2>Cadastro de Serviço</h2>
+<h2>Alteração de Serviço</h2>
 
-@using (Html.BeginForm("CadServico", "Servico", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("AlterarServico", "Servico", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
+    @Html.EditorFor(model => model.codServico, new { htmlAttributes = new { @class = "form-control", @hidden = "true" } })
     <div class="containerCadastro">
         <div class="cardCadastro">
+            <div class="avatarCadastro">
+                <div class="container containerProd">
+                    <div class="wrapper wrapperProd">
+                        <div class="image">
+                            @if (Html.DisplayFor(model => model.imagemServico) == null)
+                            {
+                                <img id="preview-img" src="~/img/free-heart-icon.png" alt=""> }
+                            else
+                            {
+                                <img id="preview-img" src="@Html.DisplayFor(model => model.imagemServico)" alt="">
+                            }
+                        </div>
+                        <div id="cancel-btn">
+                            <i class="fas fa-times"></i>
+                        </div>
+                    </div>
+                    <label class="btnServ" id="labelFile" for="default-button"><i class="fas fa-upload"></i> Escolha a imagem do serviço</label>
+                    <input type="file" name="file" id="default-button">
+                </div>
+            </div>
             <div class="dadosCadastro">
                 <div class="linha">
                     <p>
@@ -22,8 +43,7 @@
                     <p>
                         @Html.LabelFor(model => model.valorServico, htmlAttributes: new { @class = "control-label", @style = "margin-bottom: 5px" })
 
-                        @Html.EditorFor(model => model.valorServico, new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom: 5px" } })
-                        @Html.ValidationMessageFor(model => model.valorServico, "", new { @class = "text-danger" })
+                        @Html.EditorFor(model => model.valorServico, new { htmlAttributes = new { @class = "form-control valor", @style = "margin-bottom: 5px" } })
                     </p>
                 </div>
 
@@ -41,32 +61,11 @@
                         @Html.ValidationMessageFor(model => model.descServico, "", new { @class = "text-danger" })
                     </p>
                 </div>
-                <br/>
+                <br />
                 <div class="linha">
-                    <button type="submit" class="btn btn-success btnCadServico"><i class="fas fa-plus-circle"></i> Cadastrar</button>
+                    <button type="submit" class="btn btn-success btnCadServico" onclick="formataMoeda()"><i class="fas fa-edit"></i> Alterar</button>
                 </div>
                 <p>@ViewBag.message</p>
-            </div>
-            <div class="avatarCadastro">
-                <div class="container containerProd">
-                    <div class="wrapper wrapperProd">
-                        <div class="image">
-                            @if (Html.LabelFor(model => model.imagemServico) != null)
-                            {
-                                <img id="preview-img" src="~/img/free-heart-icon.png" alt=""> }
-                            else
-                            {
-
-                                <img id="preview-img" src="" alt="">
-                            }
-                        </div>
-                        <div id="cancel-btn">
-                            <i class="fas fa-times"></i>
-                        </div>
-                    </div>
-                    <label class="btnServ" id="labelFile" for="default-button"><i class="fas fa-upload"></i> Escolha a imagem do serviço</label>
-                    <input type="file" name="file" id="default-button">
-                </div>
             </div>
         </div>
     </div>
@@ -100,5 +99,6 @@
             fileName.textContent = valueStore;
         }
     });
+
 </script>
 

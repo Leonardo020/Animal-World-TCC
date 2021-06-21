@@ -24,7 +24,7 @@ namespace ProjetoAW.Repositorio
         {
             List<Funcionario> funcionarios = new List<Funcionario>();
 
-            MySqlCommand cmd = new MySqlCommand("call consultaFuncionario();", cn.Conectar());
+            MySqlCommand cmd = new MySqlCommand("call consultaFunc();", cn.Conectar());
             MySqlDataReader dr = cmd.ExecuteReader();
 
             while (dr.Read())

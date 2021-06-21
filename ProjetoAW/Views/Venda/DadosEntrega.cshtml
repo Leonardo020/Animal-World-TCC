@@ -152,7 +152,7 @@
 </div>
 @using (Html.BeginForm("CadastrarVenda", "Venda", FormMethod.Post))
 {
-
+    @Html.AntiForgeryToken()
     <div id="contDadosEntrega">
 
         <div class="cardEnd">

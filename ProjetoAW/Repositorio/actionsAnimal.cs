@@ -162,11 +162,9 @@ namespace ProjetoAW.Repositorio
             return especies;
         }
 
-        public List<SelectListItem> carregaRacas(/*int especie*/)
+        public List<SelectListItem> carregaRacas()
         {
-            //MySqlCommand cmd = new MySqlCommand("select * from tbRaca where cod_especie = @especie", cn.Conectar());
             MySqlCommand cmd = new MySqlCommand("select * from Raca", cn.Conectar());
-            //cmd.Parameters.Add("@especie", MySqlDbType.Int32).Value = especie;
             MySqlDataReader dr = cmd.ExecuteReader();
             while (dr.Read())
             {
@@ -218,6 +216,25 @@ namespace ProjetoAW.Repositorio
             cn.Desconectar();
 
             return portes;
+        }
+
+        public List<SelectListItem> carregaAnimais(int id)
+        {
+            List<SelectListItem> animais = new List<SelectListItem>();
+            MySqlCommand cmd = new MySqlCommand("select * from animal where cod_cli = @id", cn.Conectar());
+            cmd.Parameters.AddWithValue("@id", id);
+            MySqlDataReader dr = cmd.ExecuteReader();
+
+            while (dr.Read())
+            {
+                animais.Add(new SelectListItem
+                {
+                    Text = dr["nome_animal"].ToString(),
+                    Value = dr["cod_animal"].ToString(),
+                });
+            }
+
+            return animais;
         }
     }
 

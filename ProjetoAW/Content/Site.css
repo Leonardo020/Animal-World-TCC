@@ -557,6 +557,12 @@ input[type="file"] {
     text-transform: uppercase;
     width: 250px;
 }
+
+/*listas do gerente*/
+.td-image{
+    display: flex;
+    justify-content: center;
+}
 /* footer */
 footer {
     color: white;
