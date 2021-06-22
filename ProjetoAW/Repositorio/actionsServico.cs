@@ -35,7 +35,7 @@ namespace ProjetoAW.Repositorio
                 {
                     codServico = Convert.ToInt32(dr["cod_servico"]),
                     nomeServico = dr["nome_servico"].ToString(),
-                    valorServico = Convert.ToDouble(dr["valor_servico"]),
+                    valorServico = Convert.ToDecimal(dr["valor_servico"]),
                     imagemServico = dr["imagem_servico"].ToString(),
                     horaServico = dr["horario_servico"].ToString(),
                     descServico = dr["desc_servico"].ToString(),
@@ -57,7 +57,7 @@ namespace ProjetoAW.Repositorio
             {
                 servico.codServico = Convert.ToInt32(dr["cod_servico"]);
                 servico.nomeServico = dr["nome_servico"].ToString();
-                servico.valorServico = Convert.ToDouble(dr["valor_servico"]);
+                servico.valorServico = Convert.ToDecimal(dr["valor_servico"]);
                 servico.imagemServico = dr["imagem_servico"].ToString();
                 servico.descServico = dr["desc_servico"].ToString();
                 servico.horaServico = dr["horario_servico"].ToString();
@@ -70,12 +70,12 @@ namespace ProjetoAW.Repositorio
 
         public void atualizaServico(Servico servico)
         {
-            MySqlCommand cmd = new MySqlCommand("call alterarServico(@nome, @valor, @imagem, @horario, @desc, @id);", cn.Conectar());
+            MySqlCommand cmd = new MySqlCommand("call alterarServico(@id, @nome, @valor, @imagem, @horario, @desc);", cn.Conectar());
             cmd.Parameters.AddWithValue("@id", servico.codServico);
             cmd.Parameters.Add("@nome", MySqlDbType.VarChar).Value = servico.nomeServico;
             cmd.Parameters.Add("@valor", MySqlDbType.Float).Value = servico.valorServico;
             cmd.Parameters.Add("@imagem", MySqlDbType.VarChar).Value = servico.imagemServico;
-            cmd.Parameters.Add("@hora", MySqlDbType.VarChar).Value = servico.horaServico;
+            cmd.Parameters.Add("@horario", MySqlDbType.VarChar).Value = servico.horaServico;
             cmd.Parameters.Add("@desc", MySqlDbType.VarChar).Value = servico.descServico;
             cmd.ExecuteNonQuery();
             cn.Desconectar();

@@ -214,8 +214,10 @@
     <Content Include="img\cadastro.png" />
     <Content Include="img\calendar.png" />
     <Content Include="img\calops.png" />
+    <Content Include="img\cao.png" />
     <Content Include="img\casa-de-animais.png" />
     <Content Include="img\categoria.png" />
+    <Content Include="img\coelho.png" />
     <Content Include="img\consulta.png" />
     <Content Include="img\dicas-pet.jpg" />
     <Content Include="img\expand_less_white_24dp.svg" />
@@ -224,12 +226,14 @@
     <Content Include="img\firstslide.png" />
     <Content Include="img\free-heart-icon.png" />
     <Content Include="img\fundo1.jpg" />
+    <Content Include="img\gato.png" />
     <Content Include="img\home.png" />
     <Content Include="img\logopetshop.png" />
     <Content Include="img\marca1.png" />
     <Content Include="img\marcas.png" />
     <Content Include="img\marcas2.png" />
     <Content Include="img\meus-dados.png" />
+    <Content Include="img\papagaio.png" />
     <Content Include="img\pedido.png" />
     <Content Include="img\pets.png" />
     <Content Include="img\petwalker1.png" />
@@ -252,6 +256,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="img\tartaruga.png" />
     <Content Include="libman.json" />
     <Content Include="lib\font-awesome\webfonts\fa-brands-400.eot" />
     <Content Include="lib\font-awesome\webfonts\fa-brands-400.ttf" />

@@ -23,6 +23,7 @@ namespace ProjetoAW.Models
         public int codFornecedor { get; set; }
         [Display(Name = "Espécie")]
         public int codEspecie { get; set; }
+        public bool isFavorite { get; set; }
 
         //atributos extras
         public string nomeCategoria { get; set; }

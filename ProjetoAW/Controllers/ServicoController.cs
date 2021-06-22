@@ -28,7 +28,7 @@ namespace ProjetoAW.Controllers
             var servico = acServico.selecionaServicoPorId(idServico);
             agenda.codServico = servico.codServico;
             agenda.nomeServico = servico.nomeServico;
-            agenda.valorServico = servico.valorServico;
+            //agenda.valorServico = servico.valorServico;
             return View(agenda);
         }
 
@@ -70,7 +70,7 @@ namespace ProjetoAW.Controllers
         {
             return View();
         }
-        
+
         [HttpPost]
         public ActionResult CadServico(Servico servico, HttpPostedFileBase file, FormCollection frm)
         {
@@ -85,7 +85,7 @@ namespace ProjetoAW.Controllers
                 acServico.cadastraServico(servico);
                 ViewBag.Message = "Cadastro realizado com sucesso";
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 ViewBag.Message = "Ocorreu o seguinte erro ao tentar cadastrar: " + e;
             }
@@ -103,7 +103,7 @@ namespace ProjetoAW.Controllers
         {
             try
             {
-                if(file != null)
+                if (file != null)
                 {
                     string arquivo = Path.GetFileName(file.FileName);
                     string file2 = "/img/" + arquivo;
@@ -111,7 +111,6 @@ namespace ProjetoAW.Controllers
                     file.SaveAs(path);
                     servico.imagemServico = file2;
                 }
-                servico.valorServico = Convert.ToDouble(servico.valorServico.ToString().Replace("R$", string.Empty));
                 servico.descServico = frm["descServico"];
                 acServico.atualizaServico(servico);
                 ViewBag.Message = "Alteração realizada com sucesso";
@@ -120,7 +119,10 @@ namespace ProjetoAW.Controllers
             {
                 ViewBag.Message = "Ocorreu o seguinte erro ao tentar alterar: " + e;
             }
-            return View();
+            var servicoAtualizado = acServico.selecionaServicoPorId(servico.codServico);
+            ViewBag.desc = servicoAtualizado.descServico;
+            ViewBag.imagem = servicoAtualizado.imagemServico;
+            return View(servicoAtualizado);
         }
 
 

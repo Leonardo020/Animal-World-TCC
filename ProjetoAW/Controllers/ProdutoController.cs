@@ -64,13 +64,11 @@ namespace ProjetoAW.Controllers
             if (id != 0)
             {
                 produtos = acProd.consultaProdutoPorCategoria(id);
-
             }
 
             else if (searchField != "")
             {
                 produtos = acProd.consultaProdutoPorNome(searchField);
-
             }
 
             else
@@ -170,6 +168,14 @@ namespace ProjetoAW.Controllers
 
             return View();
         }
+
+        [HttpPost]
+        public ActionResult AtualizaFavorito(int id, bool isFavorite)
+        {
+            //acProd.atualizaProduto(id);
+            return View();
+        }
+
 
         public ActionResult ExcluirProd()
         {

@@ -10,6 +10,7 @@
 {
     @Html.AntiForgeryToken()
     @Html.EditorFor(model => model.codServico, new { htmlAttributes = new { @class = "form-control", @hidden = "true" } })
+    @Html.EditorFor(model => model.imagemServico, new { htmlAttributes = new { @class = "form-control", @hidden = "true" } })
     <div class="containerCadastro">
         <div class="cardCadastro">
             <div class="avatarCadastro">
@@ -40,10 +41,12 @@
                         @Html.EditorFor(model => model.nomeServico, new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom: 5px" } })
                         @Html.ValidationMessageFor(model => model.nomeServico, "", new { @class = "text-danger" })
                     </p>
+                  
                     <p>
                         @Html.LabelFor(model => model.valorServico, htmlAttributes: new { @class = "control-label", @style = "margin-bottom: 5px" })
 
-                        @Html.EditorFor(model => model.valorServico, new { htmlAttributes = new { @class = "form-control valor", @style = "margin-bottom: 5px" } })
+                        @Html.EditorFor(model => model.valorServico, new { htmlAttributes = new { @class = "form-control currency", @style = "margin-bottom: 5px"} })
+                        @Html.ValidationMessageFor(model => model.valorServico, "", new { @class = "text-danger" })
                     </p>
                 </div>
 
@@ -63,9 +66,9 @@
                 </div>
                 <br />
                 <div class="linha">
-                    <button type="submit" class="btn btn-success btnCadServico" onclick="formataMoeda()"><i class="fas fa-edit"></i> Alterar</button>
+                    <button type="submit" class="btn btn-success btnCadServico"><i class="fas fa-edit"></i> Alterar</button>
                 </div>
-                <p>@ViewBag.message</p>
+                <p>@ViewBag.Message</p>
             </div>
         </div>
     </div>

@@ -111,7 +111,6 @@
             }
 
         .textFilter {
-            
         }
     </style>
 </head>
@@ -137,7 +136,7 @@
 
 
                 <div class="cardVitrine">
-                    <i class="far fa-heart favVit" name="favVit"></i>
+                    <i class="far fa-heart favVit" id="@id" name="@item.isFavorite.ToString()" value="@item.isFavorite.ToString()" onclick="changeColor(this)"></i>
                     @if (@item.imagemProduto != null)
                     {
                         <a href="/Produto/DetalheProd/@id"><img src="@item.imagemProduto" id="imgVit" /></a>
@@ -183,11 +182,8 @@
         filtro.setAttribute('value', $('#groups').val());
     }
 
-    var isFavorite = false;
-    var favoriteToggle = document.querySelector('.favVit');
-
-    favoriteToggle.addEventListener('click', function () {
-        if (!isFavorite) {
+    function changeColor(favoriteToggle) {
+        if (!Boolean(favoriteToggle.getAttribute('value'))) {
             favoriteToggle.setAttribute('style', 'color:#43b581;')
             favoriteToggle.setAttribute('class', 'fas fa-heart favVit')
         }
@@ -195,6 +191,7 @@
             favoriteToggle.setAttribute('style', 'color:#000;')
             favoriteToggle.setAttribute('class', 'far fa-heart favVit')
         }
-        isFavorite = !isFavorite;
-    });
+        favoriteToggle.setAttribute('name', !favoriteToggle.getAttribute('value'));   
+        $.post('@Url.Action("AtualizaFavorito", "Produto")', { 'id': favoriteToggle.getAttribute('id'), 'isFavorite': Boolean(favoriteToggle.getAttribute('value'))})
+    }
 </script>

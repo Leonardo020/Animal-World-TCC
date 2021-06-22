@@ -31,7 +31,7 @@ namespace ProjetoAW.Repositorio
         {
             List<Produto> produtos = new List<Produto>();
 
-            MySqlCommand cmd = new MySqlCommand($@"select cod_produto, nome_produto, desc_produto, quantidade_estoque, valor_unitario, imagem_produto, nome_fornecedor, nome_categoria, nome_especie from produto pr
+            MySqlCommand cmd = new MySqlCommand($@"select cod_produto, nome_produto, desc_produto, quantidade_estoque, valor_unitario, imagem_produto, nome_fornecedor, nome_categoria, nome_especie, isFavorito from produto pr
                                                     inner join fornecedor frn on pr.cod_fornecedor = frn.cod_fornecedor
                                                     inner join categoria ca on pr.cod_categoria = ca.cod_categoria
                                                     inner join especie es on pr.cod_especie = es.cod_especie
@@ -51,6 +51,7 @@ namespace ProjetoAW.Repositorio
                     nomeFornecedor = dr["nome_fornecedor"].ToString(),
                     nomeCategoria = dr["nome_categoria"].ToString(),
                     nomeEspecie = dr["nome_especie"].ToString(),
+                    isFavorite = Convert.ToBoolean(dr["isFavorito"].ToString()),
                     /*codFornecedor = Convert.ToInt32(dr["cod_fornecedor"]),
                     codCategoria = Convert.ToInt32(dr["cod_categoria"]),
                     codEspecie = Convert.ToInt32(dr["cod_especie"]),*/

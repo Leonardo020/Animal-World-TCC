@@ -361,6 +361,25 @@ ul {
     height: 100%;
     width: 100%;
 }
+/*espécies do home*/
+.circuloEspecie {
+    display: flex;
+    vertical-align: middle;
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    background-color: #73af94;
+    color: #fff;
+    margin: 15px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.text-center{
+    margin-top: 5px;
+    font-weight: 400;
+}
 
 /*cadastro de pet*/
 h2 {
@@ -558,11 +577,50 @@ input[type="file"] {
     width: 250px;
 }
 
+/*alterar serviço*/
+.currency:before {
+    content: '$';
+}
+
+.currency:after {
+    content: '.00';
+}
+
 /*listas do gerente*/
 .td-image{
     display: flex;
     justify-content: center;
 }
+
+/*lista do animal*/
+.background {
+    vertical-align: middle;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background-color: #73af94
+}
+
+.linhaPets {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: space-around;
+    flex-flow: row wrap;
+}
+
+.circuloPet {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+    .circuloPet p {
+        font-size: 1.6rem;
+        padding-top: 2rem;
+    }
 /* footer */
 footer {
     color: white;
