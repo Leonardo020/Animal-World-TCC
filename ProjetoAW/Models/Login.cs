@@ -6,8 +6,10 @@ namespace ProjetoAW.Models
     {
         [Display(Name = "Código do Login")]
         public int codLogin { get; set; }
+        [Required(ErrorMessage = "Informe o usuário")]
         [Display(Name = "Usuário")]
         public string usuarioLogin { get; set; }
+        [Required(ErrorMessage = "Informe a senha")]
         [Display(Name = "Senha")]
         public string senhaLogin { get; set; }
         [Display(Name = "Tipo")]

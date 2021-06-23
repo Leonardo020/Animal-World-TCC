@@ -80,7 +80,9 @@ namespace ProjetoAW.Controllers
                 Session["Carrinho"] = carrinho;
                 Session["qtdCarrinho"] = qtdTotal;
             }
-            return RedirectToAction("MeuCarrinho");
+
+            TempData["success"] = "Produto adicionado ao carrinho!";
+            return RedirectToAction("Vitrine", "Produto");
         }
 
         public ActionResult MeuCarrinho()

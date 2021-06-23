@@ -36,7 +36,7 @@ namespace ProjetoAW.Repositorio
                 {
                     codEntrega = Convert.ToInt32(dr["cod_entrega"]),
                     dataEntrega = Convert.ToDateTime(dr["data_entrega"]),
-                    valorEntrega = Convert.ToDouble(dr["valor_entrega"]),
+                    valorEntrega = Convert.ToDecimal(dr["valor_entrega"]),
                     codPedido = Convert.ToInt32(dr["cod_entrega"]),
                     codAnimal = Convert.ToInt32(dr["cod_animal"]),
                     codCli = Convert.ToInt32(dr["cod_cli"]),
@@ -60,7 +60,7 @@ namespace ProjetoAW.Repositorio
             {
                 entrega.codEntrega = Convert.ToInt32(dr["cod_entrega"]);
                 entrega.dataEntrega = Convert.ToDateTime(dr["data_entrega"]);
-                entrega.valorEntrega = Convert.ToDouble(dr["valor_entrega"]);
+                entrega.valorEntrega = Convert.ToDecimal(dr["valor_entrega"]);
                 entrega.codPedido = Convert.ToInt32(dr["cod_entrega"]);
                 entrega.codAnimal = Convert.ToInt32(dr["cod_animal"]);
                 entrega.codCli = Convert.ToInt32(dr["cod_cli"]);

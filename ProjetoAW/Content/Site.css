@@ -208,7 +208,7 @@ ul {
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
-    background-color: #73af94;
+    background-color: #3CA374;
     padding: 0px;
     margin: 0px;
 }
@@ -368,7 +368,7 @@ ul {
     width: 130px;
     height: 130px;
     border-radius: 50%;
-    background-color: #73af94;
+    background-color: #3CA374;
     color: #fff;
     margin: 15px;
     justify-content: center;
@@ -531,7 +531,7 @@ input[type="file"] {
 
 /*editar pet*/
 #EditarCP {
-    background-color: #73af94;
+    background-color: #3CA374;
     color: white;
 }
 
@@ -563,7 +563,7 @@ input[type="file"] {
     text-align: center;
     justify-content: center;
     text-transform: uppercase;
-    width: 250px;
+    width: auto;
 }
 
 /*cadastrar serviço*/
@@ -577,15 +577,6 @@ input[type="file"] {
     width: 250px;
 }
 
-/*alterar serviço*/
-.currency:before {
-    content: '$';
-}
-
-.currency:after {
-    content: '.00';
-}
-
 /*listas do gerente*/
 .td-image{
     display: flex;
@@ -595,10 +586,10 @@ input[type="file"] {
 /*lista do animal*/
 .background {
     vertical-align: middle;
-    width: 200px;
-    height: 200px;
+    width: 220px;
+    height: 220px;
     border-radius: 50%;
-    background-color: #73af94
+    background-color: #3CA374
 }
 
 .linhaPets {
@@ -627,7 +618,7 @@ footer {
     position: relative;
     width: 100%;
     text-align: center;
-    background-color: #73af94;
+    background-color: #3CA374;
 }
 
     footer p {

@@ -32,27 +32,19 @@ namespace ProjetoAW.Controllers
             ViewBag.portes = new SelectList(portes, "Value", "Text");
         }
 
+        [HttpPost]
+        public ActionResult obterRacasByEspecie(int idEspecie)
+        {
+            var racas = acAnimal.consultaRacasPorEspecie(idEspecie);
+            return Json(racas);
+        }
+
         public ActionResult CadastroPet()
         {
             carregaEspecies();
             carregaRacas();
             carregaPortes();
             return View();
-        }
-
-        public ActionResult CadastroAnimal()
-        {
-            carregaEspecies();
-            carregaRacas();
-            carregaPortes();
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult obterRacasByEspecie(int idEspecie)
-        {
-            var racas = acAnimal.consultaRacasPorEspecie(idEspecie);
-            return Json(racas);
         }
 
         [HttpPost]
@@ -75,12 +67,12 @@ namespace ProjetoAW.Controllers
                 animal.imagemAnimal = file2;
 
                 acAnimal.cadastraAnimal(animal);
-                ViewBag.Message = "Cadastro efetuado com sucesso!";
+                TempData["success"] = "O cadastro foi efetuado com sucesso!";
             }
 
-            catch (Exception e)
+            catch
             {
-                ViewBag.Message = "Erro ao inserir " + e;
+                TempData["error"] = "Erro ao cadastrar pet";
             }
             return View();
         }
@@ -112,12 +104,12 @@ namespace ProjetoAW.Controllers
                     animal.descricaoAnimal = frm["descAnimal"];
                 }
                 acAnimal.atualizaAnimal(animal);
-                ViewBag.Message = "Atualização efetuada com sucesso!";
+                TempData["success"] = "Atualização efetuada com sucesso!";
             }
 
-            catch (Exception e)
+            catch
             {
-                ViewBag.Message = "Erro ao atualizar pet por conta de: " + e;
+                TempData["error"] = "Erro ao atualizar pet";
             }
             var animalAtualizado = acAnimal.consultaAnimalPorId(animal.codAnimal);
             ViewBag.desc = animal.descricaoAnimal;

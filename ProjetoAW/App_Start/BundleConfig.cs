@@ -23,7 +23,12 @@ namespace ProjetoAW
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/Reset.css",
-                      "~/Content/Site.css"));
+                      "~/Content/Site.css",
+                      "~/Content/toastr.css"));
+            bundles.Add(new ScriptBundle("~/bundles/inputmask").Include(
+            "~/Scripts/inputmask/jquery.inputmask.js")); 
+            bundles.Add(new StyleBundle("~/bundles/inputmask").Include(
+            "~/Scripts/inputmask/jquery.inputmask.js")); 
         }
     }
 }

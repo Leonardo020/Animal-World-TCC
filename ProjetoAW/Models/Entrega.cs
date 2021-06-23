@@ -7,10 +7,10 @@ namespace ProjetoAW.Models
     {
         [Display(Name = "Código da Entrega")]
         public int codEntrega { get; set; }
-        [Display(Name = "Nome da Entrega")]
+        [Display(Name = "Data da Entrega")]
         public DateTime dataEntrega { get; set; }
         [Display(Name = "Frete")]
-        public double valorEntrega { get; set; }
+        public decimal valorEntrega { get; set; }
         [Display(Name = "Animal")]
         public int codAnimal { get; set; }
         [Display(Name = "Pedido")]

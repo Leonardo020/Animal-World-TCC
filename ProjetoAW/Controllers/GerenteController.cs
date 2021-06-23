@@ -27,12 +27,12 @@ namespace ProjetoAW.Controllers
             try
             {
                 acFunc.cadastraFuncionario(func);
-                ViewBag.Message = "Cadastro do funcionário realizado com sucesso!";
+                TempData["success"] = "Cadastro do funcionário realizado com sucesso!";
             }
 
-            catch (Exception e)
+            catch
             {
-                ViewBag.Message = "Ocorreu um erro ao tentar cadastrar: " + e;
+                TempData["error"] = "Ocorreu um erro ao tentar cadastrar o funcionário";
             }
             return View();
         }
@@ -48,12 +48,12 @@ namespace ProjetoAW.Controllers
             try
             {
                 acProd.cadastraDesconto(desc);
-                ViewBag.Message = "Cadastro de desconto realizado com sucesso";
+                TempData["success"] = "Cadastro de desconto realizado com sucesso!";
             }
 
-            catch (Exception e)
+            catch 
             {
-                ViewBag.Message = "Ocorreu um erro ao tentar cadastrar: " + e;
+                TempData["error"] = "Ocorreu um erro ao tentar cadastrar um desconto";
             }
             return View();
         }

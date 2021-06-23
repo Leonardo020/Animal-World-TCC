@@ -46,7 +46,7 @@ namespace ProjetoAW.Repositorio
                     nomeProduto = dr["nome_produto"].ToString(),
                     descProduto = dr["desc_produto"].ToString(),
                     quantidadeEstoque = Convert.ToInt32(dr["quantidade_estoque"]),
-                    valorUnitario = Convert.ToDouble(dr["valor_unitario"]),
+                    valorUnitario = Convert.ToDecimal(dr["valor_unitario"]),
                     imagemProduto = dr["imagem_produto"].ToString(),
                     nomeFornecedor = dr["nome_fornecedor"].ToString(),
                     nomeCategoria = dr["nome_categoria"].ToString(),
@@ -76,7 +76,7 @@ namespace ProjetoAW.Repositorio
                 produto.nomeProduto = dr["nome_produto"].ToString();
                 produto.descProduto = dr["desc_produto"].ToString();
                 produto.quantidadeEstoque = Convert.ToInt32(dr["quantidade_estoque"]);
-                produto.valorUnitario = Convert.ToDouble(dr["valor_unitario"]);
+                produto.valorUnitario = Convert.ToDecimal(dr["valor_unitario"]);
                 produto.imagemProduto = dr["imagem_produto"].ToString();
                 produto.nomeFornecedor = dr["nome_fornecedor"].ToString();
                 produto.nomeCategoria = dr["nome_categoria"].ToString();
@@ -128,7 +128,7 @@ namespace ProjetoAW.Repositorio
                     nomeProduto = dr["nome_produto"].ToString(),
                     descProduto = dr["desc_produto"].ToString(),
                     quantidadeEstoque = Convert.ToInt32(dr["quantidade_estoque"]),
-                    valorUnitario = Convert.ToDouble(dr["valor_unitario"]),
+                    valorUnitario = Convert.ToDecimal(dr["valor_unitario"]),
                     imagemProduto = dr["imagem_produto"].ToString(),
                     nomeFornecedor = dr["nome_fornecedor"].ToString(),
                     nomeCategoria = dr["nome_categoria"].ToString(),
@@ -223,7 +223,7 @@ namespace ProjetoAW.Repositorio
                     nomeProduto = dr["nome_produto"].ToString(),
                     descProduto = dr["desc_produto"].ToString(),
                     quantidadeEstoque = Convert.ToInt32(dr["quantidade_estoque"]),
-                    valorUnitario = Convert.ToDouble(dr["valor_unitario"]),
+                    valorUnitario = Convert.ToDecimal(dr["valor_unitario"]),
                     imagemProduto = dr["imagem_produto"].ToString(),
                     nomeFornecedor = dr["nome_fornecedor"].ToString(),
                     nomeCategoria = dr["nome_categoria"].ToString(),
@@ -251,7 +251,7 @@ namespace ProjetoAW.Repositorio
                     nomeProduto = dr["nome_produto"].ToString(),
                     descProduto = dr["desc_produto"].ToString(),
                     quantidadeEstoque = Convert.ToInt32(dr["quantidade_estoque"]),
-                    valorUnitario = Convert.ToDouble(dr["valor_unitario"]),
+                    valorUnitario = Convert.ToDecimal(dr["valor_unitario"]),
                     imagemProduto = dr["imagem_produto"].ToString(),
                     nomeFornecedor = dr["nome_fornecedor"].ToString(),
                     nomeCategoria = dr["nome_categoria"].ToString(),

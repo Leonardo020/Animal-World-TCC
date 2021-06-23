@@ -36,12 +36,13 @@ namespace ProjetoAW.Controllers
             try
             {
                 acCli.cadastraCliente(cli);
-                ViewBag.Message = "Seu cadastro foi efetuado com sucesso! ^^";
+                TempData["success"] = "Seu cadastro foi efetuado com sucesso! ^^";
             }
 
             catch (Exception e)
             {
                 ViewBag.Message = "Não foi possível te cadastrar pelo seguinte motivo: " + e;
+                TempData["error"] = "Ocorreu um erro ao tentar se cadastrar :(";
             }
 
             return View();

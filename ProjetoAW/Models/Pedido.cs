@@ -8,14 +8,14 @@ namespace ProjetoAW.Models
     {
         [Key]
         public Guid codPedido { get; set; }
-        [DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = true)]
-        public double valorTotal { get; set; }
+        [DisplayFormat(DataFormatString = "{0:C2}")]
+        public decimal valorTotal { get; set; }
         public int quantidadePedido { get; set; }
         public int codProduto { get; set; }
         public string produto { get; set; }
         public string imagemProduto { get; set; }
-        [DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = true)]
-        public double valorProduto { get; set; }
+        [DisplayFormat(DataFormatString = "{0:C2}")]
+        public decimal valorProduto { get; set; }
         public int codCli { get; set; }
         public int codVenda { get; set; }
     }

@@ -22,7 +22,7 @@
         .cardTA {
             border-radius: 5px;
             padding: 1.2rem 0;
-            background-color: #73af94;
+            background-color: #3CA374;
             width: 80%;
             display: flex;
             flex-direction: column;
@@ -117,7 +117,7 @@
                 </div>-->
             </div>
             <div>
-                @Html.EditorFor(model => model.cod, new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom: 5px", @type = "hidden" } })
+                @Html.EditorFor(model => model.codServico, new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom: 5px", @type = "hidden" } })
                 <input type="submit" value="Agendar" id="btnAgendar" />
                 @ViewBag.Message
             </div>

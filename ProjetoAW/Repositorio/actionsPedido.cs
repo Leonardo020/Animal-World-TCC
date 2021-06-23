@@ -32,7 +32,7 @@ namespace ProjetoAW.Repositorio
                 pedidos.Add(new Pedido
                 {
                     codPedido = Convert.ToInt32(dr["cod_pedido"]),
-                    valorTotal = Convert.ToDouble(dr["valor_total"]),
+                    valorTotal = Convert.Todecimal(dr["valor_total"]),
                     quantidadePedido = Convert.ToInt32(dr["quantidade_pedido"]),
                     codProduto = Convert.ToInt32(dr["cod_produto"]),
                 });
@@ -53,7 +53,7 @@ namespace ProjetoAW.Repositorio
             while (dr.Read())
             {
                 pedido.codPedido = Convert.ToInt32(dr["cod_pedido"]);
-                pedido.valorTotal = Convert.ToDouble(dr["valor_total"]);
+                pedido.valorTotal = Convert.Todecimal(dr["valor_total"]);
                 pedido.quantidadePedido = Convert.ToInt32(dr["quantidade_pedido"]);
                 pedido.codProduto = Convert.ToInt32(dr["cod_produto"]);
                 pedido.codCli = Convert.ToInt32(dr["cod_cli"]);

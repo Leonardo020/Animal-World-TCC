@@ -59,7 +59,7 @@ namespace ProjetoAW.Controllers
 
             else
             {
-                ViewBag.message = "Usuário ou senha incorretos :(";
+                TempData["error"] = "Usuário ou senha incorretos :(";
                 return View();
             }
         }

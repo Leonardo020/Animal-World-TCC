@@ -13,14 +13,17 @@ namespace ProjetoAW.Models
         [Display(Name = "Data da Venda")]
         public DateTime dataVenda { get; set; }
         [Display(Name = "Valor Unitário")]
-        [DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = true)]
-        public double valorProduto { get; set; }
+        [DisplayFormat(DataFormatString = "{0:C2}")]
+        [Required(ErrorMessage = "Para efetuar uma venda, é necessário ter pelo menos um valor do produto")]
+        public decimal valorProduto { get; set; }
+        [Required(ErrorMessage = "Para efetuar uma venda, é necessário ter a quantidade de pelo menos um produto")]
         [Display(Name = "Quantidade")]
         public int qtdItensVenda { get; set; }
         [Display(Name = "Valor Total")]
-        [DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = true)]
-        public double valorTotal { get; set; }
+        [DisplayFormat(DataFormatString = "{0:C2}")]
+        public decimal valorTotal { get; set; }
         [Display(Name = "Tipo de Pagamento")]
+        [Required(ErrorMessage = "Informe o tipo de pagamento")]
         public int codPagamento { get; set; }
         [Display(Name = "Cliente")]
         public int codCli { get; set; }

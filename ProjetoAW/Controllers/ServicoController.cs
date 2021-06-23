@@ -28,7 +28,7 @@ namespace ProjetoAW.Controllers
             var servico = acServico.selecionaServicoPorId(idServico);
             agenda.codServico = servico.codServico;
             agenda.nomeServico = servico.nomeServico;
-            //agenda.valorServico = servico.valorServico;
+            agenda.valorServico = servico.valorServico;
             return View(agenda);
         }
 
@@ -41,7 +41,7 @@ namespace ProjetoAW.Controllers
                 acAgenda.verificaAgendamento(agenda);
                 if (agenda.confAgendamento == 1)
                 {
-                    ViewBag.Message = "Já existe um agendamento marcado nesta data e hora.";
+                    TempData["warning"] = "Já existe um agendamento marcado nesta data e hora.";
                 }
                 else
                 {
@@ -83,11 +83,11 @@ namespace ProjetoAW.Controllers
                 servico.imagemServico = file2;
                 servico.descServico = frm["descServico"];
                 acServico.cadastraServico(servico);
-                ViewBag.Message = "Cadastro realizado com sucesso";
+                TempData["success"] = "Cadastro do serviço realizado com sucesso";
             }
-            catch (Exception e)
+            catch
             {
-                ViewBag.Message = "Ocorreu o seguinte erro ao tentar cadastrar: " + e;
+                TempData["error"] = "Ocorreu um erro ao cadastrar o serviço";
             }
             return View();
         }
@@ -113,11 +113,11 @@ namespace ProjetoAW.Controllers
                 }
                 servico.descServico = frm["descServico"];
                 acServico.atualizaServico(servico);
-                ViewBag.Message = "Alteração realizada com sucesso";
+                TempData["success"] = "Alteração do serviço realizada com sucesso";
             }
             catch (Exception e)
             {
-                ViewBag.Message = "Ocorreu o seguinte erro ao tentar alterar: " + e;
+                TempData["error"] = "Ocorreu um erro ao tentar alterar o serviço";
             }
             var servicoAtualizado = acServico.selecionaServicoPorId(servico.codServico);
             ViewBag.desc = servicoAtualizado.descServico;

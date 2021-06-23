@@ -126,12 +126,13 @@ namespace ProjetoAW.Controllers
                 prod.codCategoria = Convert.ToInt32(Request["categorias"]);
                 prod.codEspecie = Convert.ToInt32(Request["especies"]);
                 acProd.cadastraProduto(prod);
-                ViewBag.Message = "Cadastro do produto efetuado com sucesso";
+
+                TempData["success"] = "Cadastro do produto efetuado com sucesso";
             }
 
-            catch (Exception e)
+            catch(Exception e)
             {
-                ViewBag.Message = "Falha ao cadastrar produto: " + e;
+                TempData["error"] = "Falha ao cadastrar produto" + e;
             }
 
             return View();
@@ -158,12 +159,12 @@ namespace ProjetoAW.Controllers
                 }
                 prod.descProduto = frm["descProduto"];
                 acProd.atualizaProduto(prod);
-                ViewBag.Message = "Atualização do produto efetuado com sucesso";
+                TempData["success"] = "Atualização do produto efetuado com sucesso";
             }
 
-            catch (Exception e)
+            catch 
             {
-                ViewBag.Message = "Falha ao atualizar produto: " + e;
+                TempData["error"] = "Falha ao atualizar produto";
             }
 
             return View();
