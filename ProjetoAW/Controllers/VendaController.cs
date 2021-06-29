@@ -18,6 +18,7 @@ namespace ProjetoAW.Controllers
         Venda carrinho = new Venda();
         Produto prod = new Produto();
         Pedido itemPedido = new Pedido();
+        Entrega entrega = new Entrega();
 
         public void carregaPagamentos()
         {
@@ -33,7 +34,7 @@ namespace ProjetoAW.Controllers
 
             var qtdTotal = 0;
 
-            if(produto != null)
+            if (produto != null)
             {
                 itemPedido.codPedido = Guid.NewGuid();
                 itemPedido.codProduto = id;
@@ -44,7 +45,7 @@ namespace ProjetoAW.Controllers
 
                 List<Pedido> pedidos = carrinho.itemPedido.FindAll(p => p.codProduto == itemPedido.codProduto);
 
-                if(pedidos.Count != 0)
+                if (pedidos.Count != 0)
                 {
                     var pedido = carrinho.itemPedido.FirstOrDefault(p => p.codProduto == produto.codProduto);
 
@@ -121,59 +122,118 @@ namespace ProjetoAW.Controllers
             carrinho.cidade = cliente.cidadeCli;
 
             carregaPagamentos();
-            
+
             return View(carrinho);
         }
 
         public ActionResult DadosPedido()
         {
-            carrinho = Session["Carrinho"] != null ? (Venda)Session["Carrinho"] : new Venda();
-            carrinho.codCli = Convert.ToInt32(Session["Cliente"]);
-            //acVenda.selecionaVendaPorCliente(sessao);
+            var sessao = Convert.ToInt32(Session["Cliente"]);
+            var vendas = acVenda.selecionaVendaPorCliente(sessao);
+            foreach(var venda in vendas)
+            {
+                var pedidos = acVenda.selecionaItensPorVenda(venda.codVenda);
+                foreach(var itemVenda in pedidos)
+                {
+                    venda.itemPedido.Add(itemVenda);
+                }
+            }
             carregaPagamentos();
-            return View();
+            return View(vendas);
         }
 
         public ActionResult CadastrarVenda(Venda venda)
         {
-            carrinho = Session["Carrinho"] != null ? (Venda)Session["Carrinho"] : new Venda();
-
-            venda.dataVenda = DateTime.Now.ToLocalTime();
-            venda.codCli = Convert.ToInt32(Session["Cliente"]);
-            venda.codPagamento = Convert.ToInt32(Request["pagamentos"]);
-            venda.qtdItensVenda = Convert.ToInt32(Session["qtdCarrinho"]);
-            venda.valorTotal = carrinho.valorTotal;
-
-            acVenda.cadastraVenda(venda);
-
-            venda = acVenda.selecionaIdVenda();
-
-            foreach(var item in carrinho.itemPedido)
+            try
             {
-                itemPedido.codVenda = venda.codVenda;
-                itemPedido.codProduto = item.codProduto;
-                itemPedido.quantidadePedido = item.quantidadePedido;
-                itemPedido.valorProduto = item.valorProduto;
+                carrinho = Session["Carrinho"] != null ? (Venda)Session["Carrinho"] : new Venda();
 
-                acVenda.cadastraItemVenda(itemPedido);
+                venda.dataVenda = DateTime.Now.ToLocalTime();
+                venda.codCli = Convert.ToInt32(Session["Cliente"]);
+                venda.codPagamento = Convert.ToInt32(Request["pagamentos"]);
+                venda.qtdItensVenda = Convert.ToInt32(Session["qtdCarrinho"]);
+                venda.valorTotal = carrinho.valorTotal;
+
+                acVenda.cadastraVenda(venda);
+
+                var idVenda = acVenda.selecionaIdVenda();
+
+                foreach (var item in carrinho.itemPedido)
+                {
+                    itemPedido.codVenda = idVenda;
+                    itemPedido.codProduto = item.codProduto;
+                    itemPedido.quantidadePedido = item.quantidadePedido;
+                    itemPedido.valorProduto = item.valorProduto;
+
+                    acVenda.cadastraItemVenda(itemPedido);
+                }
+
+                entrega.dataEntrega = venda.dataVenda.AddDays(14);
+                entrega.codCli = venda.codCli;
+                entrega.codPedido = idVenda;
+
+                acEntrega.cadastraEntrega(entrega);
+
+                return RedirectToAction("VendaRealizada");
 
             }
 
-            carrinho.valorTotal = 0;
-            carrinho.itemPedido.Clear();
-
-            return RedirectToAction("VendaRealizada");
+            catch(Exception e)
+            {
+                TempData["error"] = "Ocorreu um erro ao tentar efetuar a venda: " + e;
+                return RedirectToAction("DadosEntrega");
+            }
         }
 
         public ActionResult VendaRealizada()
         {
+            carrinho.valorTotal = 0;
+            carrinho.itemPedido.Clear();
+            Session["Carrinho"] = null;
+            Session["qtdCarrinho"] = 0;
             return View();
         }
 
-        /*public ActionResult ListaPedido()
+        public ActionResult ListaPedido()
         {
-            var pedidos = acPedido.consultaPedido();
-            return View(pedidos);
-        }*/
+            var entregaPedidos = acVenda.consultaEntrega();
+            return View(entregaPedidos);
+        }
+
+        public ActionResult ConcluirVenda(int id)
+        {
+            try
+            {
+                acVenda.concluiVenda(id);
+                TempData["success"] = "Venda concluída com sucesso";
+            }
+
+            catch (Exception e)
+            {
+                TempData["error"] = "Ocorreu um erro ao tentar concluir a venda: " + e;
+            }
+            return RedirectToAction("ListaPedido");
+        }
+
+        public ActionResult CancelarVenda(int id)
+        {
+            try
+            {
+                acVenda.cancelaVenda(id);
+                TempData["success"] = "Venda cancelada com sucesso";
+            }
+
+            catch(Exception e)
+            {
+                TempData["error"] = "Ocorreu um erro ao tentar cancelar a venda: " + e;
+            }
+            return RedirectToAction("ListaPedido");
+        }
+
+        public ActionResult ListaItensVenda(int id)
+        {
+            var itensVenda = acVenda.selecionaItensPorVenda(id);
+            return View(itensVenda);
+        }
     }
 }

@@ -12,7 +12,7 @@
     @Scripts.Render("~/bundles/modernizr")
     <script type="text/javascript" src="@Url.Content("/Scripts/script.js")"></script>
     <style>
-        h4 {
+        h2 {
             margin-top: 1.2rem;
             font-size: 1.5rem;
             text-align: center;
@@ -27,72 +27,80 @@
         }
 
         .cardEnd {
-            height: 6rem;
+            height: auto;
             background-color: white;
             box-shadow: 0px 2px 5px #1f232b5e;
-            width: 80%;
+            width: 65%;
             display: flex;
             flex-direction: row;
             align-items: center;
             justify-content: space-around;
-            border: 1px solid #000;
+            padding: 15px;
         }
 
         .TextoEnde {
             display: flex;
             flex-direction: column;
             align-content: space-between;
+            line-height: normal;
         }
+
 
         .EndeIcon {
             width: 4rem;
             height: 4rem;
         }
 
+        #tituloEndereco {
+            font-size: 18px;
+            text-align: center;
+        }
+
         .cardProd {
-            height: 6rem;
+            height: 9rem;
             background-color: white;
-            width: 80%;
+            width: 65%;
             display: flex;
             flex-direction: row;
             align-items: center;
-            border: 1px solid #000;
+            box-shadow: 0px 2px 5px #1f232b5e;
         }
 
         .conteudoProd {
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1px solid #000;
-            width: 20%;
-            height: 6rem;
+            width: 35%;
+            height: auto;
         }
 
         .ProdIcon {
-            width: 4rem;
-            height: 4rem;
+            width: 7rem;
+            height: 7rem;
         }
 
         .TextoProd {
             margin-left: 2.0rem;
+            font-size: 19px;
         }
 
         .cardPagamento {
+            margin-top: 15px;
             height: 6rem;
             background-color: white;
-            width: 80%;
+            width: 65%;
             display: flex;
             flex-direction: row;
             align-items: center;
-            justify-content: flex-start;
+            justify-content: space-between;
         }
 
         .RetireAlt {
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: space-around;
-            border: 1px solid #000;
+            justify-content: space-evenly;
+            box-shadow: 0px 4px 5px #1f232b5e;
             width: 40%;
             height: 6rem;
         }
@@ -103,17 +111,15 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            border: 1px solid #000;
             height: 6rem;
-            width: 30%;
-            background-color: #3CA374;
+            width: auto;
         }
 
         .Total {
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1px solid #000;
+            box-shadow: 0px 2px 5px #1f232b5e;
             height: 3rem;
             width: 100%;
             background-color: white;
@@ -134,21 +140,33 @@
         #confirmaDE {
             background-color: #43b581;
             color: white;
-            font-size: 1.6rem;
-            margin-bottom: 1rem;
-            margin-left: 2rem;
+            font-size: 1.4rem;
+            padding: 8px;
         }
 
         .FP1 {
             display: flex;
-            flex-direction: row;
-            padding: 1rem;
+            flex-direction: column;
+            padding: 10px;
+            align-items: center;
+            box-shadow: 0px 4px 5px #1f232b5e;
+        }
+
+        .selectPagamento {
+            max-width: 295px;
+            margin: 10px;
+        }
+
+        #valorTotal {
+            font-size: 18px;
+            font-weight: 600;
+            color: #43b581;
         }
     </style>
 </head>
 
 <div>
-    <h4>Dados da entrega</h4>
+    <h2 class="--main-title">Dados da entrega</h2>
 </div>
 @using (Html.BeginForm("CadastrarVenda", "Venda", FormMethod.Post))
 {
@@ -162,10 +180,11 @@
                      class="EndeIcon" />
             </span>
             <div class="TextoEnde">
+                <p id="tituloEndereco"> Endereço de Entrega: </p>
                 <p>
                     @Html.DisplayFor(modelItem => Model.logradouro), @Html.DisplayFor(modelItem => Model.numero),  @Html.DisplayFor(modelItem => Model.bairro),  @Html.DisplayFor(modelItem => Model.cidade),  @Html.DisplayFor(modelItem => Model.estado)
                 </p>
-                <p>
+                <p style="text-align: center">
                     CEP:  @Html.DisplayFor(modelItem => Model.cep)
                 </p>
             </div>
@@ -176,15 +195,16 @@
         {
             <div class="cardProd">
                 <div class="conteudoProd">
-                    <span>
-                        <img src="@Html.DisplayFor(modelItem => item.imagemProduto)"
-                             alt="Produto"
-                             class="ProdIcon" />
-                    </span>
+
+                    <img src="@Html.DisplayFor(modelItem => item.imagemProduto)"
+                         alt="Produto"
+                         class="ProdIcon" />
+
                 </div>
                 <div class="TextoProd">
                     <p>
                         @Html.DisplayFor(modelItem => item.quantidadePedido) - @Html.DisplayFor(modelItem => item.produto)
+                        - @Html.DisplayFor(modelItem => item.valorProduto)
                     </p>
                 </div>
             </div>
@@ -199,18 +219,14 @@
             </div>
             <div class="conteudoFP">
                 <div class="FP1">
-                    @Html.DropDownList("pagamentos", null, "Selecione a forma de pagamento", new { @class = "form-control" })
-                </div>
-
-                <div class="Total">
-                    <p>
-                        Total: @Html.DisplayFor(modelItem => Model.valorTotal)
-                    </p>
+                    @Html.LabelFor(modelItem => Model.codPagamento)
+                    @Html.DropDownList("pagamentos", null, "Selecione a forma de pagamento", new { @class = "form-select selectPagamento" })
+                    <p id="valorTotal">Total: @Html.DisplayFor(modelItem => Model.valorTotal)</p>
                 </div>
             </div>
-            <div class="BotaoConf">
-                <input type="submit" class="btn button-a button-big button-rouded btn-success" id="confirmaDE" value="Confirmar">
-            </div>
+        </div>
+        <div class="BotaoConf">
+            <button class="btn btn-success" id="confirmaDE"><i class="fas fa-check-double"></i> Confirmar </button>
         </div>
     </div>
 }

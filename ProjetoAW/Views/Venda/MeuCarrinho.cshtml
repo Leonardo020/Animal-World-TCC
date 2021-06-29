@@ -19,13 +19,9 @@
             text-align: center
         }
 
-        .MeuCarrinho {
-            margin-top: 2rem;
-        }
-
         .carrinho2 {
             width: 80%;
-            margin: 60px auto;
+            margin: 20px auto;
         }
 
         #carrinhoInfo {
@@ -35,17 +31,17 @@
         }
 
         table {
-            border: 1px solid #000;
+            border: 2px solid #3CA374;
             width: 100%;
             border-collapse: collapse;
+            border-radius: 10px;
         }
 
         th {
-            color: white;
-            background-color: #3CA374;
             text-align: left;
             padding: 5px;
             font-weight: normal;
+            font-size: 17px;
         }
 
         td {
@@ -55,7 +51,6 @@
             td input {
                 width: 40px;
                 height: 30px;
-                padding: 5px;
             }
 
             td a {
@@ -84,15 +79,6 @@
                 width: 100%;
                 max-width: 340px;
             }
-
-        td:last-child {
-            text-align: right;
-        }
-
-        th:last-child {
-            text-align: right;
-        }
-
         #ProdImg {
             height: 80px;
             width: 80px;
@@ -111,14 +97,24 @@
             padding: 2rem;
             font-size: 1rem;
         }
+
+        .columnProd {
+            padding-top: 40px !important;
+        }
+
+        #btnExcluir {
+            padding-top: 35px !important;
+        }
     </style>
 </head>
 
+
 <div class="MeuCarrinho">
-    <h2>Meu Carrinho</h2>
+    <h2 class="--main-title">Meu Carrinho</h2>
     <div class="carrinho2">
-        <table>
+        <table class="table">
             <tr>
+                <th></th>
                 <th> @Html.DisplayNameFor(model => model.codProduto)</th>
                 <th> @Html.DisplayNameFor(model => model.valorProduto)</th>
                 <th> @Html.DisplayNameFor(model => model.qtdItensVenda)</th>
@@ -129,18 +125,22 @@
             {
                 <tr id="content-cart">
                     <td>
-                        <div id="carrinhoInfo">
-                            <img src="@Html.DisplayFor(modelItem => item.imagemProduto)" id="ProdImg" />
-                            <div>
-                                <p>@Html.DisplayFor(modelItem => item.produto)</p>
-                            </div>
+                        <img src="@Html.DisplayFor(modelItem => item.imagemProduto)" id="ProdImg" />
+                    </td>
+                    <td class="columnProd">
+                        @Html.DisplayFor(modelItem => item.produto)
+                    </td>
+                    <td class="columnProd">
+                        <div>
+                            @Html.DisplayFor(modelItem => item.valorProduto)
                         </div>
                     </td>
-                    <td>@Html.DisplayFor(modelItem => item.valorProduto)</td>
-                    <td><input type="number" value="@Html.DisplayFor(modelItem => item.quantidadePedido)" /></td>
-                    <td>@Html.DisplayFor(modelItem => item.valorTotal)</td>
+                    <td class="columnProd">
+                        <input type="number" value="@Html.DisplayFor(modelItem => item.quantidadePedido)" />
+                    </td>
+                    <td class="columnProd">@Html.DisplayFor(modelItem => item.valorTotal)</td>
 
-                    <td>
+                    <td id="btnExcluir">
                         @using (Html.BeginForm("ExcluirItemCarrinho", "Venda", FormMethod.Post))
                         {
                             <input type="hidden" name="id" value=@item.codPedido>

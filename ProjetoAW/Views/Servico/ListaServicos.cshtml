@@ -29,7 +29,7 @@
         {
             <tr>
                 <td class="td-image">
-                    <img class="img-responsive" width="60" height="60" src="@Html.DisplayFor(modelItem => item.imagemServico)"/>
+                    <img class="img-responsive" width="60" height="60" src="@Html.DisplayFor(modelItem => item.imagemServico)" />
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.nomeServico)
@@ -41,11 +41,52 @@
                     @Html.DisplayFor(modelItem => item.horaServico)
                 </td>
                 <td>
-                    @Html.ActionLink("Editar", "AlterarServico", new { id=item.codServico }) |
-                    @Html.ActionLink("Excluir", "Delete", new { /* id=item.PrimaryKey */ })
+                    <a class="btn btn-primary" href="/Servico/AlterarServico/@item.codServico"><i class="fas fa-edit"></i></a>
+                    <input type="hidden" name="id" value=@item.codServico>
+                    <button type="submit" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="selecionaServico(@item.codServico)"><i class="fas fa-trash"></i></button>
                 </td>
             </tr>
         }
 
     </table>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Deseja realmente excluir este item?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    @using (Html.BeginForm("ExcluiServico", "Servico", FormMethod.Post))
+                    {
+                        <input type="hidden" name="id" value="" id="codServico" />
+                        <button class="btn btn-danger"><i class="fas fa-times-circle"></i> Excluir</button>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+
+<script text="javascript">
+
+    function selecionaServico(id) {
+        var inputId = document.getElementById('codServico');
+        $.post('@Url.Action("obterServico", "Servico")', { 'id': id }, function (data) {
+            if (data) {
+                $('.modal-title').empty();
+                $('.modal-title').append('<p>Excluir ' + data.nomeServico.trim() + '? </p>');
+                inputId.setAttribute('value', data.codServico);
+            }
+        });
+
+    }
+
+
+</script>

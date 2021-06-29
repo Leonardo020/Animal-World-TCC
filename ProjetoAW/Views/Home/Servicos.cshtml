@@ -13,12 +13,6 @@
     @Scripts.Render("~/bundles/modernizr")
     <script type="text/javascript" src="@Url.Content("/Scripts/script.js")"></script>
     <style>
-        h5 {
-            margin-top: 1.2rem;
-            font-size: 1.5rem;
-            text-align: center;
-        }
-
         #acessoServico {
             margin-top: 1rem;
             background-color: #43b581;
@@ -67,6 +61,7 @@
         .descServico{
             font-size: 17px;
             line-height: initial;
+            margin: 5px;
         }
 
         .valorServico {
@@ -83,7 +78,7 @@
     </style>
 </head>
 <div>
-    <h5> Agende seu serviço:</h5>
+    <h5 class="--main-title"> Agende seu serviço:</h5>
 </div>
 
 @foreach (var item in Model)

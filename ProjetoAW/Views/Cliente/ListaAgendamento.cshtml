@@ -16,25 +16,24 @@
             margin-top: 1.2rem;
             font-size: 1.5rem;
             text-align: center;
-            margin-bottom: 3rem;
         }
 
         .contLA {
-            height: 390px;
+            height: 300px;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
         .cardLA {
-            height: 125px;
+            height: auto;
             border-radius: 10px;
-            background-color: #43b581;
-            width: 60%;
+            border: 1px solid #43b581;
+            width: auto;
             display: flex;
             flex-direction: column;
-            align-items: center;
             justify-content: space-around;
+            padding: 10px;
         }
 
         .linhaLA {
@@ -45,7 +44,8 @@
         }
 
             .linhaLA p {
-                padding: 2rem;
+                padding: 1.2rem;
+                font-size: 17px;
             }
 
         #btnLA {
@@ -53,34 +53,55 @@
             font-size: 1rem;
             color: #fff;
         }
+
+        #nomePet {
+            font-size: 20px;
+        }
+
+        .linhaCenter {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            padding: 8px;
+        }
+
     </style>
 </head>
 
 <div>
-    <h2> Seus Últimos Agendamentos</h2>
+    <h2 class="--main-title"> Seus Últimos Agendamentos: </h2>
 </div>
 @foreach (var item in Model)
 {
-    if(item.situacaoAgenda == "Em andamento") { 
-        <div class="contLA">
-            <div class="cardLA">
+    <div class="contLA">
+        <div class="cardLA">
+            <div class="linhaLA">
+                <p id="nomePet"><i class="fas fa-paw"></i> @Html.DisplayFor(modelItem => item.nomeServico) do(a) @Html.DisplayFor(modelItem => item.nomeAnimal)</p>
                 <div class="linhaLA">
-                    <p> @Html.DisplayNameFor(model => model.dataAgenda): @Html.DisplayFor(modelItem => item.dataAgenda)</p>
-                    <p> @Html.DisplayNameFor(model => model.horarioAgenda):  @Html.DisplayFor(modelItem => item.horarioAgenda)</p>
-                    <p>@Html.DisplayNameFor(model => model.valorServico): @Html.DisplayFor(modelItem => item.valorServico) </p>
-                    <p>@Html.DisplayNameFor(model => model.situacaoAgenda): @Html.DisplayFor(modelItem => item.situacaoAgenda) </p>
-                </div>
-                <div class="linhaLA">
-                    <p>@Html.DisplayFor(modelItem => item.nomeServico) de @Html.DisplayFor(modelItem => item.nomeAnimal)</p>
-                    @using (Html.BeginForm("CancelaAgendamento", "Servico", FormMethod.Post))
-                    {
-                        <input type="hidden" name="id" value="@item.codAgenda"/>
-                        <input type="submit" class="btn btn-danger" value="Cancelar" id="btnLA" />
-                    }
+                    <p class="textoChip">@Html.DisplayNameFor(model => model.situacaoAgenda):</p>
+                    <div class="chipAndamento"><p class="textoChip"> @Html.DisplayFor(modelItem => item.situacaoAgenda)</p></div>
                 </div>
             </div>
+            <div class="linhaLA">
+                <p><i class="far fa-calendar"></i> @Html.DisplayNameFor(model => model.dataAgenda): @Html.DisplayFor(modelItem => item.dataAgenda)</p>
+                <p><i class="far fa-clock"></i> @Html.DisplayNameFor(model => model.horarioAgenda):  @Html.DisplayFor(modelItem => item.horarioAgenda)</p>
+            </div>
+            <div class="linhaLA">
+                <p><i class="fas fa-dollar-sign"></i> @Html.DisplayNameFor(model => model.valorServico): @Html.DisplayFor(modelItem => item.valorServico) </p>
+            </div>
+            @if (item.situacaoAgenda == "Em Andamento")
+            {
+                <div class="linhaCenter">
+                    @using (Html.BeginForm("CancelaAgendamento", "Servico", FormMethod.Post))
+                    {
+                        <input type="hidden" name="id" value="@item.codAgenda" />
+                        <button class="btn btn-danger" id="btnLa"><i class="fas fa-calendar-times"></i> Cancelar</button>
+                    }
+                </div>
+            }
         </div>
-    }
+    </div>
 }
 
 

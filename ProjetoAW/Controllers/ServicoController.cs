@@ -53,9 +53,9 @@ namespace ProjetoAW.Controllers
                 }
             }
 
-            catch (Exception e)
+            catch
             {
-                ViewBag.Message = "Houve um erro ao tentar cadastrar: " + e;
+                TempData["danger"] = "Houve um erro ao tentar fazer um agendamento";
             }
             return View();
         }
@@ -115,7 +115,7 @@ namespace ProjetoAW.Controllers
                 acServico.atualizaServico(servico);
                 TempData["success"] = "Alteração do serviço realizada com sucesso";
             }
-            catch (Exception e)
+            catch
             {
                 TempData["error"] = "Ocorreu um erro ao tentar alterar o serviço";
             }
@@ -123,6 +123,28 @@ namespace ProjetoAW.Controllers
             ViewBag.desc = servicoAtualizado.descServico;
             ViewBag.imagem = servicoAtualizado.imagemServico;
             return View(servicoAtualizado);
+        }
+
+        [HttpPost]
+        public ActionResult ExcluiServico(int id)
+        {
+            try
+            {
+                acServico.excluiServico(id);
+                TempData["success"] = "Exclusão do serviço realizada com sucesso";
+            }
+
+            catch
+            {
+                TempData["error"] = "Ocorreu um erro ao tentar excluir o serviço";
+            }
+            return RedirectToAction("ListaServicos");
+        }
+        
+        public JsonResult obterServico(int id)
+        {
+            var servico = acServico.selecionaServicoPorId(id);
+            return Json(servico);
         }
 
 
@@ -136,6 +158,29 @@ namespace ProjetoAW.Controllers
         {
             var servicos = acServico.consultaServico();
             return View(servicos);
+        }
+
+        public ActionResult ArquivoMortoServico()
+        {
+            var servicos = acServico.consultaLixeira();
+            return View(servicos);
+        }
+
+        public ActionResult RestauraServico(int id)
+        {
+            try
+            {
+                var servico = acServico.selecionaServicoLixeira(id);
+                acServico.cadastraServico(servico);
+                acServico.excluiServicoLixeira(id);
+                TempData["success"] = "Restauração do serviço efetuada com sucesso";
+            }
+
+            catch (Exception e)
+            {
+                TempData["error"] = "Falha ao restaurar serviço: " + e;
+            }
+            return RedirectToAction("ListaServicos");
         }
     }
 }

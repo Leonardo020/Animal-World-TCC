@@ -48,7 +48,7 @@ namespace ProjetoAW.Repositorio
         {
             Funcionario func = new Funcionario();
 
-            MySqlCommand cmd = new MySqlCommand("selecionaFuncionarioPorId(@id)", cn.Conectar());
+            MySqlCommand cmd = new MySqlCommand("selecionaFuncionario(@id)", cn.Conectar());
             cmd.Parameters.AddWithValue("@id", id);
             MySqlDataReader dr = cmd.ExecuteReader();
 
@@ -66,6 +66,32 @@ namespace ProjetoAW.Repositorio
             return func;
         }
 
+        public List<Funcionario> consultaFuncionarioPorNome(string search)
+        {
+            List<Funcionario> funcionarios = new List<Funcionario>();
+
+            MySqlCommand cmd = new MySqlCommand("call consultaFuncPorNome(@search);", cn.Conectar());
+            cmd.Parameters.AddWithValue("@search", search);
+            MySqlDataReader dr = cmd.ExecuteReader();
+
+            while (dr.Read())
+            {
+                funcionarios.Add(new Funcionario
+                {
+                    codFunc = Convert.ToInt32(dr["cod_func"]),
+                    nomeFunc = dr["nome_func"].ToString(),
+                    emailFunc = dr["email_func"].ToString(),
+                    usuarioFunc = dr["usuario_func"].ToString(),
+                    senhaFunc = dr["senha_func"].ToString(),
+                });
+            }
+
+            cn.Desconectar();
+
+            return funcionarios;
+        }
+
+
         public void atualizaFuncionario(Funcionario func)
         {
             MySqlCommand cmd = new MySqlCommand("alterarFunc(@nome, @email, @usuario, @senha, @cod)", cn.Conectar());
@@ -80,7 +106,7 @@ namespace ProjetoAW.Repositorio
 
         public void excluiFuncionario(int id)
         {
-            MySqlCommand cmd = new MySqlCommand("excluiFunc(@id)", cn.Conectar());
+            MySqlCommand cmd = new MySqlCommand("delete from Funcionario where cod_func = @id", cn.Conectar());
             cmd.Parameters.AddWithValue("@id", id);
             cmd.ExecuteNonQuery();
             cn.Desconectar();

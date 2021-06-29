@@ -1,0 +1,55 @@
+﻿@model IEnumerable<ProjetoAW.Models.Produto>
+
+@{
+    ViewBag.Title = "ArquivoMortoProduto";
+}
+
+<h2>ArquivoMorto</h2>
+
+<div class="container">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.nomeProduto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.descProduto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.quantidadeEstoque)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.valorUnitario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.imagemProduto)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nomeProduto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.descProduto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.quantidadeEstoque)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.valorUnitario)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.imagemProduto)
+                </td>
+                <td>
+                    @Html.ActionLink("Restaurar", "RestauraProduto", new { id=item.codProduto })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

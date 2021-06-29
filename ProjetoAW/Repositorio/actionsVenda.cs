@@ -39,7 +39,7 @@ namespace ProjetoAW.Repositorio
                     codPagamento = Convert.ToInt32(dr["cod_pagamento"]),
                     codCli = Convert.ToInt32(dr["cod_cli"]),
                     codServico = Convert.ToInt32(dr["cod_servico"]),
-                    codProduto = Convert.ToInt32(dr["cod_Produto"]),
+                    codProduto = Convert.ToInt32(dr["cod_produto"]),
                 });
             }
 
@@ -48,20 +48,51 @@ namespace ProjetoAW.Repositorio
             return vendas;
         }
 
-        public Venda selecionaIdVenda()
+        public List<Venda> consultaEntrega()
         {
-            Venda venda = new Venda();
+            List<Venda> entregas = new List<Venda>();
+
+            MySqlCommand cmd = new MySqlCommand("call consultaEntrega();", cn.Conectar());
+            MySqlDataReader dr = cmd.ExecuteReader();
+
+
+            while (dr.Read())
+            {
+                entregas.Add(new Venda
+                {
+
+                    codEntrega = Convert.ToInt32(dr["cod_entrega"]),
+                    codVenda = Convert.ToInt32(dr["cod_pedido"]),
+                    dataEntrega = Convert.ToDateTime(dr["data_entrega"]),
+                    situacao = dr["situacao"].ToString(),
+                    dataVenda = Convert.ToDateTime(dr["data_venda"]),
+                    tipoPagamento = dr["tipo_pagamento"].ToString(),
+                    nomeCli = dr["nome_cli"].ToString(),
+                    qtdItensVenda = Convert.ToInt32(dr["qtd_total"]),
+                    valorTotal = Convert.ToDecimal(dr["valor_total"]),
+
+                });
+            }
+            cn.Desconectar();
+
+            return entregas;
+        }
+
+
+        public int selecionaIdVenda()
+        {
+            var idVenda = 0;
             MySqlCommand cmd = new MySqlCommand("select cod_venda from Venda order by cod_venda desc limit 1", cn.Conectar());
             MySqlDataReader dr = cmd.ExecuteReader();
 
             while (dr.Read())
             {
-                venda.codVenda = Convert.ToInt32(dr["cod_venda"]);
+                idVenda = Convert.ToInt32(dr["cod_venda"]);
             }
 
             cn.Desconectar();
 
-            return venda;
+            return idVenda;
         }
 
         public void atualizaVenda(Venda venda)
@@ -103,6 +134,71 @@ namespace ProjetoAW.Repositorio
             cn.Desconectar();
 
             return pagamentos;
+        }
+
+        public List<Venda> selecionaVendaPorCliente(int id)
+        {
+            List<Venda> vendas = new List<Venda>();
+            MySqlCommand cmd = new MySqlCommand("selecionaVendaPorCliente(@id);", cn.Conectar());
+            cmd.Parameters.AddWithValue("@id", id);
+            MySqlDataReader dr = cmd.ExecuteReader();
+
+            while (dr.Read())
+            {
+                vendas.Add(new Venda
+                {
+                    codVenda = Convert.ToInt32(dr["cod_venda"]),
+                    situacao = dr["situacao"].ToString(),
+                    qtdItensVenda = Convert.ToInt32(dr["qtd_total"]),
+                    dataVenda = Convert.ToDateTime(dr["data_venda"]),
+                    tipoPagamento = dr["tipo_pagamento"].ToString(),
+                    valorTotal = Convert.ToDecimal(dr["valor_total"]),
+                });
+            }
+
+            cn.Desconectar();
+
+            return vendas;
+        }
+
+        public List<Pedido> selecionaItensPorVenda(int id)
+        {
+            List<Pedido> pedidos = new List<Pedido>();
+            MySqlCommand cmd = new MySqlCommand("selecionaItensVenda(@id);", cn.Conectar());
+            cmd.Parameters.AddWithValue("@id", id);
+            MySqlDataReader dr = cmd.ExecuteReader();
+
+            while (dr.Read())
+            {
+                pedidos.Add(new Pedido
+                {
+                    quantidadePedido = Convert.ToInt32(dr["qtd_item"]),
+                    valorTotal = Convert.ToDecimal(dr["valor_item"]),
+                    produto = dr["nome_produto"].ToString(),
+                    imagemProduto = dr["imagem_produto"].ToString(),
+                });
+            }
+
+
+            cn.Desconectar();
+
+            return pedidos;
+        }
+
+        public void concluiVenda(int id)
+        {
+            MySqlCommand cmd = new MySqlCommand("update Venda set situacao = 'Concluído' where cod_venda = @id", cn.Conectar());
+            cmd.Parameters.AddWithValue("@id", id);
+            cmd.ExecuteNonQuery();
+            cn.Desconectar();
+        } 
+        
+        public void cancelaVenda(int id)
+        {
+            MySqlCommand cmd = new MySqlCommand("update Venda set situacao = 'Cancelado' where cod_venda = @id", cn.Conectar());
+            cmd.Parameters.AddWithValue("@id", id);
+            cmd.ExecuteNonQuery();
+            cn.Desconectar();
         }
 
     }

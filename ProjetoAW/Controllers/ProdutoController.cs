@@ -76,6 +76,11 @@ namespace ProjetoAW.Controllers
                 produtos = acProd.consultaProduto();
             }
 
+            foreach(var produto in produtos)
+            {
+                produto.descontoProd = produto.valorUnitario - produto.valorUnitario * Convert.ToDecimal(Session["descontoProd"]) ;
+            }
+
             return View(produtos);
         }
 
@@ -130,7 +135,7 @@ namespace ProjetoAW.Controllers
                 TempData["success"] = "Cadastro do produto efetuado com sucesso";
             }
 
-            catch(Exception e)
+            catch (Exception e)
             {
                 TempData["error"] = "Falha ao cadastrar produto" + e;
             }
@@ -141,10 +146,11 @@ namespace ProjetoAW.Controllers
         public ActionResult AlterarProd(int id)
         {
             var produto = acProd.selecionaProdutoPorId(id);
+            ViewBag.imagem = produto.imagemProduto;
             return View(produto);
         }
 
-        [HttpPut]
+        [HttpPost]
         public ActionResult AlterarProd(Produto prod, HttpPostedFileBase file, FormCollection frm)
         {
             try
@@ -162,38 +168,99 @@ namespace ProjetoAW.Controllers
                 TempData["success"] = "Atualização do produto efetuado com sucesso";
             }
 
-            catch 
+            catch (Exception e)
             {
-                TempData["error"] = "Falha ao atualizar produto";
+                TempData["error"] = "Falha ao atualizar produto" + e;
             }
-
-            return View();
+            var produtoAtualizado = acProd.selecionaProdutoPorId(prod.codProduto);
+            ViewBag.imagem = prod.imagemProduto;
+            return View(produtoAtualizado);
         }
 
         [HttpPost]
-        public ActionResult AtualizaFavorito(int id, bool isFavorite)
+        public JsonResult AtualizaFavorito(int id, bool isFavorite)
         {
-            //acProd.atualizaProduto(id);
-            return View();
+            try
+            {
+                var sessao = Convert.ToInt32(Session["Cliente"]);
+                acProd.cadastraFavoritoPorCliente(id, sessao, isFavorite);
+            }
+            catch
+            {
+                TempData["warning"] = "Falha ao tentar salvar favorito";
+            }
+            var produto = acProd.selecionaProdutoPorId(id);
+            return new JsonResult { Data = produto, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
 
-
-        public ActionResult ExcluirProd()
+        [HttpPost]
+        public ActionResult ExcluiProd(int id)
         {
-            return View();
-        }
+            try
+            {
+                acProd.excluiProduto(id);
+                TempData["success"] = "Exclusão do produto efetuada com sucesso";
+            }
 
-        [HttpDelete]
-        public ActionResult ExcluirProd(int id)
-        {
-            acProd.excluiProduto(id);
-            return View();
+            catch(Exception e)
+            {
+                TempData["error"] = "Falha ao excluir produto " + e;
+            }
+            return RedirectToAction("ListaProd");
         }
 
         public ActionResult ListaProd()
         {
             var produtos = acProd.consultaProduto();
+
+            /*if (produtos.Exists(prod => prod.isFavorite == true))
+            {
+
+                var sessao = Convert.ToInt32(Session["Cliente"]);
+                var produtoFavoritado = acProd.selecionaFavoritos(sessao);
+                return View(produtoFavoritado);
+            }*/
+
+            /*else
+            {
+            }*/
             return View(produtos);
+        }
+
+        [HttpPost]
+        public ActionResult ListaProd(string search)
+        {
+            var produtos = acProd.consultaProdutoPorNome(search);
+            return View(produtos);
+        }
+
+        public ActionResult ArquivoMortoProduto()
+        {
+            var produtos = acProd.consultaLixeira();
+            return View(produtos);
+        }
+
+        public ActionResult RestauraProduto(int id)
+        {
+            try
+            {
+                var produto = acProd.selecionaProdutoLixeira(id);
+                acProd.cadastraProduto(produto);
+                acProd.excluiProdutoLixeira(id);
+                TempData["success"] = "Restauração do produto efetuada com sucesso";
+            }
+
+            catch (Exception e)
+            {
+                TempData["error"] = "Falha ao restaurar produto: " + e;
+            }
+            return RedirectToAction("ListaProd");
+        }
+
+        public JsonResult obterProduto(int id)
+        {
+            var produto = acProd.selecionaProdutoPorId(id);
+            return Json(produto);
         }
 
         public JsonResult getProdutos(string search)

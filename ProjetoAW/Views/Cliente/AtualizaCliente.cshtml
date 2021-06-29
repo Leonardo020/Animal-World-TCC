@@ -97,7 +97,7 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.nomeCli, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.nomeCli, new { htmlAttributes = new { @class = "form-control", @required = "true"} })
+                                @Html.EditorFor(model => model.nomeCli, new { htmlAttributes = new { @class = "form-control", @required = "true" } })
                                 @Html.ValidationMessageFor(model => model.nomeCli, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -114,7 +114,7 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.emailCli, htmlAttributes: new { @class = "control-label" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.emailCli, new { htmlAttributes = new { @class = "form-control", @required = "true", @type="email"} })
+                                @Html.EditorFor(model => model.emailCli, new { htmlAttributes = new { @class = "form-control", @required = "true", @type = "email" } })
                                 @Html.ValidationMessageFor(model => model.emailCli, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -153,7 +153,7 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.bairroCli, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.bairroCli, new { htmlAttributes = new { @class = "form-control", @id = "bairro",@required="true" } })
+                                @Html.EditorFor(model => model.bairroCli, new { htmlAttributes = new { @class = "form-control", @id = "bairro", @required = "true" } })
                                 @Html.ValidationMessageFor(model => model.bairroCli, "", new { @class = "text-danger" })
                             </div>
                         </div>

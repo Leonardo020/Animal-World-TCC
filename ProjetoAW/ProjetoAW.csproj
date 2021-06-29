@@ -229,6 +229,7 @@
     <Content Include="img\free-heart-icon.png" />
     <Content Include="img\fundo1.jpg" />
     <Content Include="img\gato.png" />
+    <Content Include="img\gerente.png" />
     <Content Include="img\home.png" />
     <Content Include="img\logopetshop.png" />
     <Content Include="img\marca1.png" />
@@ -367,13 +368,21 @@
     <Content Include="Views\Cliente\Dados.cshtml" />
     <Content Include="Views\Gerente\ListaAgendamentos.cshtml" />
     <Content Include="Views\Produto\CadastroProd.cshtml" />
-    <Content Include="Views\Gerente\CadastrosFunc.cshtml" />
     <Content Include="Views\Gerente\CadastroFunc.cshtml" />
     <Content Include="Views\Produto\AlterarProd.cshtml" />
     <Content Include="Views\Servico\CadServico.cshtml" />
     <Content Include="Views\Servico\CadAgendamento.cshtml" />
     <Content Include="Views\Gerente\ListaFunc.cshtml" />
     <Content Include="Views\Servico\AlterarServico.cshtml" />
+    <Content Include="Views\Cliente\AtualizaCliente.cshtml" />
+    <Content Include="Views\Venda\VendaRealizada.cshtml" />
+    <Content Include="Views\Gerente\ArquivoMorto.cshtml" />
+    <Content Include="Views\Produto\ArquivoMortoProduto.cshtml" />
+    <Content Include="Views\Servico\ArquivoMortoServico.cshtml" />
+    <Content Include="Views\Gerente\CadastroDesc.cshtml" />
+    <Content Include="Views\Venda\ListaItensVenda.cshtml" />
+    <Content Include="Views\Gerente\ListaPets.cshtml" />
+    <Content Include="Views\Gerente\CadastroFornecedor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

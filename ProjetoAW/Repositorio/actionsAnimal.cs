@@ -77,10 +77,29 @@ namespace ProjetoAW.Repositorio
                     imagemAnimal = dr["imagem_animal"].ToString(),
                     sexo = dr["sexo"].ToString(),
                     descricaoAnimal = dr["descricao"].ToString(),
+                    nomePorte = dr["nome_porte"].ToString(),
+                    nomeRaca = dr["nome_raca"].ToString(),
+                    nomeEspecie = dr["nome_especie"].ToString(),
+                    nomeCli = dr["nome_cli"].ToString(),
                 });
             }
 
             cn.Desconectar();
+
+            foreach (var animal in animais)
+            {
+                if (animal.sexo == "M")
+                {
+                    animal.sexo = "Masculino";
+                }
+
+                else
+                {
+                    animal.sexo = "Feminino";
+                }
+
+            }
+
 
             return animais;
         }

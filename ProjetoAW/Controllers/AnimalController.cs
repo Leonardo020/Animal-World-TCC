@@ -123,5 +123,12 @@ namespace ProjetoAW.Controllers
             var animais = acAnimal.consultaAnimalPorCliente(cliente);
             return View(animais);
         }
+
+        [HttpPost]
+        public JsonResult obterAnimalAgendamento(int pet)
+        {
+            var animal = acAnimal.consultaAnimalPorId(pet);
+            return Json(animal.nomeAnimal);
+        }
     }
 }

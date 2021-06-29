@@ -12,9 +12,16 @@ namespace ProjetoAW.Controllers
         actionsServico acServico = new actionsServico();
         public ActionResult Home()
         {
-            var categorias = acProd.carregaCategorias();
+            var desconto = acProd.verificaDesconto();
+            if(desconto != null)
+            {
+                Session["descontoProd"] = desconto.desconto;
+            }
 
-            ViewBag.categorias = categorias;
+            else
+            {
+                Session["descontoProd"] = 0;
+            }
             return View();
         }
 
@@ -73,6 +80,8 @@ namespace ProjetoAW.Controllers
                 Session["nivel0"] = null;
                 Session["nivel1"] = null;
                 Session["nivel2"] = null;
+                Session["Carrinho"] = null;
+                Session["qtdCarrinho"] = 0;
             }
             return RedirectToAction("Home");
         }

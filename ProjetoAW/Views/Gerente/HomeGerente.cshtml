@@ -23,11 +23,11 @@
         }
 
         .contAG {
-            display:flex;
-            flex-direction:row;
-            justify-content:space-around;
-            align-items:center;
-            height:450px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            height: 450px;
+            margin-top: 45px;
         }
 
         .cardAG {
@@ -67,7 +67,7 @@
         }
 
         .actionLinkGerente {
-            font-size: 21px;
+            font-size: 22px;
             color: #43b581;
             font-weight: 300;
         }
@@ -85,7 +85,7 @@
 </head>
 
 <div>
-    <h3>Área do Gerente</h3>
+    <h3 class="--main-title">Área do Gerente</h3>
 </div>
 
 <div class="contAG">
@@ -95,9 +95,9 @@
             <h5>Cadastros</h5>
         </div>
         <div class="conteudoHG">
-            <h2><a href="/Produto/CadastroProd" class="actionLinkGerente">Produtos</a></h2>
-            <h2><a href="/Gerente/CadastroFunc" class="actionLinkGerente">Funcionários</a></h2>
-            <h2><a href="/Servico/CadServico" class="actionLinkGerente">Serviços</a></h2>
+            <h2><a href="/Produto/CadastroProd" class="actionLinkGerente"><i class="fas fa-pump-soap"></i> Produtos</a></h2>
+            <h2><a href="/Gerente/CadastroFunc" class="actionLinkGerente"><i class="fas fa-user-cog"></i> Funcionários</a></h2>
+            <h2><a href="/Servico/CadServico" class="actionLinkGerente"><i class="fas fa-soap"></i> Serviços</a></h2>
         </div>
     </div>
     <div class="cardAG">
@@ -106,9 +106,9 @@
             <h5>Consultas</h5>
         </div>
         <div class="conteudoHG">
-            <h2><a href="/Produto/ListaProd" class="actionLinkGerente">Produtos</a></h2>
-            <h2><a href="/Cliente/ListaClientes" class="actionLinkGerente">Clientes</a></h2>
-            <h2><a href="/Gerente/ListaFunc" class="actionLinkGerente">Funcionários</a></h2>
+            <h2><a href="/Produto/ListaProd" class="actionLinkGerente"><i class="fas fa-pump-soap"></i> Produtos</a></h2>
+            <h2><a href="/Cliente/ListaClientes" class="actionLinkGerente"><i class="fas fa-users"></i> Clientes</a></h2>
+            <h2><a href="/Gerente/ListaFunc" class="actionLinkGerente"><i class="fas fa-user-cog"></i> Funcionários</a></h2>
         </div>
     </div>
     <div class="cardAG">
@@ -117,8 +117,8 @@
             <h5>Agendamentos</h5>
         </div>
         <div class="conteudoHG">
-            <h2><a href="/Servico/ListaServicos" class="actionLinkGerente">Serviços</a></h2>
-            <h2><a href="/Gerente/ListaAgendamentos" class="actionLinkGerente">Agenda</a></h2>
+            <h2><a href="/Servico/ListaServicos" class="actionLinkGerente"><i class="fas fa-soap"></i> Serviços</a></h2>
+            <h2><a href="/Gerente/ListaAgendamentos" class="actionLinkGerente"><i class="far fa-calendar-alt"></i> Agenda</a></h2>
         </div>
     </div>
     <div class="cardAG">
@@ -127,8 +127,19 @@
             <h5>Pedidos</h5>
         </div>
         <div class="conteudoHG">
-            <h2><a href="/Venda/ListaPedido" class="actionLinkGerente">Entregas</a></h2>
-            <h2><a href="#" class="actionLinkGerente">Descontos</a></h2>
+            <h2><a href="/Servico/CadServico" class="actionLinkGerente"><i class="far fa-copyright"></i> Fornecedores</a></h2>
+            <h2><a href="/Venda/ListaPedido" class="actionLinkGerente"><i class="fas fa-dolly-flatbed"></i> Entregas</a></h2>
+            <h2><a href="/Gerente/CadastroDesc" class="actionLinkGerente"><i class="fas fa-hand-holding-usd"></i> Descontos</a></h2>
+        </div>
+    </div> 
+    <div class="cardAG">
+        <div class="cardTitulo">
+            <img src="~/img/gerente.png" id="iconHG" />
+            <h5>Administrador</h5>
+        </div>
+        <div class="conteudoHG">
+            <h2><a href="/Gerente/ArquivoMorto" class="actionLinkGerente"><i class="fas fa-trash"></i> Lixeira</a></h2>
+            <h2><a href="/Home/Logout" class="actionLinkGerente"><i class="fas fa-power-off"></i> Sair</a></h2>
         </div>
     </div>
 </div>

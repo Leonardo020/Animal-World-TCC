@@ -42,7 +42,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            width: auto;
+            width: 240px;
             font-size: 1rem;
             box-shadow: 0 2px 5px #000;
             border-radius: 10px;
@@ -68,7 +68,7 @@
         .actionProduto {
             color: #000;
             font-weight: 600;
-            font-size: 16px;
+            font-size: 15px;
         }
 
             .actionProduto:link {
@@ -78,6 +78,11 @@
         .precoVit {
             color: #43b581;
             font-weight: 600;
+        }
+
+        #valor{
+            margin-top: 5px;
+            font-size: 14px;
         }
 
         .addCarrinho {
@@ -109,16 +114,13 @@
                 line-height: 40px;
                 cursor: pointer;
             }
-
-        .textFilter {
-        }
     </style>
 </head>
 <div class="container">
 
     <div class="contVitrine">
         <div class="cbcVit">
-            <h6>Os melhores produtos:</h6>
+            <h6 class="--main-title">Os melhores produtos:</h6>
             <div class="filtrarVit">
                 <h2 class="textFilter">Filtrar por: </h2>
                 @Html.DropDownList("groups", null, "Opção", new { @class = "form-control" })
@@ -134,29 +136,46 @@
             {
                 var id = item.codProduto;
 
-
-                <div class="cardVitrine">
+            <div class="cardVitrine">
+                @if (item.isFavorite)
+                {
+                    <i class="fas fa-heart favVit" id="@id" name="@item.isFavorite.ToString()" value="@item.isFavorite.ToString()" onclick="changeColor(this)" style="color: #43b581"></i>
+                }
+                else
+                {
                     <i class="far fa-heart favVit" id="@id" name="@item.isFavorite.ToString()" value="@item.isFavorite.ToString()" onclick="changeColor(this)"></i>
-                    @if (@item.imagemProduto != null)
-                    {
-                        <a href="/Produto/DetalheProd/@id"><img src="@item.imagemProduto" id="imgVit" /></a>
-                    }
-                    else
-                    {
-                        <img class="card-img-right flex-auto d-none d-md-block" data-src=" " alt="Thumbnail [300x300]" style="width: 300px; height: 300px;" src="~/Images/image-not-found.jpg" data-holder-rendered="true">
-                    }
 
-                    <hr />
-                    @Html.ActionLink(item.nomeProduto, "DetalheProd", new { id = item.codProduto }, new { @class = "actionProduto" })
+                }
+                @if (item.imagemProduto != null)
+                {
+                    <a href="/Produto/DetalheProd/@id"><img src="@item.imagemProduto" id="imgVit" /></a>
+                }
+                else
+                {
+                    <img class="card-img-right flex-auto d-none d-md-block" data-src=" " alt="Thumbnail [300x300]" style="width: 300px; height: 300px;" src="~/Images/image-not-found.jpg" data-holder-rendered="true">
+                }
+
+                <hr />
+                @Html.ActionLink(item.nomeProduto, "DetalheProd", new { id = item.codProduto }, new { @class = "actionProduto" })
+
+                @if (item.descontoProd != 0)
+                {
+                    <s id="valor">@Html.DisplayFor(modelItem => item.valorUnitario)</s>
+                    <h5 class="precoVit">@Html.DisplayFor(modelItem => item.descontoProd)</h5>
+                }
+
+                else
+                {
                     <h5 class="precoVit"> @Html.DisplayFor(modelItem => item.valorUnitario)</h5>
-                    @using (Html.BeginForm("AdicionarItemCarrinho", "Venda", FormMethod.Post))
-                    {
-                        <input type="hidden" name="id" value="@item.codProduto" />
-                        <input type="hidden" name="preco" value="@item.valorUnitario" />
-                        <input type="hidden" name="quantidade" value="1" />
-                        <button class="btn btn-success addCarrinho"><i class="fas fa-shopping-cart"></i> Adicionar ao Carrinho</button>
-                    }
-                </div>
+                }
+                @using (Html.BeginForm("AdicionarItemCarrinho", "Venda", FormMethod.Post))
+                {
+                    <input type="hidden" name="id" value="@item.codProduto" />
+                    <input type="hidden" name="preco" value="@item.valorUnitario" />
+                    <input type="hidden" name="quantidade" value="1" />
+                    <button class="btn btn-success addCarrinho"><i class="fas fa-shopping-cart"></i> Adicionar ao Carrinho</button>
+                }
+            </div>
             }
         </div>
         <div class="paginaVit">
@@ -183,15 +202,17 @@
     }
 
     function changeColor(favoriteToggle) {
-        if (!Boolean(favoriteToggle.getAttribute('value'))) {
-            favoriteToggle.setAttribute('style', 'color:#43b581;')
-            favoriteToggle.setAttribute('class', 'fas fa-heart favVit')
-        }
-        else {
-            favoriteToggle.setAttribute('style', 'color:#000;')
-            favoriteToggle.setAttribute('class', 'far fa-heart favVit')
-        }
-        favoriteToggle.setAttribute('name', !favoriteToggle.getAttribute('value'));   
-        $.post('@Url.Action("AtualizaFavorito", "Produto")', { 'id': favoriteToggle.getAttribute('id'), 'isFavorite': Boolean(favoriteToggle.getAttribute('value'))})
+        favoriteToggle.setAttribute('name', !favoriteToggle.getAttribute('value'));
+        $.post('@Url.Action("AtualizaFavorito", "Produto")', { 'id': favoriteToggle.getAttribute('id'), 'isFavorite': Boolean(favoriteToggle.getAttribute('value')) }, function (data) {
+            if (data.isFavorite) {
+                favoriteToggle.setAttribute('style', 'color:#43b581;')
+                favoriteToggle.setAttribute('class', 'fas fa-heart favVit')
+            }
+            else {
+                favoriteToggle.setAttribute('style', 'color:#000;')
+                favoriteToggle.setAttribute('class', 'far fa-heart favVit')
+            }
+        })
     }
+
 </script>

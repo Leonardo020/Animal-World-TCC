@@ -35,9 +35,13 @@ namespace ProjetoAW.Models
         public int codPorte { get; set; }
 
         //atributos extras
+        [Display(Name = "Espécie")]
         public string nomeEspecie { get; set; }
+        [Display(Name = "Raça")]
         public string nomeRaca { get; set; }
+        [Display(Name = "Dono")]
         public string nomeCli { get; set; }
+        [Display(Name = "Porte")]
         public string nomePorte { get; set; }
     }
 }

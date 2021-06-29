@@ -6,10 +6,11 @@ namespace ProjetoAW.Models
 {
     public class Venda
     {
-        [Display(Name = "Código da Venda")]
+        [Display(Name = "Número da Venda")]
         public int codVenda { get; set; }
         [Display(Name = "Situação")]
         public string situacao { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "Data da Venda")]
         public DateTime dataVenda { get; set; }
         [Display(Name = "Valor Unitário")]
@@ -35,6 +36,7 @@ namespace ProjetoAW.Models
         public List<Pedido> itemPedido = new List<Pedido>();
         
         //atributos extras
+        [Display(Name = "Nome do Cliente")]
         public string nomeCli { get; set; }
         public string logradouro { get; set; }
         public int numero { get; set; }
@@ -42,6 +44,12 @@ namespace ProjetoAW.Models
         public string estado { get; set; }
         public string cidade { get; set; }
         public string cep { get; set; }
+        [Display(Name = "Tipo de Pagamento")]
+        public string tipoPagamento { get; set; }
+        public int codEntrega { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Data de Entrega")]
+        public DateTime dataEntrega { get; set;}
 
     }
 }

@@ -4,7 +4,7 @@
     ViewBag.Title = "DadosPet";
 }
 
-<h2>Cadastro de Pet</h2>
+<h2 class="--main-title">Cadastro de Pet</h2>
 
 @using (Html.BeginForm("CadastroPet", "Animal", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
@@ -19,16 +19,16 @@
 
                 <div class="linha">
                     <p>
-                        @Html.LabelFor(model => model.codEspecie, htmlAttributes: new { @class = "control-label ", @style = "margin-bottom: 5px" }): @Html.DropDownList("especies", null, "Selecione a espécie do animal", new { @class = "form-control", @style = "margin-bottom: 5px" })
+                        @Html.LabelFor(model => model.codEspecie, htmlAttributes: new { @class = "control-label ", @style = "margin-bottom: 5px" }): @Html.DropDownList("especies", null, "Selecione a espécie do animal", new { @class = "form-select", @style = "margin-bottom: 5px" })
                     </p>
                     <p>
-                        @Html.LabelFor(model => model.codRaca, htmlAttributes: new { @class = "control-label ", @style = "margin-bottom: 5px" }): @Html.DropDownList("racas", null, "Selecione a raça do animal", new { @class = "form-control", @disabled = "true", @style = "margin-bottom: 5px" })
+                        @Html.LabelFor(model => model.codRaca, htmlAttributes: new { @class = "control-label ", @style = "margin-bottom: 5px" }): @Html.DropDownList("racas", null, "Selecione a raça do animal", new { @class = "form-select", @disabled = "true", @style = "margin-bottom: 5px" })
                     </p>
                 </div>
 
                 <div class="linha">
                     <p>
-                        @Html.LabelFor(model => model.codPorte, htmlAttributes: new { @class = "control-label", @style = "margin-bottom: 5px" }): @Html.DropDownList("portes", null, "Selecione o porte do animal", new { @class = "form-control", @style = "margin-bottom: 5px" })
+                        @Html.LabelFor(model => model.codPorte, htmlAttributes: new { @class = "control-label", @style = "margin-bottom: 5px" }): @Html.DropDownList("portes", null, "Selecione o porte do animal", new { @class = "form-select", @style = "margin-bottom: 5px" })
                     </p>
                     <p>
                         @Html.LabelFor(model => model.sexo, htmlAttributes: new { @class = "control-label", @style = "margin-bottom: 5px" }):

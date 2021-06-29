@@ -2,159 +2,86 @@
 
 @{ ViewBag.Title = "AlterarProd"; }
 
-<h2>Alterar Produto</h2>
-
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-    <script type="text/javascript" src="@Url.Content("/Scripts/script.js")"></script>
-
-    <style>
-
-        .contAlterarProd {
-            height: 350px;
-            padding-top: 3.4rem;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .formAProd {
-            display: flex;
-            flex-direction: row;
-        }
-
-        p {
-            margin-bottom: 15px;
-        }
-
-        label {
-            color: #405c60;
-        }
-
-        .alterarProd {
-            height: 80%;
-            top: 0px;
-            width: 80%;
-            padding: 18px 6% 20px 6%;
-            margin: 0 0 35px 0;
-            background: rgb(247, 247, 247);
-            border: 1px solid rgba(147, 184, 189,0.8);
-            border-radius: 5px;
-        }
-
-        .dadosAProd {
-            flex-grow: 1;
-            width: 70%;
-        }
-
-        #linha1 {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            width: 85%;
-        }
-
-        #linhaDesc {
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            width: 85%;
-        }
-
-        h2 {
-            margin-top: 1.2rem;
-            font-size: 1.5rem;
-            text-align: center;
-            margin-bottom: 1.6rem;
-        }
-
-        .botaoAProd {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-around;
-        }
-
-        .avatar {
-            vertical-align: middle;
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-        }
-
-        #botaoAProd {
-            font-size: 1.5rem;
-            background-color: #43b581;
-            color: white;
-        }
-    </style>
-</head>
-
-<h2>alterar Produto</h2>
-
-@using (Html.BeginForm("CadServico", "Servico", FormMethod.Post, new { enctype = "multipart/form-data" }))
+<h2 class="--main-title">Alteracão de Produto</h2>
+@using (Html.BeginForm("AlterarProd", "Produto", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-    <div class="contAlterarProd">
-        <div class="alterarProd">
-            <div class="dadosAProd">
-                <p>
-                    @Html.LabelFor(model => model.nomeProduto, htmlAttributes: new { @class = "control-label col-md-2" })
-                    @Html.EditorFor(model => model.nomeProduto, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.nomeProduto, "", new { @class = "text-danger" })
-                </p>
-
-                <div id="linha1">
-                    <p>
-                        @Html.LabelFor(model => model.quantidadeEstoque, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.quantidadeEstoque, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.quantidadeEstoque, "", new { @class = "text-danger" })
+    @Html.AntiForgeryToken()
+    @Html.EditorFor(model => model.codProduto, new { htmlAttributes = new { @class = "form-control", @hidden = "true"} })
+    <div class="containerCadastro">
+        <div class="cardCadastro">
+            <div class="avatarCadastro">
+                <div class="container containerProd">
+                    <div class="wrapper wrapperProd">
+                        <div class="image">
+                            @if (Html.LabelFor(model => model.imagemProduto) == null)
+                            {
+                                <img id="preview-img" src="~/img/free-heart-icon.png" alt="">
+                            }
+                            else
+                            {
+                                <img id="preview-img" src="@ViewBag.imagem" alt="">
+                            }
                         </div>
-                    </p>
-
-                    <p>
-                        @Html.LabelFor(m => m.codCategoria)
-                        @Html.DropDownList("categorias", null, "Selecione a categoria", new { @class = "form-control", @disabled = "true" })
-                    </p>
-                </div>
-
-                <div id="linhaDesc">
-                    @Html.LabelFor(model => model.descProduto, htmlAttributes: new { @class = "control-label col-md-2" })
-
-                    @Html.TextArea("descProduto", (string)ViewBag.desc, new { @class = "form-control", placeholder = "Digite a descrição do produto", rows = "4", style = "resize:none;", name = "descProduto" })
-                    @Html.ValidationMessageFor(model => model.descProduto, "", new { @class = "text-danger" })
-
-                </div>
-                <div id="linha1">
-                    <p>
-                        @Html.LabelFor(m => m.codFornecedor)
-                        @Html.DropDownList("fornecedor", null, "Selecione o Fornecedor", new { @class = "form-control", @disabled = "true" })
-                    </p>
-
-                    <p>
-                        @Html.LabelFor(model => model.valorUnitario, htmlAttributes: new { @class = "control-label col-md-2" })
-                        @Html.EditorFor(model => model.valorUnitario, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.valorUnitario, "", new { @class = "text-danger" })
-                    </p>
+                        <div id="cancel-btn">
+                            <i class="fas fa-times"></i>
+                        </div>
+                    </div>
+                    <label id="labelFile" class="btnProd" for="default-button"><i class="fas fa-upload"></i> Escolha a imagem do produto</label>
+                    <input type="file" name="file" id="default-button">
                 </div>
             </div>
-            <div class="botaoCProd">
-                <img src="" alt="AvatarProd" class="avatar">
-                <input type="file">
-                <input type="submit" value="Alterar" id="botaoAProd" />
+            <div class="dadosCadastro">
+                <div class="linha">
+                    <p>
+                        @Html.LabelFor(model => model.nomeProduto, htmlAttributes: new { @class = "control-label", @style = "margin-bottom: 5px" })
+                        @Html.EditorFor(model => model.nomeProduto, new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom: 5px", @placeholder = "Digite o nome do produto" } })
+                        @Html.ValidationMessageFor(model => model.nomeProduto, "", new { @class = "text-danger" })
+                    </p>
+                    <p>
+                        @Html.LabelFor(model => model.quantidadeEstoque, htmlAttributes: new { @class = "control-label", @style = "margin-bottom: 5px" })
+                        @Html.EditorFor(model => model.quantidadeEstoque, new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom: 5px", @placeholder = "Digite a quantidade do produto" } })
+                        @Html.ValidationMessageFor(model => model.quantidadeEstoque, "", new { @class = "text-danger" })
+                    </p>
+                </div>
+                <div class="linha">
+                    <p>
+                        @Html.LabelFor(model => model.codFornecedor, htmlAttributes: new { @class = "control-label", @style = "margin-bottom: 5px" })
+                        @Html.EditorFor(model => model.nomeFornecedor, new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom: 5px", @disabled = "true" } })
+                    </p>
+                    <p>
+                        @Html.LabelFor(model => model.codEspecie, htmlAttributes: new { @class = "control-label", @style = "margin-bottom: 5px" })
+                        @Html.EditorFor(model => model.nomeEspecie, new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom: 5px", @disabled = "true" } })
+                    </p>
+                </div>
+                <div class="linha">
+                    <p>
+                        @Html.LabelFor(model => model.valorUnitario, htmlAttributes: new { @class = "control-label", @style = "margin-bottom: 5px" })
+
+                        @Html.EditorFor(model => model.valorUnitario, new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom: 5px", @placeholder = "Digite o valor do produto (R$)", @id = "valor", @onkeyup = "formatarMoeda()" } })
+                        @Html.ValidationMessageFor(model => model.valorUnitario, "", new { @class = "text-danger" })
+                    </p>
+                    <p>
+                        @Html.LabelFor(model => model.codCategoria, htmlAttributes: new { @class = "control-label", @style = "margin-bottom: 5px" })
+                        @Html.EditorFor(model => model.nomeCategoria, new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom: 5px", @disabled = "true" } })
+                    </p>
+                </div>
+                <div class="linha">
+                    <p>
+                        @Html.LabelFor(model => model.descProduto, htmlAttributes: new { @class = "control-label", @style = "margin-bottom: 5px" })
+                        @Html.TextArea("descProduto", (string)ViewBag.desc, new { @class = "form-control text-areaProd", placeholder = "Digite a descrição do produto", rows = "4", cols = "2", style = "resize:none; margin-bottom: 5px", name = "descProduto" })
+                        @Html.ValidationMessageFor(model => model.descProduto, "", new { @class = "text-danger" })
+                    </p>
+                </div>
+                <div class="linha btnCadastrar">
+                    <button type="submit" class="btn btn-success btnCadastrar"><i class="fas fa-edit"></i> Alterar Produto</button>
+                </div>
+                <p>@ViewBag.Message</p>
             </div>
         </div>
     </div>
 }
 
-<script>
+<script type="text/javascript">
     const wrapper = document.querySelector(".wrapper");
     const fileName = document.querySelector(".file-name");
     const defaultBtn = document.querySelector("#default-button");
@@ -172,7 +99,7 @@
                 wrapper.classList.add("active");
             }
             cancelBtn.addEventListener("click", function () {
-                img.src = "";
+                img.src = "/img/free-heart-icon.png";
                 wrapper.classList.remove("active");
             })
             reader.readAsDataURL(file);
@@ -183,4 +110,3 @@
         }
     });
 </script>
-

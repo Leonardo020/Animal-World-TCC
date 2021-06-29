@@ -1,0 +1,121 @@
+﻿@{
+    ViewBag.Title = "ArquivoMorto";
+}
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <script type="text/javascript" src="@Url.Content("/Scripts/script.js")"></script>
+
+    <style>
+
+        h2 {
+            margin-top: 1.2rem;
+            font-size: 1.6rem;
+            text-align: center;
+        }
+
+        .contLP {
+            padding-top: 2rem;
+            height: 390px;
+        }
+
+        .avatarLP {
+            vertical-align: middle;
+            width: 235px;
+            height: 240px;
+            border-radius: 50%;
+        }
+
+        .actionPet {
+            color: #000;
+            margin-top: 24px;
+            font-size: 30px;
+        }
+
+            .actionPet:hover {
+                color: #43b581;
+                transition-duration: 0.6s;
+            }
+
+            .actionPet:link {
+                text-decoration: none;
+            }
+
+        .icon-button {
+            align-items: center;
+            align-content: center;
+            margin: 93px;
+            font-size: 45px;
+            color: #fff;
+        }
+
+        #txtCadastro {
+            display: none;
+        }
+
+        .container-item {
+            display: flex;
+            vertical-align: middle;
+            width: 280px;
+            height: 280px;
+            border: 2px dashed;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .linha-md {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            width: 100%;
+        }
+
+        .action {
+            font-size: 18px;
+            margin-top: 5px;
+            color: #000;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+            .action:hover {
+                border-color: #3CA374;
+                color: #3CA374;
+                transition-duration: 0.6s;
+            }
+    </style>
+</head>
+<div class="container">
+    <h2 class="--main-title"> Qual lixeira deseja acessar? </h2>
+    <div class="contLP">
+        <div class="linha-md">
+
+            <a class="action" href="/Produto/ArquivoMortoProduto">
+                <div class="circuloPet">
+                    <div class="container-item">
+                        <i class="fas fa-pump-soap icon-lg"></i>
+                        <p class="text-center">Produtos</p>
+                    </div>
+                </div>
+
+            </a>
+
+            <a class="action" href="/Servico/ArquivoMortoServico">
+                <div class="circuloPet">
+                    <div class="container-item">
+                        <i class="fas fa-soap icon-lg"></i>
+                        <p class="text-center">Serviços</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+

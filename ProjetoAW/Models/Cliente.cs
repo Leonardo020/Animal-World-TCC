@@ -14,8 +14,10 @@ namespace ProjetoAW.Models
         public string emailCli { get; set; }
         [Required(ErrorMessage = "Informe o seu CPF")]
         [Display(Name = "CPF")]
+        [DisplayFormat(DataFormatString = "{0:000\\.000\\.000-00}", ApplyFormatInEditMode = true)]
         public string cpfCli { get; set; }
         [Required(ErrorMessage = "Informe o seu celular")]
+        [DisplayFormat(DataFormatString = "{0:(##) #####-####}")]
         [Display(Name = "Celular")]
         public string telefoneCli { get; set; }
 

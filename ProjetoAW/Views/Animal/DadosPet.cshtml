@@ -4,7 +4,7 @@
     ViewBag.Title = "DadosPet";
 }
 <div>
-    <h2>Dados do Pet</h2>
+    <h2 class="--main-title">Dados do Pet</h2>
 </div>
 
 @using (Html.BeginForm("DadosPet", "Animal", FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -32,6 +32,7 @@
 
                 <div class="linha">
                     <p> @Html.LabelFor(model => model.idade, htmlAttributes: new { @class = "control-label " }): @Html.EditorFor(model => model.idade, new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom: 5px" } })</p>
+                    
                     <p> @Html.LabelFor(model => model.sexo, htmlAttributes: new { @class = "control-label " }): @Html.EditorFor(model => model.sexo, new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom: 5px", @disabled = "true" } })</p>
                 </div>
 
@@ -39,7 +40,7 @@
                     <p>@Html.LabelFor(model => model.descricaoAnimal, htmlAttributes: new { @class = "control-label " }): @Html.TextArea("descAnimal", (string)ViewBag.desc, new { @class = "form-control", placeholder = "Digite a descrição do animal", rows = "4", style = "resize:none; margin-bottom: 5px", name = "descAnimal" })</p>
                     <p> @Html.LabelFor(model => model.codPorte, htmlAttributes: new { @class = "control-label " }): @Html.EditorFor(model => model.nomePorte, new { htmlAttributes = new { @class = "form-control", @disabled = "true", @style = "margin-bottom: 5px" } })</p>
                 </div>
-                <div class="linha">
+                <div class="linhaEP">
                     <button class="btn button-a button-big button-rouded btn-success" id="EditarCP"><i class="fas fa-pencil-alt"></i> Editar Dados</button>
                 </div>
                     <p>@ViewBag.Message</p>

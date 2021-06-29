@@ -7,7 +7,7 @@
     <style>
         h2 {
             margin-top: 1.2rem;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             text-align: center;
             margin-bottom: 1.6rem;
         }
@@ -20,13 +20,13 @@
         }
 
         .cardTA {
-            border-radius: 5px;
+            border-radius: 10px;
             padding: 1.2rem 0;
-            background-color: #3CA374;
-            width: 80%;
+            width: auto;
             display: flex;
             flex-direction: column;
             align-items: center;
+            border: 1px solid #3CA374;
         }
 
         .titulo {
@@ -37,39 +37,40 @@
 
         .conteudoTA {
             height: 100%;
-            width: 80%;
+            width: auto;
             background-color: white;
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
             justify-content: space-around;
+            padding: 10px;
         }
 
         .linhaTA1 {
-            padding-left: 1.2rem;
             display: flex;
             flex-direction: row;
             justify-content: space-between;
-            width: 85%;
+            width: auto;
+            margin: 5px;
         }
 
         .linhaDados {
             display: flex;
             flex-direction: row;
+            border: 1px solid #8eb0a1;
+            border-radius: 5px;
         }
 
         .linhaTA2 {
-            text-align: center;
-            border: 1px solid #000;
-            height: 70px;
             display: flex;
-            width: 50%;
+            flex-direction: column;
+            width: auto;
+            padding: 10px;
+            text-align: center;
         }
 
-        .linhaTA3 {
-            text-align: center;
-            border: 1px solid #000;
-            height: 60%;
-            padding: 1.2rem;
+        #valorServico {
+            color: #43b581;
+            font-weight: 600;
         }
 
         #btnAgendar {
@@ -79,7 +80,7 @@
     </style>
 </head>
 <div>
-    <h2>Agendamento</h2>
+    <h2 class="--main-title">Agendamento</h2>
 </div>
 
 @using (Html.BeginForm("CadAgendamento", "Servico", FormMethod.Post))
@@ -88,40 +89,53 @@
     <div class="contTA">
         <div class="cardTA">
             <div class="titulo">
-                <h3>@Html.DisplayFor(modelItem => Model.nomeServico)</h3>
+                <h3>Serviço: @Html.DisplayFor(modelItem => Model.nomeServico)</h3>
             </div>
             <div class="conteudoTA">
                 <div class="linhaTA1">
                     <p> @Html.LabelFor(model => model.dataAgenda, htmlAttributes: new { @class = "control-label", @style = "margin-bottom: 5px" }): @Html.EditorFor(model => model.dataAgenda, new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom: 5px", @type = "date" } })</p>
                 </div>
                 <div class="linhaTA1">
-                    <p> @Html.LabelFor(model => model.horarioAgenda, htmlAttributes: new { @class = "control-label", @style = "margin-bottom: 5px" }):  @Html.EditorFor(model => model.horarioAgenda, new {htmlAttributes = new { @class = "form-control", @style = "margin-bottom: 5px", @type = "time"} })</p>
+                    <p> @Html.LabelFor(model => model.horarioAgenda, htmlAttributes: new { @class = "control-label", @style = "margin-bottom: 5px" }):  @Html.EditorFor(model => model.horarioAgenda, new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom: 5px", @type = "time" } })</p>
+                </div>
+                <div class="linhaTA1">
                     <p>
                         @Html.LabelFor(model => model.codAnimal, htmlAttributes: new { @class = "control-label", @style = "margin-bottom: 5px" })
-                        @Html.DropDownList("animais", null, "Selecione o animal", new { @class = "form-control", @style = "margin-bottom: 5px" })
+                        @Html.DropDownList("animais", null, "Selecione o animal", new { @class = "form-select", @style = "margin-bottom: 5px", @id = "pet" })
                     </p>
                 </div>
-                <div class="linhaDados">
-                    <div class="linhaTA2">
-                        <p id="animal">Animal escolhido: </p>
-                        <p>
-                            Valor total do serviço: @Html.DisplayFor(modelItem => Model.valorServico) 
-                        </p>
-                    </div>
+            </div>
+            <div class="linhaDados">
+                <div class="linhaTA2">
+                    <p id="animal">Animal escolhido: </p>
+                    <p>
+                        <br />
+                        Valor total do serviço: <span id="valorServico"> @Html.DisplayFor(modelItem => Model.valorServico)</span>
+                    </p>
                 </div>
-
-                <!--<div class="linhaTA3">
-                    <label>Tipo de Serviço:</label>
-                    <input type="radio" name="opcao" value="op1" checked> Premium
-                    <input type="radio" name="opcao" value="op2"> Serviço Padrão
-                </div>-->
             </div>
             <div>
                 @Html.EditorFor(model => model.codServico, new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom: 5px", @type = "hidden" } })
-                <input type="submit" value="Agendar" id="btnAgendar" />
+                <button class="btn btn-success" id="btnAgendar"><i class="fas fa-calendar-check"></i> Agendar</button>
                 @ViewBag.Message
             </div>
         </div>
     </div>
 }
+
+<script text="javascript">
+    $(document).ready(function () {
+        $('#pet').change(function () {
+            var idPet = $('#pet').val();
+            if (idPet > 0) {
+                $.post('@Url.Action("obterAnimalAgendamento", "Animal")', { 'pet': idPet }, function (data) {
+                    if (data.length > 0) {
+                        $('#animal').empty();
+                        $('#animal').append('<p> Animal escolhido: ' + data + '</p>');
+                    }
+                });
+            }
+        });
+    });
+</script>
 

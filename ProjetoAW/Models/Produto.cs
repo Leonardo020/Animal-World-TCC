@@ -30,11 +30,12 @@ namespace ProjetoAW.Models
         [Required(ErrorMessage = "Informe a espécie a que se destina o produto")]
         [Display(Name = "Espécie")]
         public int codEspecie { get; set; }
-        public bool isFavorite { get; set; }
-
         //atributos extras
         public string nomeCategoria { get; set; }
         public string nomeFornecedor { get; set; }
         public string nomeEspecie { get; set; }
+        public bool isFavorite { get; set; }
+        [DisplayFormat(DataFormatString = "{0:C2}")]
+        public decimal descontoProd { get; set; }
     }
 }

@@ -1,0 +1,46 @@
+﻿@model IEnumerable<ProjetoAW.Models.Pedido>
+
+@{
+    ViewBag.Title = "ListaItensVenda";
+}
+
+<h2>Lista de Itens Vendidos</h2>
+
+<div class="container">
+
+    <table class="table">
+        <tr>
+            <th style="text-align:center">
+                @Html.DisplayNameFor(model => model.imagemProduto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.produto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.quantidadePedido)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.valorTotal)
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="td-image">
+                    <img class="img-responsive" width="80" height="80" src="@Html.DisplayFor(modelItem => item.imagemProduto)" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.produto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.quantidadePedido) unidade(s)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.valorTotal)
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

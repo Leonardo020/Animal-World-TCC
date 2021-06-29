@@ -1,0 +1,120 @@
+﻿@model ProjetoAW.Models.Desconto
+
+@{ ViewBag.Title = "CadastroDesc"; }
+
+<style>
+
+    .contCD {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 500px;
+    }
+
+    .CadDesc {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: 1px 0px 5px #d0bdbd;
+        border-radius: 5px;
+    }
+
+    #linhaCD {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem;
+    }
+
+    #linhaLD {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+        padding: 1rem;
+        border: 1px solid #000;
+    }
+
+    .ListaDesc {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        border: 1px solid #000;
+        margin-top: 6rem;
+        width: 40rem;
+    }
+
+    h5 {
+        margin-top: 1.2rem;
+        font-size: 1.5rem;
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+
+    #btnCD {
+        font-size: 1.2rem;
+    }
+
+    .container{
+        width: 600px;
+        margin-top: 15px;
+    }
+</style>
+
+<h5>Cadastro de Desconto</h5>
+
+<div class="contCD">
+    @using (Html.BeginForm("CadastroDesc", "Gerente", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="CadDesc">
+            <div id="linhaCD">
+                @Html.LabelFor(model => model.desconto, htmlAttributes: new { @class = "control-label ", @style = "margin-left: 5px" })
+                <div>
+                    @Html.EditorFor(model => model.desconto, new { htmlAttributes = new { @class = "form-control", @style = "margin-left: 5px", @placeholder = "0%" } })
+                </div>
+                <button type="submit" class="btn btn-success" id="btnCD" style="margin-left:1rem;">Cadastrar Desconto</button>
+            </div>
+        </div>
+    }
+    <div class="container">
+        @using (Html.BeginForm("AplicarDesconto", "Gerente", FormMethod.Post))
+        {
+            <table class="table" id="linha">
+                <tr>
+                    <th>Porcentagem</th>
+                    <th>Ações</th>
+                </tr>
+            </table>
+
+        }
+    </div>
+
+</div>
+
+<script text="javascript">
+    $(document).ready(function () {
+        $.get('@Url.Action("ConsultaDescontos", "Gerente")', function (data) {
+            if (data.length > 0) {
+                for (var i = 0; i < data.length; i++) {
+                    if (data[i].isDesconto) {
+                        $('#linha').append('<tr> <td>' + data[i].desconto + `%</td> <td><a href="/Gerente/DesativarDesconto/${data[i].codDesconto}" id="aplicar"><i class="">Desativar</a> | <a href="/Gerente/ExcluirDesconto/${data[i].codDesconto}"id="excluir">Excluir</a></td></tr>`);
+
+                    }
+                    else {
+                        $('#linha').append('<tr> <td>' + data[i].desconto + `%</td> <td><a href="/Gerente/AplicarDesconto/${data[i].codDesconto}" id="aplicar"><i class="">Aplicar</a> | <a href="/Gerente/ExcluirDesconto/${data[i].codDesconto}"id="excluir">Excluir</a></td></tr>`);
+
+                    }
+                }
+            }
+        });
+    });
+
+    
+
+
+</script>
+

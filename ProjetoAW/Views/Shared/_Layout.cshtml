@@ -38,14 +38,14 @@
                          alt="logo" />
                 </button>
             </form>
-            <a href="/Venda/DadosPedido">
-                <h4 class="header__content__subtitle --color_primary">
-                    Meus Pedidos
-                    <img src="~/img/shopping_bag_white_24dp.svg"
-                         alt="sacola"
-                         class="header__content__subtitle__image" />
-                </h4>
-            </a>
+
+            <h4 class="header__content__subtitle --color_primary">
+                @Html.ActionLink("Meus Pedidos", "DadosPedido", "Venda", null, new { @class = "actionLink" })
+                <img src="~/img/shopping_bag_white_24dp.svg"
+                     alt="sacola"
+                     class="header__content__subtitle__image" />
+            </h4>
+
             <div class="header__content__navcontainer">
                 @if (Session["usuario"] != null && Session["senha"] != null)
                 {
@@ -155,6 +155,7 @@
                 @Html.ActionLink("Serviços", "Servicos", "Home", null, new { @class = "actionLink" })
             </li>
         </ul>
+
         <input type="hidden" id="success"
                value="@TempData["success"]" />
         <input type="hidden" id="info"
@@ -256,13 +257,15 @@
             if (valor == 'NaN') elemento.value = '';
         }
     </script>
-    <div class="body">
+    <div class="body" style="padding-bottom: 100px;">
         @RenderBody()
     </div>
 
-    <footer style="margin-top: 325px">
-        <p>&copy; @DateTime.Now.Year -  Copyright - Animal World</p>
+    <footer style="position: fixed; bottom: 0; left: 0; padding: 10px;">
+        <p>&copy; @DateTime.Now.Year - Copyright - Animal World - Versão 3.0 </p>
+        <p>Todos os direitos reservados - Desenvolvido por Archnology Corp</p>
     </footer>
+
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/inputmask")

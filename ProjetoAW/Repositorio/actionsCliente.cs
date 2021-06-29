@@ -10,7 +10,7 @@ namespace ProjetoAW.Repositorio
         Conexao cn = new Conexao();
         public void cadastraCliente(Cliente cli)
         {
-            MySqlCommand cmd = new MySqlCommand("call cadastroCliente(@nome, @email, @cpf, @telefone, @logradouro, @numero, @bairro, @cep, @estado, @cidade, @usuario, @senha, 3);", cn.Conectar());
+            MySqlCommand cmd = new MySqlCommand("call cadastroCliente(@nome, @email, @cpf, @telefone, @logradouro, @numero, @bairro, @cep, @estado, @cidade, @usuario, @senha, 2);", cn.Conectar());
             cmd.Parameters.Add("@nome", MySqlDbType.VarChar).Value = cli.nomeCli;
             cmd.Parameters.Add("@email", MySqlDbType.VarChar).Value = cli.emailCli;
             cmd.Parameters.Add("@cpf", MySqlDbType.VarChar).Value = cli.cpfCli;
@@ -35,20 +35,20 @@ namespace ProjetoAW.Repositorio
 
             MySqlCommand cmd = new MySqlCommand("call consultaCliente();", cn.Conectar());
             MySqlDataReader dr = cmd.ExecuteReader();
-
             while (dr.Read())
             {
+                /*formatando valores, desta forma colocando a máscara de exibição para o usuário*/
                 clientes.Add(new Cliente
                 {
                     codCli = Convert.ToInt32(dr["cod_cli"]),
                     nomeCli = dr["nome_cli"].ToString(),
                     emailCli = dr["email_cli"].ToString(),
-                    cpfCli = dr["cpf_cli"].ToString(),
-                    telefoneCli = dr["telefone"].ToString(),
+                    cpfCli = Convert.ToUInt64(dr["cpf_cli"]).ToString(@"000\.000\.000\-00"),
+                    telefoneCli = Convert.ToUInt64(dr["telefone"]).ToString(@"(00) 00000\-0000"),
                     logradouroCli = dr["logradouro"].ToString(),
                     numeroCli = Convert.ToInt32(dr["numero"]),
                     bairroCli = dr["bairro"].ToString(),
-                    cepCli = dr["cep"].ToString(),
+                    cepCli = Convert.ToUInt64(dr["cep"]).ToString(@"00000\-000"),
                     estadoCli = dr["estado"].ToString(),
                     cidadeCli = dr["cidade"].ToString(),
                     usuarioCli = dr["usuario_cli"].ToString(),
@@ -108,7 +108,39 @@ namespace ProjetoAW.Repositorio
             cn.Desconectar();
         }
 
-        public void exclui(int id)
+        public List<Cliente> consultaClientePorNome(string search)
+        {
+            List<Cliente> clientes = new List<Cliente>();
+
+            MySqlCommand cmd = new MySqlCommand("call consultaClientePorNome(@search);", cn.Conectar());
+            cmd.Parameters.AddWithValue("@search", search);
+            MySqlDataReader dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                clientes.Add(new Cliente
+                {
+                    codCli = Convert.ToInt32(dr["cod_cli"]),
+                    nomeCli = dr["nome_cli"].ToString(),
+                    emailCli = dr["email_cli"].ToString(),
+                    cpfCli = Convert.ToUInt64(dr["cpf_cli"]).ToString(@"000\.000\.000\-00"),
+                    telefoneCli = Convert.ToUInt64(dr["telefone"]).ToString(@"(00) 00000\-0000"),
+                    logradouroCli = dr["logradouro"].ToString(),
+                    numeroCli = Convert.ToInt32(dr["numero"]),
+                    bairroCli = dr["bairro"].ToString(),
+                    cepCli = Convert.ToUInt64(dr["cep"]).ToString(@"00000\-000"),
+                    estadoCli = dr["estado"].ToString(),
+                    cidadeCli = dr["cidade"].ToString(),
+                    usuarioCli = dr["usuario_cli"].ToString(),
+                    senhaCli = dr["senha_cli"].ToString(),
+                });
+            }
+
+            cn.Desconectar();
+
+            return clientes;
+        }
+
+        public void excluiCliente(int id)
         {
             MySqlCommand cmd = new MySqlCommand("call excluiCliente(@id);", cn.Conectar());
             cmd.Parameters.AddWithValue("@id", id);

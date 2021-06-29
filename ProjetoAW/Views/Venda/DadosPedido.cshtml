@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<ProjetoAW.Models.Venda>
 @{
     ViewBag.Title = "DadosPedido";
 }
@@ -20,104 +20,193 @@
         }
 
         #contDadosPedido {
-            height:380px;
+            height: auto;
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-top:2rem;
+            margin-top: 2rem;
         }
 
         .cardPed {
-            height: 9rem;
+            height: auto;
+            margin-top: 25px;
             background-color: white;
-            width: 80%;
+            width: auto;
             display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content:space-between;
-            border: 1px solid #000;
+            flex-direction: column;
+            border: 1px solid #3CA374;
+            border-radius: 10px;
         }
 
         .ProdInfo {
             display: flex;
-            flex-direction: row;
-            width: 40%;
-            margin-left:1.5rem;
+            flex-direction: column;
+            /* width: 40%; */
+            margin-bottom: 1.5rem;
+            padding: 15px;
         }
 
         .ProdInfo1 {
             display: flex;
             flex-direction: column;
-            align-items:center;
-            justify-content:center;
-            width: 10%;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            width: 350px;
         }
 
         .ProdInfo2 {
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
             align-items: center;
-            justify-content: space-between;
-            width: 20%;
-            height:100%;
+            justify-content: space-around;
+            height: 100%;
+            font-size: 18px;
+            margin: 15px;
         }
 
         .TotalInfo {
             display: flex;
-            flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-end;
             width: 100%;
-            height:40%;
-            border: 1px solid #000;
+            margin: 10px;
+        }
+
+        .PagamentoInfo {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            width: 100%;
+            margin: 10px;
         }
 
         .Status {
             display: flex;
-            flex-direction: column;
             align-items: center;
-            justify-content: center;
-            height:10rem;
         }
 
         .ProdIcon {
-            width: 4rem;
-            height: 4rem;
+            width: 6rem;
+            height: 6rem;
+            padding: 5px;
         }
 
-        h6 {
-            margin-top:1.5rem;
+        #valor {
+            color: #43b581;
+            font-size: 18px;
+            font-weight: 600;
         }
 
+        .contLA {
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .cardLA {
+            height: auto;
+            border-radius: 10px;
+            border: 2px solid #43b581;
+            width: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            padding: 10px;
+        }
+
+        .linhaLA {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+            .linhaLA p {
+                padding: 1.2rem;
+                font-size: 17px;
+            }
+
+        #btnLA {
+            border-radius: 15px;
+            font-size: 1rem;
+            color: #fff;
+        }
+
+        #nomePet {
+            font-size: 20px;
+        }
+
+        .linhaCenter {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            padding: 8px;
+        }
+
+        .element-spacing{
+            padding: 15px;
+        }
     </style>
 </head>
-    <h2>Meus Pedidos</h2>
+<div class="container">
+    <h2 class="--main-title">Meus Pedidos</h2>
 
     <div id="contDadosPedido">
-        <div class="cardPed">
-            <div class="ProdInfo">
-                <img src="~/img/calops.png"
-                     alt="Produto"
-                     class="ProdIcon" />
-                <h6>Ração de Calopsita Qualquer</h6>
-            </div>
-            <div class="ProdInfo1">
-                <h5>Quantidade</h5>
-                </br>
-                <h5>1</h5>
-            </div>
-            <div class="ProdInfo1">
-                <h5>Data de Confirmação</h5>
-                </br>
-                <h5>20/01/2021</h5>
-            </div>
-            <div class="ProdInfo2">
-                <div class="TotalInfo">
-                    <h5>Total: R$24,00</h5>
+        @foreach (var item in Model)
+        {
+            <div class="cardPed">
+                <div class="ProdInfo2">
+                    <h6 class="element-spacing">@Html.DisplayNameFor(model => model.codVenda): #@item.codVenda</h6>
+                    <h5 class="element-spacing"><i class="fas fa-cart-arrow-down icon-sm"></i> @Html.DisplayNameFor(model => model.qtdItensVenda): @item.qtdItensVenda</h5>
+                    <h5 class="element-spacing"><i class="fas fa-calendar-check icon-sm"></i> @Html.DisplayNameFor(model => model.dataVenda): @Html.DisplayFor(modelItem => item.dataVenda)</h5>
+                    <div class="Status">
+                        <p class="textoChip">@Html.DisplayNameFor(model => model.situacao):</p>
+                        @if (item.situacao == "Em Andamento")
+                        {
+                            <div class="chipAndamento">
+                                <p class="textoChip">@item.situacao</p>
+                            </div>
+                        }
+
+                        else if (item.situacao == "Concluído")
+                        {
+                            <div class="chipConcluido">
+                                <p class="textoChip">@item.situacao</p>
+                            </div>
+                        }
+
+                        else
+                        {
+                            <div class="chipCancelado">
+                                <p class="textoChip">@item.situacao</p>
+                            </div>
+                        }
+                    </div>
                 </div>
-                <div class="Status">
-                    <p>Status</p>
-                    <p>Enviado aos correios.</p>
+                <div class="ProdInfo2">
+                    @foreach (var pedido in item.itemPedido)
+                    {
+                        <div class="ProdInfo1">
+                            <img src="@pedido.imagemProduto"
+                                 alt="Produto"
+                                 class="ProdIcon" />
+                            <h6>@pedido.quantidadePedido @pedido.produto</h6>
+                        </div>
+                    }
+                </div>
+
+                <div class="ProdInfo2">
+                    <div class="PagamentoInfo">
+                        <h5>@Html.DisplayNameFor(model => model.tipoPagamento): @Html.DisplayFor(modelItem => item.tipoPagamento)</h5>
+                    </div>
+                    <div class="TotalInfo">
+                        <h5 id="valor">@Html.DisplayNameFor(model => model.valorTotal): @Html.DisplayFor(modelItem => item.valorTotal)</h5>
+                    </div>
                 </div>
             </div>
-        </div>
+        }
+    </div>
+</div>

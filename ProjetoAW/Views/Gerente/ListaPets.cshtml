@@ -1,0 +1,82 @@
+﻿@model IEnumerable<ProjetoAW.Models.Animal>
+
+@{
+    ViewBag.Title = "ListaPets";
+}
+
+<h2>Lista de Pets</h2>
+
+<div class="container">
+
+    <table class="table">
+        <tr>
+            <th style="text-align: center">
+                @Html.DisplayNameFor(model => model.imagemAnimal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nomeAnimal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.descricaoAnimal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.idade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.temperamento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.sexo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nomeEspecie)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nomeRaca)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nomeCli)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nomePorte)
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="td-image">
+                    <img class="img-responsive" width="80" height="80" src="@Html.DisplayFor(modelItem => item.imagemAnimal)" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nomeAnimal)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.descricaoAnimal)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.idade)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.temperamento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.sexo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nomeEspecie)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nomeRaca)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nomeCli)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nomePorte)
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

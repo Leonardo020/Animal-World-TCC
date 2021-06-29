@@ -8,7 +8,15 @@
     <h2>Lista de Clientes</h2>
 </div>
 <div class="container">
+    @using (Html.BeginForm("ListaClientes", "Cliente", FormMethod.Post))
+    {
+        <input class="form-control" style="display: inline-block; max-width: 350px !important; margin-bottom:5px;" id="search" name="search"
+               placeholder="Digite o nome do cliente desejado" />
+        <button type="submit" class="btn btn-default --border btnPesquisa">
+            <i class="fas fa-search"></i>
+        </button>
 
+    }
     <table class="table">
         <tr>
             <th>
@@ -26,7 +34,14 @@
             <th>
                 @Html.DisplayNameFor(model => model.cepCli)
             </th>
-            <th></th>
+            <th>
+                @using (Html.BeginForm("ListaFunc", "Gerente", FormMethod.Get))
+                {
+                    <button type="submit" class="btn btn-default --border btnPesquisa">
+                        <i class="fas fa-sync-alt"></i>
+                    </button>
+                }
+            </th>
         </tr>
 
         @foreach (var item in Model)
@@ -48,8 +63,7 @@
                     @Html.DisplayFor(modelItem => item.cepCli)
                 </td>
                 <td>
-                    @Html.ActionLink("Editar", "Edit", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Ver Pets", "Details", new { /* id=item.PrimaryKey */ }) 
+                    <a class="btn btn-success" href="/Gerente/ListaPets/@item.codCli"><i class="fas fa-paw"></i> Ver Pets</a>
                 </td>
             </tr>
         }

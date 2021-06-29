@@ -130,7 +130,7 @@ namespace ProjetoAW.Repositorio
                 agendamentos.Add(new Agenda
                 {
                     codAgenda = Convert.ToInt32(dr["cod_agenda"]),
-                    dataAgenda = Convert.ToDateTime(dr["data_agenda"]),
+                    dataAgenda = Convert.ToDateTime(dr["data_agenda"].ToString()),
                     horarioAgenda = dr["horario_agenda"].ToString(),
                     situacaoAgenda = dr["situacao_agenda"].ToString(),
                     nomeServico = dr["nome_servico"].ToString(),

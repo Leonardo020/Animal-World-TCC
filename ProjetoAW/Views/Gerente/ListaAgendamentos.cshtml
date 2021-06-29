@@ -4,84 +4,85 @@
     ViewBag.Title = "ListaAgendamentos";
 }
 
-<h2>ListaAgendamentos</h2>
+<h2>Lista de Agendamentos</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.codAgenda)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.dataAgenda)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.horarioAgenda)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.codServico)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.codCli)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.codAnimal)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.situacaoAgenda)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.nomeServico)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.nomeCli)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.nomeAnimal)
-        </th>
-        <th></th>
-    </tr>
+<div class="container">
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.codAgenda)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.dataAgenda)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.horarioAgenda)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.codServico)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.codCli)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.codAnimal)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.situacaoAgenda)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.nomeServico)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.nomeCli)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.nomeAnimal)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
 
-</table>
+    <table class="table">
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.dataAgenda)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.horarioAgenda)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nomeServico)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nomeCli)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nomeAnimal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.situacaoAgenda)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.dataAgenda)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.horarioAgenda)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nomeServico)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nomeCli)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nomeAnimal)
+                </td>
+                <td>
+                    @if (item.situacaoAgenda == "Em Andamento")
+                    {
+                        <div class="chipAndamento">
+                            <i class="fas fa-spinner"></i> @Html.DisplayFor(modelItem => item.situacaoAgenda)
+                        </div>
+
+                    }
+
+                    else if (item.situacaoAgenda == "Concluído")
+                    {
+                        <div class="chipConcluido">
+                            <i class="fas fa-check"></i> @Html.DisplayFor(modelItem => item.situacaoAgenda)
+                        </div>
+                    }
+
+                    else
+                    {
+                        <div class="chipCancelado">
+                            <i class="fas fa-times"></i> @Html.DisplayFor(modelItem => item.situacaoAgenda)
+                        </div>
+                    }
+                </td>
+                <td>
+                    @if (item.situacaoAgenda == "Em Andamento")
+                    {
+                        <a class="btn btn-success" href="/Gerente/ConcluirAgendamento/@item.codAgenda"> <i class="fas fa-check"></i></a>
+                        <a class="btn btn-danger" href="/Gerente/CancelarAgendamento/@item.codAgenda"> <i class="fas fa-times"></i></a>
+                    }
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

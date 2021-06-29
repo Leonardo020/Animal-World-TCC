@@ -1,69 +1,99 @@
-﻿@model IEnumerable<ModelsAnimalWorld.Models.Venda>
+﻿@model IEnumerable<ProjetoAW.Models.Venda>
 
 @{
     ViewBag.Title = "ListaPedido";
 }
 
-<h2>ListaPedido</h2>
+<h2>Lista de Pedidos</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.codVenda)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.situacao)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.dataVenda)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.codPagamento)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.codCli)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.codServico)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.codProduto)
-        </th>
-        <th></th>
-    </tr>
+<div class="container-fluid">
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.codVenda)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.situacao)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.dataVenda)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.codPagamento)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.codCli)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.codServico)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.codProduto)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.codVenda)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.dataVenda)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.dataEntrega)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.qtdItensVenda)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.valorTotal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nomeCli)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.tipoPagamento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.situacao)
+            </th>
+            <th></th>
+        </tr>
 
-</table>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    #@Html.DisplayFor(modelItem => item.codVenda)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.dataVenda)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.dataEntrega)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.qtdItensVenda)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.valorTotal)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nomeCli)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tipoPagamento)
+                </td>
+                <td>
+                    @if (item.situacao == "Em Andamento")
+                    {
+                        <div class="chipAndamento">
+                            <i class="fas fa-spinner"></i> @Html.DisplayFor(modelItem => item.situacao)
+                        </div>
+
+                    }
+
+                    else if (item.situacao == "Concluído")
+                    {
+                        <div class="chipConcluido">
+                            <i class="fas fa-check"></i> @Html.DisplayFor(modelItem => item.situacao)
+                        </div>
+                    }
+
+                    else
+                    {
+                        <div class="chipCancelado">
+                            <i class="fas fa-times"></i> @Html.DisplayFor(modelItem => item.situacao)
+                        </div>
+                    }
+                </td>
+                <td>
+                    @if (item.situacao == "Em Andamento")
+                    {
+                        <a class="btn btn-success" href="/Venda/ConcluirVenda/@item.codVenda"> <i class="fas fa-check"></i></a>
+                        <a class="btn btn-danger" href="/Venda/CancelarVenda/@item.codVenda"> <i class="fas fa-times"></i></a>
+                    }
+                    <a class="btn btn-primary" href="/Venda/ListaItensVenda/@item.codVenda"><i class="fas fa-eye"></i> Detalhes</a>
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

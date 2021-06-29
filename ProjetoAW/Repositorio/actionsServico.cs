@@ -83,8 +83,63 @@ namespace ProjetoAW.Repositorio
 
         public void excluiServico(int id)
         {
-            MySqlCommand cmd = new MySqlCommand("call excluiServico(@id)", cn.Conectar());
+            MySqlCommand cmd = new MySqlCommand("call deletaServico(@id);", cn.Conectar());
             cmd.Parameters.AddWithValue("@id", id);
+            cmd.ExecuteNonQuery();
+            cn.Desconectar();
+        }
+
+        public List<Servico> consultaLixeira()
+        {
+            List<Servico> servicos = new List<Servico>();
+
+            MySqlCommand cmd = new MySqlCommand("select * from ArquivoMortoServico;", cn.Conectar());
+            MySqlDataReader dr = cmd.ExecuteReader();
+
+            while (dr.Read())
+            {
+                servicos.Add(new Servico
+                {
+                    codServico = Convert.ToInt32(dr["cod_servico"]),
+                    nomeServico = dr["nome_servico"].ToString(),
+                    valorServico = Convert.ToDecimal(dr["valor_servico"]),
+                    imagemServico = dr["imagem_servico"].ToString(),
+                    horaServico = dr["horario_servico"].ToString(),
+                    descServico = dr["desc_servico"].ToString(),
+                });
+            }
+            cn.Desconectar();
+
+            return servicos;
+        }
+
+        public Servico selecionaServicoLixeira(int id)
+        {
+            Servico servico = new Servico();
+            MySqlCommand cmd = new MySqlCommand("select * from ArquivoMortoServico where cod_servico = @id", cn.Conectar());
+            cmd.Parameters.AddWithValue("@id", id);
+
+            MySqlDataReader dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                servico.codServico = Convert.ToInt32(dr["cod_servico"]);
+                servico.nomeServico = dr["nome_servico"].ToString();
+                servico.valorServico = Convert.ToDecimal(dr["valor_servico"]);
+                servico.imagemServico = dr["imagem_Servico"].ToString();
+                servico.horaServico = dr["horario_servico"].ToString();
+                servico.descServico = dr["desc_servico"].ToString();
+            }
+
+            cn.Desconectar();
+
+            return servico;
+        }
+
+        public void excluiServicoLixeira(int id)
+        {
+            MySqlCommand cmd = new MySqlCommand("delete from ArquivoMortoServico where cod_servico = @id", cn.Conectar());
+            cmd.Parameters.AddWithValue("@id", id);
+            cmd.ExecuteNonQuery();
             cn.Desconectar();
         }
     }
