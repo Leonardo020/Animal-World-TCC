@@ -27,6 +27,46 @@ namespace ProjetoAW.Repositorio
             cn.Desconectar();
         }
 
+        public List<Produto> consultaProdutoPorRelevancia()
+        {
+            List<Produto> produtos = new List<Produto>();
+
+            MySqlCommand cmd = new MySqlCommand($@"call consultaProdutoPorQtd();", cn.Conectar());
+            MySqlDataReader dr = cmd.ExecuteReader();
+
+            while (dr.Read())
+            {
+                produtos.Add(new Produto
+                {
+                    codProduto = Convert.ToInt32(dr["cod_produto"]),
+                    nomeProduto = dr["nome_produto"].ToString(),
+                    descProduto = dr["desc_produto"].ToString(),
+                    quantidadeEstoque = Convert.ToInt32(dr["quantidade_estoque"]),
+                    valorUnitario = Convert.ToDecimal(dr["valor_unitario"]),
+                    imagemProduto = dr["imagem_produto"].ToString(),
+                    nomeFornecedor = dr["nome_fornecedor"].ToString(),
+                    nomeCategoria = dr["nome_categoria"].ToString(),
+                    nomeEspecie = dr["nome_especie"].ToString(),
+                    /*isFavorite = Convert.ToBoolean(dr["isFavorite"].ToString()),*/
+                    /*codFornecedor = Convert.ToInt32(dr["cod_fornecedor"]),
+                    codCategoria = Convert.ToInt32(dr["cod_categoria"]),
+                    codEspecie = Convert.ToInt32(dr["cod_especie"]),*/
+                });
+            }
+
+            cn.Desconectar();
+
+            /*foreach(var item in produtos)
+            {
+                if(item.isFavorite == null)
+                {
+                    item.isFavorite = false;
+                }
+            }*/
+
+            return produtos;
+        }
+
         public List<Produto> consultaProduto(string filtro = "cod_produto desc")
         {
             List<Produto> produtos = new List<Produto>();

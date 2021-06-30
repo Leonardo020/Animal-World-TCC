@@ -52,7 +52,7 @@
             align-items: center;
             justify-content: center;
             padding: 15px;
-            width: 350px;
+            width: auto;
         }
 
         .ProdInfo2 {
@@ -167,21 +167,21 @@
                         @if (item.situacao == "Em Andamento")
                         {
                             <div class="chipAndamento">
-                                <p class="textoChip">@item.situacao</p>
+                                <p class="textoChip"><i class="fas fa-spinner fa-spin"></i> @item.situacao</p>
                             </div>
                         }
 
                         else if (item.situacao == "Concluído")
                         {
                             <div class="chipConcluido">
-                                <p class="textoChip">@item.situacao</p>
+                                <p class="textoChip"><i class="fas fa-check"></i> @item.situacao</p>
                             </div>
                         }
 
                         else
                         {
                             <div class="chipCancelado">
-                                <p class="textoChip">@item.situacao</p>
+                                <p class="textoChip"><i class="fas fa-times"></i> @item.situacao</p>
                             </div>
                         }
                     </div>

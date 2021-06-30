@@ -12,6 +12,7 @@ namespace ProjetoAW.Controllers
         actionsServico acServico = new actionsServico();
         public ActionResult Home()
         {
+            var produtos = acProd.consultaProdutoPorRelevancia();
             var desconto = acProd.verificaDesconto();
             if(desconto != null)
             {
@@ -20,9 +21,9 @@ namespace ProjetoAW.Controllers
 
             else
             {
-                Session["descontoProd"] = 0;
+                Session["descontoProd"] = null;
             }
-            return View();
+            return View(produtos);
         }
 
         public ActionResult Login()

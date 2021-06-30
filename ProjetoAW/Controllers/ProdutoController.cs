@@ -76,10 +76,14 @@ namespace ProjetoAW.Controllers
                 produtos = acProd.consultaProduto();
             }
 
-            foreach(var produto in produtos)
+            if (Session["descontoProd"] != null)
             {
-                produto.descontoProd = produto.valorUnitario - produto.valorUnitario * Convert.ToDecimal(Session["descontoProd"]) ;
+                foreach (var produto in produtos)
+                {
+                    produto.descontoProd = produto.valorUnitario - produto.valorUnitario * Convert.ToDecimal(Session["descontoProd"]);
+                }
             }
+
 
             return View(produtos);
         }
@@ -202,7 +206,7 @@ namespace ProjetoAW.Controllers
                 TempData["success"] = "Exclusão do produto efetuada com sucesso";
             }
 
-            catch(Exception e)
+            catch (Exception e)
             {
                 TempData["error"] = "Falha ao excluir produto " + e;
             }

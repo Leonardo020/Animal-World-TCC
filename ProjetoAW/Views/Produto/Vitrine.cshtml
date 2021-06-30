@@ -15,105 +15,6 @@
             font-size: 1.6rem;
             padding-right: 40rem;
         }
-
-        .contVitrine {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-around;
-        }
-
-        .cbcVit {
-            width: auto;
-            display: flex;
-            flex-direction: row;
-            justify-content: space-around;
-        }
-
-        .linhaVitrine {
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            padding-bottom: 2rem;
-            padding-top: 1.6rem
-        }
-
-        .cardVitrine {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            width: 240px;
-            font-size: 1rem;
-            box-shadow: 0 2px 5px #000;
-            border-radius: 10px;
-            align-content: stretch;
-            padding: 15px;
-            margin-right: 35px;
-        }
-
-        .filtrarVit {
-            display: flex;
-            flex-direction: row;
-            width: auto;
-            align-items: center;
-            justify-content: center;
-            border-radius: 15px;
-        }
-
-        #imgVit {
-            height: 175px;
-            width: 160px;
-        }
-
-        .actionProduto {
-            color: #000;
-            font-weight: 600;
-            font-size: 15px;
-        }
-
-            .actionProduto:link {
-                text-decoration: none;
-            }
-
-        .precoVit {
-            color: #43b581;
-            font-weight: 600;
-        }
-
-        #valor{
-            margin-top: 5px;
-            font-size: 14px;
-        }
-
-        .addCarrinho {
-            background-color: #43b581;
-            color: white;
-            font-size: 0.8rem;
-            margin-top: 1rem;
-        }
-
-        .favVit {
-            margin-top: 0.6rem;
-            margin-left: 10rem;
-            height: 20px;
-            width: 20px;
-            cursor: pointer
-        }
-
-        .paginaVit {
-            margin-bottom: 40px;
-        }
-
-            .paginaVit span {
-                display: inline-block;
-                border: 1px solid #000;
-                margin-left: 10px;
-                width: 40px;
-                height: 40px;
-                text-align: center;
-                line-height: 40px;
-                cursor: pointer;
-            }
     </style>
 </head>
 <div class="container">
@@ -123,7 +24,7 @@
             <h6 class="--main-title">Os melhores produtos:</h6>
             <div class="filtrarVit">
                 <h2 class="textFilter">Filtrar por: </h2>
-                @Html.DropDownList("groups", null, "Opção", new { @class = "form-control" })
+                @Html.DropDownList("groups", null, "Opção", new { @class = "form-select" })
                 @using (Html.BeginForm("Vitrine", "Produto", FormMethod.Post))
                 {
                     <input type="hidden" value="" id="filtro" name="filtro" />

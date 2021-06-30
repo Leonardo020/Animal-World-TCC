@@ -2,7 +2,7 @@
 
 @{ ViewBag.Title = "AlterarProd"; }
 
-<h2 class="--main-title">Alteracão de Produto</h2>
+<h2 class="--main-title">Alteração de Produto</h2>
 @using (Html.BeginForm("AlterarProd", "Produto", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()

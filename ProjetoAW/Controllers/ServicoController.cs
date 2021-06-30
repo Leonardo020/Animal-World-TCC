@@ -57,7 +57,7 @@ namespace ProjetoAW.Controllers
             {
                 TempData["danger"] = "Houve um erro ao tentar fazer um agendamento";
             }
-            return View();
+            return RedirectToAction("ListaAgendamento");
         }
 
         public ActionResult ListaAgendamento()
@@ -140,18 +140,42 @@ namespace ProjetoAW.Controllers
             }
             return RedirectToAction("ListaServicos");
         }
-        
+
         public JsonResult obterServico(int id)
         {
             var servico = acServico.selecionaServicoPorId(id);
             return Json(servico);
         }
 
+        public ActionResult ConcluiAgendamento(int id)
+        {
+            try
+            {
+                TempData["success"] = "Serviço concluído com sucesso!";
+                acAgenda.concluiAgendamento(id);
+            }
+
+            catch
+            {
+                TempData["error"] = "Ocorreu um erro ao tentar concluir o serviço";
+            }
+            return RedirectToAction("ListaAgendamentos", "Gerente");
+
+        }
 
         public ActionResult CancelaAgendamento(int id)
         {
-            acAgenda.cancelaAgendamento(id);
-            return RedirectToAction("ListaAgendamento", "Cliente");
+            try
+            {
+                acAgenda.cancelaAgendamento(id);
+                TempData["success"] = "Serviço cancelado com sucesso";
+            }
+
+            catch
+            {
+                TempData["error"] = "Ocorreu um erro ao tentar cancelar o serviço";
+            }
+            return RedirectToAction("Home", "Home");
         }
 
         public ActionResult ListaServicos()

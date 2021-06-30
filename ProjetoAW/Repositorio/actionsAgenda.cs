@@ -144,6 +144,14 @@ namespace ProjetoAW.Repositorio
             return agendamentos;
         }
 
+        public void concluiAgendamento(int id)
+        {
+            MySqlCommand cmd = new MySqlCommand("update Agenda set situacao_agenda = 'Concluído' where cod_agenda = @id", cn.Conectar());
+            cmd.Parameters.AddWithValue("@id", id);
+            cmd.ExecuteNonQuery();
+            cn.Desconectar();
+        }
+
         public void cancelaAgendamento(int id)
         {
             MySqlCommand cmd = new MySqlCommand("update Agenda set situacao_agenda = 'Cancelado' where cod_agenda = @id", cn.Conectar());

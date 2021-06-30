@@ -20,7 +20,7 @@
         }
 
         #contDadosEntrega {
-            height: 400px;
+            height: auto;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -188,7 +188,7 @@
                     CEP:  @Html.DisplayFor(modelItem => Model.cep)
                 </p>
             </div>
-            <a href="#">Editar</a>
+            <a href="/Cliente/DadosPessoais/@Model.codCli">Editar</a>
         </div>
 
         @foreach (var item in Model.itemPedido)

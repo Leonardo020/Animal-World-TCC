@@ -13,17 +13,18 @@
         }
 
         .CardMarc {
-            height: 23rem;
+            height: auto;
             margin: 1.6rem auto;
             background-color: white;
             box-shadow: 0px 2px 5px #1f232b5e;
             border-radius: 10px;
-            width: 18rem;
+            width: 50%;
             display: flex;
-            flex-direction: column;
-            justify-content: space-around;
+            /*flex-direction: column; */
+            justify-content: space-evenly;
             align-items: center;
-            border: 2px solid #000;
+            /* border: 2px solid #000; */
+            padding: 15px;
         }
 
         #acessoMarca {
@@ -34,7 +35,7 @@
 
         #contMarcas {
             display: flex;
-            flex-direction: row;
+            flex-direction: column;
             align-items: center;
             justify-content: space-evenly;
             flex-wrap: wrap;
@@ -58,7 +59,6 @@
     {
         <div class="CardMarc">
             <img class="marcaImg" src="@item.imagemFornecedor">
-            <h2 class="marcaTxt">@item.nomeFornecedor</h2>
             @using(Html.BeginForm("Vitrine", "Produto", FormMethod.Post))
             {
                 <input type="hidden" value="@item.codFornecedor"/>

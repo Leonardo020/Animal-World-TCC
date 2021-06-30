@@ -19,10 +19,11 @@
         }
 
         .contLA {
-            height: 300px;
+            height: auto;
             display: flex;
             flex-direction: column;
             align-items: center;
+            margin: 20px;
         }
 
         .cardLA {
@@ -65,7 +66,6 @@
             justify-content: center;
             padding: 8px;
         }
-
     </style>
 </head>
 
@@ -80,7 +80,20 @@
                 <p id="nomePet"><i class="fas fa-paw"></i> @Html.DisplayFor(modelItem => item.nomeServico) do(a) @Html.DisplayFor(modelItem => item.nomeAnimal)</p>
                 <div class="linhaLA">
                     <p class="textoChip">@Html.DisplayNameFor(model => model.situacaoAgenda):</p>
-                    <div class="chipAndamento"><p class="textoChip"> @Html.DisplayFor(modelItem => item.situacaoAgenda)</p></div>
+                    @if (item.situacaoAgenda == "Em Andamento")
+                    {
+                        <div class="chipAndamento"><p class="textoChip"><i class="fas fa-spinner fa-spin"></i> @Html.DisplayFor(modelItem => item.situacaoAgenda)</p></div>
+                    }
+
+                    else if (item.situacaoAgenda == "Concluído")
+                    {
+                        <div class="chipConcluido"><p class="textoChip"><i class="fas fa-check"></i> @Html.DisplayFor(modelItem => item.situacaoAgenda)</p></div>
+                    }
+                    else
+                    {
+                        <div class="chipCancelado"><p class="textoChip"><i class="fas fa-times"></i> @Html.DisplayFor(modelItem => item.situacaoAgenda)</p></div>
+                    }
+
                 </div>
             </div>
             <div class="linhaLA">

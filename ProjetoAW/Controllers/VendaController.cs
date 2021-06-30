@@ -83,7 +83,56 @@ namespace ProjetoAW.Controllers
             }
 
             TempData["success"] = "Produto adicionado ao carrinho!";
-            return RedirectToAction("Vitrine", "Produto");
+            return RedirectToAction("MeuCarrinho");
+        }
+
+        public ActionResult DeletaItemCarrinho(int id)
+        {
+            carrinho = Session["Carrinho"] != null ? (Venda)Session["Carrinho"] : new Venda();
+            var produto = acProd.selecionaProdutoPorId(id);
+
+            var qtdTotal = 0;
+
+            if (produto != null)
+            {
+                itemPedido.codPedido = Guid.NewGuid();
+                itemPedido.codProduto = id;
+                itemPedido.produto = produto.nomeProduto;
+                itemPedido.quantidadePedido = 1;
+                itemPedido.valorProduto = produto.valorUnitario;
+                itemPedido.imagemProduto = produto.imagemProduto;
+
+                List<Pedido> pedidos = carrinho.itemPedido.FindAll(p => p.codProduto == itemPedido.codProduto);
+
+                if (pedidos.Count != 0)
+                {
+                    var pedido = carrinho.itemPedido.FirstOrDefault(p => p.codProduto == produto.codProduto);
+
+                    pedido.quantidadePedido -= 1;
+                    itemPedido.valorProduto *= itemPedido.quantidadePedido;
+                    carrinho.valorTotal -= itemPedido.valorProduto;
+                    pedido.valorTotal = pedido.quantidadePedido * itemPedido.valorProduto;
+                    itemPedido.valorTotal = pedido.valorTotal;
+
+                    foreach (var itens in carrinho.itemPedido)
+                    {
+                        qtdTotal += itens.quantidadePedido;
+                    }
+
+                    carrinho.qtdItensVenda = qtdTotal;
+                }
+
+                else
+                {
+                    ExcluirItemCarrinho(itemPedido.codPedido);
+                }
+
+                Session["Carrinho"] = carrinho;
+                Session["qtdCarrinho"] = qtdTotal;
+            }
+
+            TempData["success"] = "Produto retirado do carrinho";
+            return RedirectToAction("MeuCarrinho");
         }
 
         public ActionResult MeuCarrinho()
@@ -98,15 +147,17 @@ namespace ProjetoAW.Controllers
             var itemExclusao = carrinho.itemPedido.Find(p => p.codPedido == id);
             carrinho.valorTotal -= itemExclusao.valorProduto;
             carrinho.qtdItensVenda -= itemExclusao.quantidadePedido;
-
             carrinho.itemPedido.Remove(itemExclusao);
+            /*if (carrinho.qtdItensVenda == 1)
+            {
+            }*/
             Session["Carrinho"] = carrinho;
             Session["qtdCarrinho"] = carrinho.qtdItensVenda;
 
             return RedirectToAction("MeuCarrinho");
         }
 
-        public ActionResult DadosEntrega()
+        public ActionResult DadosEntrega(Venda venda)
         {
             carrinho = Session["Carrinho"] != null ? (Venda)Session["Carrinho"] : new Venda();
             var sessao = Convert.ToInt32(Session["Cliente"]);
@@ -130,10 +181,10 @@ namespace ProjetoAW.Controllers
         {
             var sessao = Convert.ToInt32(Session["Cliente"]);
             var vendas = acVenda.selecionaVendaPorCliente(sessao);
-            foreach(var venda in vendas)
+            foreach (var venda in vendas)
             {
                 var pedidos = acVenda.selecionaItensPorVenda(venda.codVenda);
-                foreach(var itemVenda in pedidos)
+                foreach (var itemVenda in pedidos)
                 {
                     venda.itemPedido.Add(itemVenda);
                 }
@@ -178,7 +229,7 @@ namespace ProjetoAW.Controllers
 
             }
 
-            catch(Exception e)
+            catch (Exception e)
             {
                 TempData["error"] = "Ocorreu um erro ao tentar efetuar a venda: " + e;
                 return RedirectToAction("DadosEntrega");
@@ -223,7 +274,7 @@ namespace ProjetoAW.Controllers
                 TempData["success"] = "Venda cancelada com sucesso";
             }
 
-            catch(Exception e)
+            catch (Exception e)
             {
                 TempData["error"] = "Ocorreu um erro ao tentar cancelar a venda: " + e;
             }

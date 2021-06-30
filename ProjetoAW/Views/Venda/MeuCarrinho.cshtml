@@ -79,6 +79,7 @@
                 width: 100%;
                 max-width: 340px;
             }
+
         #ProdImg {
             height: 80px;
             width: 80px;
@@ -108,7 +109,6 @@
     </style>
 </head>
 
-
 <div class="MeuCarrinho">
     <h2 class="--main-title">Meu Carrinho</h2>
     <div class="carrinho2">
@@ -135,15 +135,18 @@
                             @Html.DisplayFor(modelItem => item.valorProduto)
                         </div>
                     </td>
+
                     <td class="columnProd">
-                        <input type="number" value="@Html.DisplayFor(modelItem => item.quantidadePedido)" />
+                        <a class="btn btn-default" href="/Venda/DeletaItemCarrinho/@item.codProduto"><i class="fas fa-minus"></i></a><input type="number" value="@Html.DisplayFor(modelItem => item.quantidadePedido)" disabled /> <a class="btn btn-default" href="/Venda/AdicionarItemCarrinho/@item.codProduto"><i class="fas fa-plus"></i></a>
                     </td>
+
                     <td class="columnProd">@Html.DisplayFor(modelItem => item.valorTotal)</td>
 
                     <td id="btnExcluir">
                         @using (Html.BeginForm("ExcluirItemCarrinho", "Venda", FormMethod.Post))
                         {
                             <input type="hidden" name="id" value=@item.codPedido>
+
                             <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
                         }
                     </td>
@@ -151,9 +154,9 @@
             }
 
         </table>
+
         @using (Html.BeginForm("DadosEntrega", "Venda", FormMethod.Post))
         {
-            @Html.AntiForgeryToken()
             <button class="btn btn-success">Finalizar compra</button>
         }
     </div>

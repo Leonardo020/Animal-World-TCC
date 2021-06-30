@@ -239,6 +239,7 @@
     <Content Include="img\papagaio.png" />
     <Content Include="img\pedido.png" />
     <Content Include="img\pets.png" />
+    <Content Include="img\petshop.png" />
     <Content Include="img\petwalker1.png" />
     <Content Include="img\produtos.jpg" />
     <Content Include="img\sair.png" />
