@@ -120,8 +120,8 @@ namespace ProjetoAW.Controllers
 
         public ActionResult DetalheProd(/*int id*/)
         {
-            /*var produto = acProd.selecionaProdutoPorId(id);
-            return View(produto);*/
+            var produto = acProd.selecionaProdutoPorId(id);
+            return View(produto);
             return View();
         }
 
