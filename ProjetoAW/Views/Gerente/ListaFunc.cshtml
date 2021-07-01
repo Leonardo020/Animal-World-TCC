@@ -1,4 +1,6 @@
-﻿@model IEnumerable<ProjetoAW.Models.Funcionario>
+﻿@using X.PagedList.Mvc;
+
+@model X.PagedList.PagedList<ProjetoAW.Models.Funcionario>
 
 @{
     ViewBag.Title = "ListaFunc";
@@ -15,78 +17,82 @@
         </button>
 
     }
-        <table class="table">
+    <table class="table">
+        <tr>
+            <th>
+                Nome do Funcionário
+            </th>
+            <th>
+                E-mail do Funcionário
+            </th>
+            <th>
+                Usuário
+            </th>
+            <th>
+                Senha
+            </th>
+            <th>
+                @using (Html.BeginForm("ListaFunc", "Gerente", FormMethod.Get))
+                {
+                    <button type="submit" class="btn btn-default --border btnPesquisa">
+                        <i class="fas fa-sync-alt"></i>
+                    </button>
+                }
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
             <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.nomeFunc)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.emailFunc)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.usuarioFunc)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.senhaFunc)
-                </th>
-                <th>
-                    @using (Html.BeginForm("ListaFunc", "Gerente", FormMethod.Get))
-                    {
-                        <button type="submit" class="btn btn-default --border btnPesquisa">
-                            <i class="fas fa-sync-alt"></i>
-                        </button>
-                    }
-                </th>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nomeFunc)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.emailFunc)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.usuarioFunc)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.senhaFunc)
+                </td>
+                <td>
+                    <a class="btn btn-primary" href="Gerente/AtualizaFunc/@item.codFunc"><i class="fas fa-edit"></i> </a>
+                    <input type="hidden" name="id" value=@item.codFunc>
+                    <button type="submit" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" onclick="selecionaFunc(@item.codFunc)"><i class="fas fa-trash"></i></button>
+                </td>
             </tr>
+        }
 
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.nomeFunc)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.emailFunc)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.usuarioFunc)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.senhaFunc)
-                    </td>
-                    <td>
-                        <a class="btn btn-primary" href="Gerente/AtualizaFunc/@item.codFunc"><i class="fas fa-edit"></i> </a>
-                        <input type="hidden" name="id" value=@item.codFunc>
-                        <button type="submit" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" onclick="selecionaFunc(@item.codFunc)"><i class="fas fa-trash"></i></button>
-                    </td>
-                </tr>
-            }
+    </table>
 
-        </table>
-
-        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="deleteModalLabel"></h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        Deseja realmente excluir este funcionário?
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                        @using (Html.BeginForm("ExcluiFunc", "Gerente", FormMethod.Post))
-                        {
-                            <input type="hidden" name="id" value="" id="codFunc" />
-                            <button class="btn btn-danger"><i class="fas fa-times-circle"></i> Excluir</button>
-                        }
-                    </div>
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Deseja realmente excluir este funcionário?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    @using (Html.BeginForm("ExcluiFunc", "Gerente", FormMethod.Post))
+                    {
+                        <input type="hidden" name="id" value="" id="codFunc" />
+                        <button class="btn btn-danger"><i class="fas fa-times-circle"></i> Excluir</button>
+                    }
                 </div>
             </div>
         </div>
     </div>
-
+    Listando registros de @Model.FirstItemOnPage a @Model.LastItemOnPage de um total de @Model.TotalItemCount
+    <br />
+    <div class="paginacao">
+        @Html.PagedListPager(Model, pagina => Url.Action("ListaFunc", new { pagina}))
+    </div>
+</div>
 
 <script text="javascript">
 
@@ -102,3 +108,4 @@
 
     }
 </script>
+

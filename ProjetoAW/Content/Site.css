@@ -49,7 +49,6 @@ body {
     text-align: center;
     color: #43b581;
     font-size: 28px;
-
 }
 
 .--background_primary {
@@ -383,7 +382,7 @@ ul {
     flex-direction: column;
 }
 
-.text-center{
+.text-center {
     margin-top: 5px;
     font-weight: 400;
 }
@@ -551,7 +550,7 @@ input[type="file"] {
 }
 
 /*cadastrar produto*/
-.btnProd{
+.btnProd {
     background-color: #e74c3c !important;
 }
 
@@ -562,11 +561,11 @@ input[type="file"] {
     height: 32vh !important
 }
 
-.text-areaProd{
+.text-areaProd {
     max-width: 655px;
 }
 
-.btnCadastrar{
+.btnCadastrar {
     margin: 2px 0 0 35px;
     text-align: center;
     justify-content: center;
@@ -586,7 +585,7 @@ input[type="file"] {
 }
 
 /*listas do gerente*/
-.td-image{
+.td-image {
     display: flex;
     justify-content: center;
 }
@@ -767,7 +766,7 @@ input[type="file"] {
 }
 
 /*botões das listas*/
-.btnPesquisa:hover{
+.btnPesquisa:hover {
     border: 1px solid #43b581;
     color: #43b581;
 }
@@ -777,13 +776,43 @@ input[type="file"] {
     font-size: 25px !important;
 }
 
-.icon-md{
-    font-size: 40px !important; 
+.icon-md {
+    font-size: 40px !important;
 }
 
 .icon-lg {
     font-size: 60px !important;
 }
+
+/*layout paginação*/
+.paginacao {
+    margin-top: 5px;
+    padding: 2px;
+    border-radius: 10px !important;
+    display: flex;
+    justify-content: flex-start;
+}
+
+    .paginacao ul {
+        background-color: #fff;
+        border-radius: 10px;
+        border: 1px solid #43b581;
+    }
+
+        .paginacao ul li {
+            padding: 5px;
+            color: #000;
+        }
+
+    .paginacao a {
+        text-decoration: none;
+        color: #000;
+    }
+
+        .paginacao a:hover {
+            color: #43b581;
+            transition-duration: 0.6s;
+        }
 
 /* footer */
 footer {

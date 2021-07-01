@@ -24,6 +24,11 @@ namespace ProjetoAW.Controllers
         }
         public ActionResult TelaAgendamento(int idServico)
         {
+            if ((Session["usuario"] == null) || (Session["senha"] == null))
+            {
+                TempData["warning"] = "Esteja logado para realizar um agendamento!";
+                return RedirectToAction("Login", "Home");
+            }
             carregaAnimais();
             var servico = acServico.selecionaServicoPorId(idServico);
             agenda.codServico = servico.codServico;
@@ -57,17 +62,27 @@ namespace ProjetoAW.Controllers
             {
                 TempData["danger"] = "Houve um erro ao tentar fazer um agendamento";
             }
-            return RedirectToAction("ListaAgendamento");
+            return RedirectToAction("ListaAgendamento", "Cliente");
         }
 
         public ActionResult ListaAgendamento()
         {
+            if ((Session["usuario"] == null) || (Session["senha"] == null))
+            {
+                TempData["warning"] = "Esteja logado para acessar a lista de agendamentos!";
+                return RedirectToAction("Login", "Home");
+            }
             var agendamentos = acAgenda.consultaAgendamento();
             return View(agendamentos);
         }
 
         public ActionResult CadServico()
         {
+            if ((Session["usuario"] == null) || (Session["senha"] == null))
+            {
+                TempData["warning"] = "Esteja logado para cadastrar um serviço!";
+                return RedirectToAction("Login", "Home");
+            }
             return View();
         }
 
@@ -94,6 +109,11 @@ namespace ProjetoAW.Controllers
 
         public ActionResult AlterarServico(int id)
         {
+            if ((Session["usuario"] == null) || (Session["senha"] == null))
+            {
+                TempData["warning"] = "Esteja logado para alterar um serviço!";
+                return RedirectToAction("Login", "Home");
+            }
             var servico = acServico.selecionaServicoPorId(id);
             return View(servico);
         }
@@ -175,17 +195,27 @@ namespace ProjetoAW.Controllers
             {
                 TempData["error"] = "Ocorreu um erro ao tentar cancelar o serviço";
             }
-            return RedirectToAction("Home", "Home");
+            return RedirectToAction("Login", "Home");
         }
 
         public ActionResult ListaServicos()
         {
+            if ((Session["usuario"] == null) || (Session["senha"] == null))
+            {
+                TempData["warning"] = "Esteja logado para acessar a lista de serviços!";
+                return RedirectToAction("Login", "Home");
+            }
             var servicos = acServico.consultaServico();
             return View(servicos);
         }
 
         public ActionResult ArquivoMortoServico()
         {
+            if ((Session["usuario"] == null) || (Session["senha"] == null))
+            {
+                TempData["warning"] = "Esteja logado para acessar o arquivo morto!";
+                return RedirectToAction("Login", "Home");
+            }
             var servicos = acServico.consultaLixeira();
             return View(servicos);
         }

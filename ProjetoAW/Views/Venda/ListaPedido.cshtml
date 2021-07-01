@@ -1,4 +1,6 @@
-﻿@model IEnumerable<ProjetoAW.Models.Venda>
+﻿@using X.PagedList.Mvc;
+
+@model X.PagedList.PagedList<ProjetoAW.Models.Venda>
 
 @{
     ViewBag.Title = "ListaPedido";
@@ -11,28 +13,28 @@
     <table class="table">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.codVenda)
+                Número da Venda
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.dataVenda)
+                Data da Venda
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.dataEntrega)
+                Data de Entrega
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.qtdItensVenda)
+                Quantidade Vendida
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.valorTotal)
+                Valor Total
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.nomeCli)
+                Cliente
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.tipoPagamento)
+                Tipo de Pagamento
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.situacao)
+                Situação
             </th>
             <th></th>
         </tr>
@@ -64,9 +66,9 @@
                 <td>
                     @if (item.situacao == "Em Andamento")
                     {
-                    <div class="chipAndamento">
-                        <i class="fas fa-spinner fa-spin"></i> @Html.DisplayFor(modelItem => item.situacao)
-                    </div>
+                        <div class="chipAndamento">
+                            <i class="fas fa-spinner fa-spin"></i> @Html.DisplayFor(modelItem => item.situacao)
+                        </div>
 
                     }
 
@@ -96,4 +98,9 @@
         }
 
     </table>
+    Listando registros de @Model.FirstItemOnPage a @Model.LastItemOnPage de um total de @Model.TotalItemCount
+    <br />
+    <div class="paginacao">
+        @Html.PagedListPager(Model, pagina => Url.Action("ListaPedido", new { pagina }))
+    </div>
 </div>

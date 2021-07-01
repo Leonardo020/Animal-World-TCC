@@ -1,4 +1,6 @@
-﻿@model IEnumerable<ProjetoAW.Models.Produto>
+﻿@using X.PagedList.Mvc;
+
+@model X.PagedList.PagedList<ProjetoAW.Models.Produto>
 
 @{
     ViewBag.Title = "ListaProd";
@@ -20,38 +22,38 @@
     <table class="table">
         <tr>
             <th style="text-align">
-                @Html.DisplayNameFor(model => model.imagemProduto)
+                Imagem do Produto
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.nomeProduto)
+                Nome do Produto
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.quantidadeEstoque)
+                Quantidade em estoque
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.valorUnitario)
+                Valor unitário
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.codCategoria)
+                Categoria
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.codFornecedor)
+                Forneceodr
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.codEspecie)
+                Espécie
             </th>
             <th class="linha" style="justify-content: space-around">
-                
-                    @using (Html.BeginForm("ListaProduto", "Produto", FormMethod.Get))
-                    {
-                        <button type="submit" class="btn btn-default --border btnPesquisa">
-                            <i class="fas fa-sync-alt"></i>
-                        </button>
-                    }
 
-                    <a class="btn btn-success" href="/Produto/CadastroProd">
-                        <i class="fas fa-plus"></i>
-                    </a>
+                @using (Html.BeginForm("ListaProduto", "Produto", FormMethod.Get))
+                {
+                    <button type="submit" class="btn btn-default --border btnPesquisa">
+                        <i class="fas fa-sync-alt"></i>
+                    </button>
+                }
+
+                <a class="btn btn-success" href="/Produto/CadastroProd">
+                    <i class="fas fa-plus"></i>
+                </a>
             </th>
         </tr>
 
@@ -110,6 +112,11 @@
                 </div>
             </div>
         </div>
+    </div>
+    Listando registros de @Model.FirstItemOnPage a @Model.LastItemOnPage de um total de @Model.TotalItemCount
+    <br />
+    <div class="paginacao">
+        @Html.PagedListPager(Model, pagina => Url.Action("ListaProd", new { pagina }))
     </div>
 </div>
 

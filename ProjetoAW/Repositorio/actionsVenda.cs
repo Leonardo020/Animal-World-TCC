@@ -125,7 +125,8 @@ namespace ProjetoAW.Repositorio
 
             while (dr.Read())
             {
-                pagamentos.Add(new SelectListItem{
+                pagamentos.Add(new SelectListItem
+                {
                     Text = dr["tipo_pagamento"].ToString(),
                     Value = dr["cod_pagamento"].ToString(),
                 });
@@ -185,14 +186,47 @@ namespace ProjetoAW.Repositorio
             return pedidos;
         }
 
+        public Venda selecionaEntregaPorVenda(int id)
+        {
+            Venda venda = new Venda();
+            MySqlCommand cmd = new MySqlCommand("consultaEntregaPorVenda(@id);", cn.Conectar());
+            cmd.Parameters.AddWithValue("@id", id);
+            MySqlDataReader dr = cmd.ExecuteReader();
+
+            while (dr.Read())
+            {
+                venda.codEntrega = Convert.ToInt32(dr["cod_entrega"]);
+                venda.codVenda = Convert.ToInt32(dr["cod_pedido"]);
+                venda.dataEntrega = Convert.ToDateTime(dr["data_entrega"]);
+                venda.situacao = dr["situacao"].ToString();
+                venda.dataVenda = Convert.ToDateTime(dr["data_venda"]);
+                venda.tipoPagamento = dr["tipo_pagamento"].ToString();
+                venda.nomeCli = dr["nome_cli"].ToString();
+                venda.cpfCli = dr["cpf_cli"].ToString();
+                venda.cep = dr["cep"].ToString();
+                venda.numero = Convert.ToInt32(dr["numero"]);
+                venda.logradouro = dr["logradouro"].ToString();
+                venda.bairro = dr["bairro"].ToString();
+                venda.estado = dr["estado"].ToString();
+                venda.cidade = dr["cidade"].ToString();
+                venda.qtdItensVenda = Convert.ToInt32(dr["qtd_total"]);
+                venda.valorTotal = Convert.ToDecimal(dr["valor_total"]);
+            }
+
+
+            cn.Desconectar();
+
+            return pedidos;
+        }
+
         public void concluiVenda(int id)
         {
             MySqlCommand cmd = new MySqlCommand("update Venda set situacao = 'Concluído' where cod_venda = @id", cn.Conectar());
             cmd.Parameters.AddWithValue("@id", id);
             cmd.ExecuteNonQuery();
             cn.Desconectar();
-        } 
-        
+        }
+
         public void cancelaVenda(int id)
         {
             MySqlCommand cmd = new MySqlCommand("update Venda set situacao = 'Cancelado' where cod_venda = @id", cn.Conectar());

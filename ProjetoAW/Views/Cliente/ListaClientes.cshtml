@@ -1,4 +1,6 @@
-﻿@model IEnumerable<ProjetoAW.Models.Cliente>
+﻿@using X.PagedList.Mvc;
+
+@model X.PagedList.PagedList<ProjetoAW.Models.Cliente>
 
 @{
     ViewBag.Title = "ListaClientes";
@@ -20,19 +22,19 @@
     <table class="table">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.nomeCli)
+                Nome do Cliente
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.emailCli)
+                E-mail do Cliente
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.cpfCli)
+               CPF
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.telefoneCli)
+              Celular
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.cepCli)
+                CEP
             </th>
             <th>
                 @using (Html.BeginForm("ListaFunc", "Gerente", FormMethod.Get))
@@ -69,4 +71,9 @@
         }
 
     </table>
+    Listando registros de @Model.FirstItemOnPage a @Model.LastItemOnPage de um total de @Model.TotalItemCount
+    <br />
+    <div class="paginacao">
+        @Html.PagedListPager(Model, pagina => Url.Action("ListaClientes", new { pagina }))
+    </div>
 </div>

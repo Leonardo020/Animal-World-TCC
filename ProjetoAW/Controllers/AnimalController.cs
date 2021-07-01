@@ -1,8 +1,10 @@
-﻿using ProjetoAW.Models;
+﻿using X.PagedList;
+using ProjetoAW.Models;
 using ProjetoAW.Repositorio;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
@@ -41,6 +43,11 @@ namespace ProjetoAW.Controllers
 
         public ActionResult CadastroPet()
         {
+            if ((Session["usuario"] == null) || (Session["senha"] == null))
+            {
+                TempData["warning"] = "Esteja logado para cadastrar um pet!";
+                return RedirectToAction("Login", "Home");
+            }
             carregaEspecies();
             carregaRacas();
             carregaPortes();
@@ -79,6 +86,11 @@ namespace ProjetoAW.Controllers
 
         public ActionResult DadosPet(int id)
         {
+            if ((Session["usuario"] == null) || (Session["senha"] == null))
+            {
+                TempData["warning"] = "Esteja logado para consultar os dados do pet!";
+                return RedirectToAction("Login", "Home");
+            }
             var animais = acAnimal.consultaAnimalPorId(id);
             ViewBag.desc = animais.descricaoAnimal;
             ViewBag.imagem = animais.imagemAnimal;
@@ -117,10 +129,16 @@ namespace ProjetoAW.Controllers
             return View(animalAtualizado);
         }
 
-        public ActionResult ListaPet()
+        public ActionResult ListaPet(int? pagina)
         {
+            if ((Session["usuario"] == null) || (Session["senha"] == null))
+            {
+                TempData["warning"] = "Esteja logado para consultar seus pets!";
+                return RedirectToAction("Login", "Home");
+            }
             int cliente = Convert.ToInt32(Session["Cliente"]);
-            var animais = acAnimal.consultaAnimalPorCliente(cliente);
+            int paginaNumero = (pagina ?? 1);
+            var animais = acAnimal.consultaAnimalPorCliente(cliente).OrderBy(a => a.codAnimal).ToPagedList(paginaNumero, 10);
             return View(animais);
         }
 

@@ -2,8 +2,10 @@
 using ProjetoAW.Repositorio;
 using System;
 using System.IO;
+using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using X.PagedList;
 
 namespace ProjetoAW.Controllers
 {
@@ -21,6 +23,11 @@ namespace ProjetoAW.Controllers
 
         public ActionResult CadastroFunc()
         {
+            if ((Session["usuario"] == null) || (Session["senha"] == null))
+            {
+                TempData["warning"] = "Esteja logado para acessar o arquivo morto!";
+                return RedirectToAction("Login", "Home");
+            }
             return View();
         }
 
@@ -42,6 +49,11 @@ namespace ProjetoAW.Controllers
 
         public ActionResult AtualizaFunc(int id)
         {
+            if ((Session["usuario"] == null) || (Session["senha"] == null))
+            {
+                TempData["warning"] = "Esteja logado para atualizar o funcionário!";
+                return RedirectToAction("Login", "Home");
+            }
             var func = acFunc.selecionaFuncionarioPorId(id);
             return View(func);
         }
@@ -73,7 +85,7 @@ namespace ProjetoAW.Controllers
 
             catch (Exception e)
             {
-                TempData["error"] = "Ocorreu um erro ao tentar excluir o funcionário: " + e;
+                TempData["error"] = "Ocorreu um erro ao tentar excluir um funcionário: " + e;
             }
 
             return RedirectToAction("ListaFunc");
@@ -87,6 +99,11 @@ namespace ProjetoAW.Controllers
 
         public ActionResult CadastroFornecedor()
         {
+            if ((Session["usuario"] == null) || (Session["senha"] == null))
+            {
+                TempData["warning"] = "Esteja logado para cadastrar um fornecedor!";
+                return RedirectToAction("Login", "Home");
+            }
             return View();
         }
 
@@ -117,6 +134,11 @@ namespace ProjetoAW.Controllers
 
         public ActionResult CadastroDesc()
         {
+            if ((Session["usuario"] == null) || (Session["senha"] == null))
+            {
+                TempData["warning"] = "Esteja logado para cadastrar um desconto!";
+                return RedirectToAction("Login", "Home");
+            }
             return View();
         }
 
@@ -181,15 +203,27 @@ namespace ProjetoAW.Controllers
             return RedirectToAction("CadastroDesc");
         }
 
-        public ActionResult ListaAgendamentos()
+        public ActionResult ListaAgendamentos(int? pagina)
         {
-            var agendamentos = acAgenda.consultaAgendamento();
+            if ((Session["usuario"] == null) || (Session["senha"] == null))
+            {
+                TempData["warning"] = "Esteja logado para consultar a lista de agendamentos!";
+                return RedirectToAction("Login", "Home");
+            }
+            int paginaNumero = (pagina ?? 1);
+            var agendamentos = acAgenda.consultaAgendamento().OrderBy(a => a.codAgenda).ToPagedList(paginaNumero, 10);
             return View(agendamentos);
         }
 
-        public ActionResult ListaFunc()
+        public ActionResult ListaFunc(int? pagina)
         {
-            var funcionarios = acFunc.consultaFuncionario();
+            if ((Session["usuario"] == null) || (Session["senha"] == null))
+            {
+                TempData["warning"] = "Esteja logado para consultar a lista de funcionários!";
+                return RedirectToAction("Login", "Home");
+            }
+            int paginaNumero = (pagina ?? 1);
+            var funcionarios = acFunc.consultaFuncionario().OrderBy(f => f.codFunc).ToPagedList(paginaNumero, 10);
             return View(funcionarios);
         }
 
@@ -202,6 +236,11 @@ namespace ProjetoAW.Controllers
 
         public ActionResult ListaPets(int id)
         {
+            if ((Session["usuario"] == null) || (Session["senha"] == null))
+            {
+                TempData["warning"] = "Esteja logado para consultar a lista de animais!";
+                return RedirectToAction("Login", "Home");
+            }
             var animais = acAnimal.consultaAnimalPorCliente(id);
             return View(animais);
 
@@ -209,6 +248,11 @@ namespace ProjetoAW.Controllers
 
         public ActionResult ArquivoMorto()
         {
+            if ((Session["usuario"] == null) || (Session["senha"] == null))
+            {
+                TempData["warning"] = "Esteja logado para acessar o arquivo morto!";
+                return RedirectToAction("Login", "Home");
+            }
             return View();
         }
     }

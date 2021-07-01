@@ -1,4 +1,6 @@
-﻿@model IEnumerable<ProjetoAW.Models.Agenda>
+﻿@using X.PagedList.Mvc;
+
+@model X.PagedList.PagedList<ProjetoAW.Models.Agenda>
 
 @{
     ViewBag.Title = "ListaAgendamentos";
@@ -13,22 +15,22 @@
         <tr>
 
             <th>
-                @Html.DisplayNameFor(model => model.dataAgenda)
+               Data de Agendamento
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.horarioAgenda)
+               Horário de Agendamento
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.nomeServico)
+                Nome do Serviço
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.nomeCli)
+                Cliente
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.nomeAnimal)
+                Animal
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.situacaoAgenda)
+               Situação
             </th>
             <th></th>
         </tr>
@@ -54,9 +56,9 @@
                 <td>
                     @if (item.situacaoAgenda == "Em Andamento")
                     {
-                    <div class="chipAndamento">
-                        <i class="fas fa-spinner fa-spin"></i> @Html.DisplayFor(modelItem => item.situacaoAgenda)
-                    </div>
+                        <div class="chipAndamento">
+                            <i class="fas fa-spinner fa-spin"></i> @Html.DisplayFor(modelItem => item.situacaoAgenda)
+                        </div>
 
                     }
 
@@ -85,4 +87,9 @@
         }
 
     </table>
+    Listando registros de @Model.FirstItemOnPage a @Model.LastItemOnPage de um total de @Model.TotalItemCount
+    <br />
+    <div class="paginacao">
+        @Html.PagedListPager(Model, pagina => Url.Action("ListaAgendamentos", new { pagina }))
+    </div>
 </div>

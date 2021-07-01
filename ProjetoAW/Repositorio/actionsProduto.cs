@@ -293,14 +293,15 @@ namespace ProjetoAW.Repositorio
             MySqlCommand cmd = new MySqlCommand("select * from desconto where isDesconto = 1", cn.Conectar());
             MySqlDataReader dr = cmd.ExecuteReader();
 
-            if (dr.HasRows){
+            if (dr.HasRows)
+            {
 
                 while (dr.Read())
                 {
                     desconto.codDesconto = Convert.ToInt32(dr["cod_desconto"]);
                     desconto.desconto = Convert.ToDecimal(dr["desconto"]);
                     desconto.isDesconto = Convert.ToBoolean(dr["isDesconto"]);
-                
+
                 }
             }
 
@@ -401,6 +402,47 @@ namespace ProjetoAW.Repositorio
             cn.Desconectar();
 
             return produtos;
+        }
+
+        public void verificaFavorito(int id, int sessao, bool isFavorite)
+        {
+
+            var produto = new Produto();
+            MySqlCommand cmd = new MySqlCommand("select * from FavoritoProduto where cod_produto = @id and cod_cli = @sessao", cn.Conectar());
+            cmd.Parameters.AddWithValue("@id", id);
+            cmd.Parameters.AddWithValue("@sessao", sessao);
+
+            MySqlDataReader dr = cmd.ExecuteReader();
+
+            if (dr.HasRows)
+            {
+                isFavorite = !isFavorite;
+                cn.Desconectar();
+                atualizaFavorito(id, sessao, isFavorite);
+            }
+
+            else
+            {
+                cn.Desconectar();
+                cadastraFavoritoPorCliente(id, sessao, isFavorite);
+            }
+
+            while (dr.Read())
+            {
+                produto.isFavorite = Convert.ToBoolean(dr["isFavorite"]);
+            }
+
+        }
+
+        public void atualizaFavorito(int produto, int cliente, bool isFavorite)
+        {
+            MySqlCommand cmd = new MySqlCommand("update favoritoproduto set isFavorite = @isFavorite where cod_produto = @produto and cod_cli = @cliente", cn.Conectar());
+            cmd.Parameters.AddWithValue("@produto", MySqlDbType.Int32).Value = produto;
+            cmd.Parameters.AddWithValue("@cliente", MySqlDbType.Int32).Value = cliente;
+            cmd.Parameters.Add("@isFavorite", MySqlDbType.Int32).Value = isFavorite;
+
+            cmd.ExecuteNonQuery();
+            cn.Desconectar();
         }
 
         public void cadastraFavoritoPorCliente(int produto, int cliente, bool isFavorite)

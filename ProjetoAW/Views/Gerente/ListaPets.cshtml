@@ -1,5 +1,6 @@
-﻿@model IEnumerable<ProjetoAW.Models.Animal>
+﻿@using X.PagedList.Mvc;
 
+@model X.PagedList.PagedList<ProjetoAW.Models.Animal>
 @{
     ViewBag.Title = "ListaPets";
 }
@@ -11,34 +12,34 @@
     <table class="table">
         <tr>
             <th style="text-align: center">
-                @Html.DisplayNameFor(model => model.imagemAnimal)
+                Imagem do Animal
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.nomeAnimal)
+                Nome do Animal
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.descricaoAnimal)
+                Descrição
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.idade)
+                Idade
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.temperamento)
+                Temperamento
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.sexo)
+                Sexo
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.nomeEspecie)
+                Espécie
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.nomeRaca)
+                Raça
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.nomeCli)
+                Cliente
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.nomePorte)
+                Porte
             </th>
         </tr>
 
@@ -79,4 +80,9 @@
         }
 
     </table>
+    Listando registros de @Model.FirstItemOnPage a @Model.LastItemOnPage de um total de @Model.TotalItemCount
+    <br />
+    <div class="paginacao">
+        @Html.PagedListPager(Model, pagina => Url.Action("ListaPets", new { pagina }))
+    </div>
 </div>

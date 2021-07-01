@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using X.PagedList;
 
 namespace ProjetoAW.Controllers
 {
@@ -57,35 +58,49 @@ namespace ProjetoAW.Controllers
             ViewBag.categorias = new SelectList(categorias, "Value", "Text");
         }
 
-        public ActionResult Vitrine(int id = 0, string searchField = "")
+        public ActionResult Vitrine(int? pagina, int id = 0, string searchField = "")
         {
-            List<Produto> produtos = new List<Produto>();
             carregaGroups();
+            int paginaNumero = (pagina ?? 1);
             if (id != 0)
             {
-                produtos = acProd.consultaProdutoPorCategoria(id);
+                var produtos = acProd.consultaProdutoPorCategoria(id).OrderBy(p => p.codProduto).ToPagedList(paginaNumero, 10);
+                if (Session["descontoProd"] != null)
+                {
+                    foreach (var produto in produtos)
+                    {
+                        produto.descontoProd = produto.valorUnitario - produto.valorUnitario * Convert.ToDecimal(Session["descontoProd"]);
+                    }
+                }
+                return View(produtos);
             }
 
             else if (searchField != "")
             {
-                produtos = acProd.consultaProdutoPorNome(searchField);
+                var produtos = acProd.consultaProdutoPorNome(searchField).OrderBy(p => p.codProduto).ToPagedList(paginaNumero, 10);
+                if (Session["descontoProd"] != null)
+                {
+                    foreach (var produto in produtos)
+                    {
+                        produto.descontoProd = produto.valorUnitario - produto.valorUnitario * Convert.ToDecimal(Session["descontoProd"]);
+                    }
+                }
+                return View(produtos);
             }
 
             else
             {
-                produtos = acProd.consultaProduto();
-            }
-
-            if (Session["descontoProd"] != null)
-            {
-                foreach (var produto in produtos)
+                var produtos = acProd.consultaProduto().OrderBy(p => p.codProduto).ToPagedList(paginaNumero, 10);
+                if (Session["descontoProd"] != null)
                 {
-                    produto.descontoProd = produto.valorUnitario - produto.valorUnitario * Convert.ToDecimal(Session["descontoProd"]);
+                    foreach (var produto in produtos)
+                    {
+                        produto.descontoProd = produto.valorUnitario - produto.valorUnitario * Convert.ToDecimal(Session["descontoProd"]);
+                    }
                 }
+                return View(produtos);
             }
 
-
-            return View(produtos);
         }
 
         [HttpPost]
@@ -111,6 +126,11 @@ namespace ProjetoAW.Controllers
 
         public ActionResult CadastroProd()
         {
+            if ((Session["usuario"] == null) || (Session["senha"] == null))
+            {
+                TempData["warning"] = "Esteja logado para cadastrar um produto!";
+                return RedirectToAction("Login", "Home");
+            }
             carregaEspecies();
             carregaFornecedores();
             carregaCategorias();
@@ -149,6 +169,12 @@ namespace ProjetoAW.Controllers
 
         public ActionResult AlterarProd(int id)
         {
+
+            if ((Session["usuario"] == null) || (Session["senha"] == null))
+            {
+                TempData["warning"] = "Esteja logado para alterar um produto!";
+                return RedirectToAction("Login", "Home");
+            }
             var produto = acProd.selecionaProdutoPorId(id);
             ViewBag.imagem = produto.imagemProduto;
             return View(produto);
@@ -187,6 +213,21 @@ namespace ProjetoAW.Controllers
             try
             {
                 var sessao = Convert.ToInt32(Session["Cliente"]);
+                acProd.verificaFavorito(id, sessao, isFavorite);
+            }
+            catch (Exception e)
+            {
+                TempData["warning"] = "Falha ao tentar salvar favorito " + e;
+            }
+            var produto = acProd.selecionaProdutoPorId(id);
+            return new JsonResult { Data = produto, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+
+        /*public JsonResult DeletaFavorito()
+        {
+            try
+            {
+                var sessao = Convert.ToInt32(Session["Cliente"]);
                 acProd.cadastraFavoritoPorCliente(id, sessao, isFavorite);
             }
             catch
@@ -195,7 +236,7 @@ namespace ProjetoAW.Controllers
             }
             var produto = acProd.selecionaProdutoPorId(id);
             return new JsonResult { Data = produto, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
-        }
+        }*/
 
         [HttpPost]
         public ActionResult ExcluiProd(int id)
@@ -213,9 +254,10 @@ namespace ProjetoAW.Controllers
             return RedirectToAction("ListaProd");
         }
 
-        public ActionResult ListaProd()
+        public ActionResult ListaProd(int? pagina)
         {
-            var produtos = acProd.consultaProduto();
+            int paginaNumero = (pagina ?? 1);
+            var produtos = acProd.consultaProduto().OrderBy(a => a.codProduto).ToPagedList(paginaNumero, 10);
 
             /*if (produtos.Exists(prod => prod.isFavorite == true))
             {
@@ -228,6 +270,7 @@ namespace ProjetoAW.Controllers
             /*else
             {
             }*/
+
             return View(produtos);
         }
 
@@ -248,6 +291,11 @@ namespace ProjetoAW.Controllers
         {
             try
             {
+                if ((Session["usuario"] == null) || (Session["senha"] == null))
+                {
+                    TempData["warning"] = "Esteja logado para restaurar um produto!";
+                    return RedirectToAction("Login", "Home");
+                }
                 var produto = acProd.selecionaProdutoLixeira(id);
                 acProd.cadastraProduto(produto);
                 acProd.excluiProdutoLixeira(id);

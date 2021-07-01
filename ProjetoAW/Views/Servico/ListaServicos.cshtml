@@ -1,4 +1,6 @@
-﻿@model IEnumerable<ProjetoAW.Models.Servico>
+﻿@using X.PagedList.Mvc;
+
+@model X.PagedList.PagedList<ProjetoAW.Models.Servico>
 
 @{
     ViewBag.Title = "ListaServicos";
@@ -11,16 +13,16 @@
     <table class="table">
         <tr>
             <th style="text-align: center">
-                @Html.DisplayNameFor(model => model.imagemServico)
+                Imagem do Serviço
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.nomeServico)
+                Nome do Serviço
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.valorServico)
+                Valor do Serviço
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.horaServico)
+                Hora do Serviço
             </th>
             <th></th>
         </tr>
@@ -70,6 +72,11 @@
                 </div>
             </div>
         </div>
+    </div>
+    Listando registros de @Model.FirstItemOnPage a @Model.LastItemOnPage de um total de @Model.TotalItemCount
+    <br />
+    <div class="paginacao">
+        @Html.PagedListPager(Model, pagina => Url.Action("ListaServicos", new { pagina }))
     </div>
 </div>
 

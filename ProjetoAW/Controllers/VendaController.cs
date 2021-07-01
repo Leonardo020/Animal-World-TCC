@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using X.PagedList;
 
 namespace ProjetoAW.Controllers
 {
@@ -31,6 +32,7 @@ namespace ProjetoAW.Controllers
         {
             carrinho = Session["Carrinho"] != null ? (Venda)Session["Carrinho"] : new Venda();
             var produto = acProd.selecionaProdutoPorId(id);
+            var desconto = acProd.verificaDesconto();
 
             var qtdTotal = 0;
 
@@ -40,7 +42,15 @@ namespace ProjetoAW.Controllers
                 itemPedido.codProduto = id;
                 itemPedido.produto = produto.nomeProduto;
                 itemPedido.quantidadePedido = 1;
-                itemPedido.valorProduto = produto.valorUnitario;
+                if(Session["descontoProd"] != null)
+                {
+                    itemPedido.valorProduto = produto.valorUnitario - produto.valorUnitario * Convert.ToDecimal(Session["descontoProd"]);
+
+                }
+                else
+                {
+                    itemPedido.valorProduto = produto.valorUnitario;
+                }
                 itemPedido.imagemProduto = produto.imagemProduto;
 
                 List<Pedido> pedidos = carrinho.itemPedido.FindAll(p => p.codProduto == itemPedido.codProduto);
@@ -159,12 +169,18 @@ namespace ProjetoAW.Controllers
 
         public ActionResult DadosEntrega(Venda venda)
         {
+            if ((Session["usuario"] == null) || (Session["senha"] == null))
+            {
+                TempData["warning"] = "Esteja logado para acessar os dados da entrega!";
+                return RedirectToAction("Login", "Home");
+            }
             carrinho = Session["Carrinho"] != null ? (Venda)Session["Carrinho"] : new Venda();
             var sessao = Convert.ToInt32(Session["Cliente"]);
             var cliente = acCli.selecionaClientePorId(sessao);
 
             carrinho.codCli = cliente.codCli;
             carrinho.nomeCli = cliente.nomeCli;
+            carrinho.cpfCli = cliente.cpfCli;
             carrinho.cep = cliente.cepCli;
             carrinho.logradouro = cliente.logradouroCli;
             carrinho.numero = cliente.numeroCli;
@@ -179,6 +195,11 @@ namespace ProjetoAW.Controllers
 
         public ActionResult DadosPedido()
         {
+            if ((Session["usuario"] == null) || (Session["senha"] == null))
+            {
+                TempData["warning"] = "Esteja logado para acessar os dados do pedido!";
+                return RedirectToAction("Login", "Home");
+            }
             var sessao = Convert.ToInt32(Session["Cliente"]);
             var vendas = acVenda.selecionaVendaPorCliente(sessao);
             foreach (var venda in vendas)
@@ -197,6 +218,11 @@ namespace ProjetoAW.Controllers
         {
             try
             {
+                if ((Session["usuario"] == null) || (Session["senha"] == null))
+                {
+                    TempData["warning"] = "Esteja logado para encerrar uma compra!";
+                    return RedirectToAction("Login", "Home");
+                }
                 carrinho = Session["Carrinho"] != null ? (Venda)Session["Carrinho"] : new Venda();
 
                 venda.dataVenda = DateTime.Now.ToLocalTime();
@@ -225,7 +251,7 @@ namespace ProjetoAW.Controllers
 
                 acEntrega.cadastraEntrega(entrega);
 
-                return RedirectToAction("VendaRealizada");
+                return RedirectToAction("VendaRealizada", idVenda);
 
             }
 
@@ -236,8 +262,9 @@ namespace ProjetoAW.Controllers
             }
         }
 
-        public ActionResult VendaRealizada()
+        public ActionResult VendaRealizada(int idVenda)
         {
+            acVenda.selecionaEntregaPorVenda(idVenda);
             carrinho.valorTotal = 0;
             carrinho.itemPedido.Clear();
             Session["Carrinho"] = null;
@@ -245,9 +272,16 @@ namespace ProjetoAW.Controllers
             return View();
         }
 
-        public ActionResult ListaPedido()
+        public ActionResult ListaPedido(int? pagina)
         {
-            var entregaPedidos = acVenda.consultaEntrega();
+            if ((Session["usuario"] == null) || (Session["senha"] == null))
+            {
+                TempData["warning"] = "Esteja logado para acessar a lista de pedidos!";
+                return RedirectToAction("Login", "Home");
+            }
+
+            int paginaNumero = (pagina ?? 1);
+            var entregaPedidos = acVenda.consultaEntrega().OrderBy(p => p.codProduto).ToPagedList(paginaNumero, 10);
             return View(entregaPedidos);
         }
 
@@ -283,6 +317,11 @@ namespace ProjetoAW.Controllers
 
         public ActionResult ListaItensVenda(int id)
         {
+            if ((Session["usuario"] == null) || (Session["senha"] == null))
+            {
+                TempData["warning"] = "Esteja logado para acessar os itens da venda!";
+                return RedirectToAction("Login", "Home");
+            }
             var itensVenda = acVenda.selecionaItensPorVenda(id);
             return View(itensVenda);
         }

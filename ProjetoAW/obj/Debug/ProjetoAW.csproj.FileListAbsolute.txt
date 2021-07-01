@@ -399,3 +399,10 @@ C:\Users\leona\OneDrive - Etec Centro Paula Souza\Etec\3º Módulo\TCC\Sistema\P
 C:\Users\leona\OneDrive - Etec Centro Paula Souza\Etec\3º Módulo\TCC\Sistema\ProjetoAW\ProjetoAW\obj\Debug\ProjetoAW.pdb
 C:\Users\leona\OneDrive - Etec Centro Paula Souza\Etec\3º Módulo\TCC\Sistema\ProjetoAW\ProjetoAW\obj\Debug\ProjetoAW.csprojAssemblyReference.cache
 C:\Users\leona\OneDrive - Etec Centro Paula Souza\Etec\3º Módulo\TCC\Sistema\ProjetoAW\ProjetoAW\bin\Renci.SshNet.dll
+C:\Users\leona\OneDrive - Etec Centro Paula Souza\Etec\3º Módulo\TCC\Sistema\ProjetoAW\ProjetoAW\bin\JetBrains.Annotations.dll
+C:\Users\leona\OneDrive - Etec Centro Paula Souza\Etec\3º Módulo\TCC\Sistema\ProjetoAW\ProjetoAW\bin\System.Text.Encodings.Web.dll
+C:\Users\leona\OneDrive - Etec Centro Paula Souza\Etec\3º Módulo\TCC\Sistema\ProjetoAW\ProjetoAW\bin\X.PagedList.dll
+C:\Users\leona\OneDrive - Etec Centro Paula Souza\Etec\3º Módulo\TCC\Sistema\ProjetoAW\ProjetoAW\bin\X.PagedList.Mvc.dll
+C:\Users\leona\OneDrive - Etec Centro Paula Souza\Etec\3º Módulo\TCC\Sistema\ProjetoAW\ProjetoAW\bin\X.PagedList.Web.Common.dll
+C:\Users\leona\OneDrive - Etec Centro Paula Souza\Etec\3º Módulo\TCC\Sistema\ProjetoAW\ProjetoAW\bin\JetBrains.Annotations.xml
+C:\Users\leona\OneDrive - Etec Centro Paula Souza\Etec\3º Módulo\TCC\Sistema\ProjetoAW\ProjetoAW\bin\System.Text.Encodings.Web.xml

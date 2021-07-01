@@ -101,11 +101,11 @@
             if (data.length > 0) {
                 for (var i = 0; i < data.length; i++) {
                     if (data[i].isDesconto) {
-                        $('#linha').append('<tr> <td>' + data[i].desconto + `%</td> <td><a href="/Gerente/DesativarDesconto/${data[i].codDesconto}" id="aplicar"><i class="">Desativar</a> | <a href="/Gerente/ExcluirDesconto/${data[i].codDesconto}"id="excluir">Excluir</a></td></tr>`);
+                        $('#linha').append('<tr> <td>' + data[i].desconto + `%</td> <td><a class="btn btn-warning" style="color: #fff;" href="/Gerente/DesativarDesconto/${data[i].codDesconto}" id="aplicar"><i class="fas fa-dollar-sign"></i> Desativar</a> | <a class="btn btn-danger" href="/Gerente/ExcluirDesconto/${data[i].codDesconto}"id="excluir"><i class="fas fa-trash"></i> Excluir </a></td></tr>`);
 
                     }
                     else {
-                        $('#linha').append('<tr> <td>' + data[i].desconto + `%</td> <td><a href="/Gerente/AplicarDesconto/${data[i].codDesconto}" id="aplicar"><i class="">Aplicar</a> | <a href="/Gerente/ExcluirDesconto/${data[i].codDesconto}"id="excluir">Excluir</a></td></tr>`);
+                        $('#linha').append('<tr> <td>' + data[i].desconto + `%</td> <td><a class="btn btn-primary" href="/Gerente/AplicarDesconto/${data[i].codDesconto}" id="aplicar"><i class="fas fa-file-invoice-dollar"></i> Aplicar </a> | <a class="btn btn-danger" href="/Gerente/ExcluirDesconto/${data[i].codDesconto}"id="excluir"><i class="fas fa-trash"></i> Excluir </a></td></tr>`);
 
                     }
                 }
