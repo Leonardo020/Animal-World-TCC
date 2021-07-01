@@ -28,7 +28,7 @@ namespace ProjetoAW.Controllers
 
         }
 
-        public ActionResult AdicionarItemCarrinho(int id)
+        public ActionResult AdicionarItemCarrinho(int id, int qntDet = 0)
         {
             carrinho = Session["Carrinho"] != null ? (Venda)Session["Carrinho"] : new Venda();
             var produto = acProd.selecionaProdutoPorId(id);
@@ -36,13 +36,28 @@ namespace ProjetoAW.Controllers
 
             var qtdTotal = 0;
 
+            if(carrinho.qtdItensVenda > produto.quantidadeEstoque || carrinho.qtdItensVenda < produto.quantidadeEstoque)
+            {
+                TempData["warning"] = "Quantidade em estoque incompatível com a alterada";
+                return RedirectToAction("MeuCarrinho");
+            }
+
             if (produto != null)
             {
                 itemPedido.codPedido = Guid.NewGuid();
                 itemPedido.codProduto = id;
                 itemPedido.produto = produto.nomeProduto;
-                itemPedido.quantidadePedido = 1;
-                if(Session["descontoProd"] != null)
+                if (qntDet != 0)
+                {
+                    itemPedido.quantidadePedido = qntDet;
+                }
+
+                else
+                {
+                    itemPedido.quantidadePedido = 1;
+                }
+
+                if (Session["descontoProd"] != null)
                 {
                     itemPedido.valorProduto = produto.valorUnitario - produto.valorUnitario * Convert.ToDecimal(Session["descontoProd"]);
 
@@ -58,7 +73,6 @@ namespace ProjetoAW.Controllers
                 if (pedidos.Count != 0)
                 {
                     var pedido = carrinho.itemPedido.FirstOrDefault(p => p.codProduto == produto.codProduto);
-
                     pedido.quantidadePedido += 1;
                     itemPedido.valorProduto *= itemPedido.quantidadePedido;
                     carrinho.valorTotal += itemPedido.valorProduto;
@@ -210,6 +224,7 @@ namespace ProjetoAW.Controllers
                     venda.itemPedido.Add(itemVenda);
                 }
             }
+
             carregaPagamentos();
             return View(vendas);
         }

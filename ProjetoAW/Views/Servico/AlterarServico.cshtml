@@ -38,14 +38,14 @@
                     <p>
                         @Html.LabelFor(model => model.nomeServico, htmlAttributes: new { @class = "control-label", @style = "margin-bottom: 5px" })
 
-                        @Html.EditorFor(model => model.nomeServico, new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom: 5px" } })
+                        @Html.EditorFor(model => model.nomeServico, new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom: 5px", @required = "true" } })
                         @Html.ValidationMessageFor(model => model.nomeServico, "", new { @class = "text-danger" })
                     </p>
                   
                     <p>
                         @Html.LabelFor(model => model.valorServico, htmlAttributes: new { @class = "control-label", @style = "margin-bottom: 5px" })
 
-                        @Html.EditorFor(model => model.valorServico, new { htmlAttributes = new { @class = "form-control currency", @style = "margin-bottom: 5px"} })
+                        @Html.EditorFor(model => model.valorServico, new { htmlAttributes = new { @class = "form-control currency", @style = "margin-bottom: 5px", @required = "true" } })
                         @Html.ValidationMessageFor(model => model.valorServico, "", new { @class = "text-danger" })
                     </p>
                 </div>
@@ -54,13 +54,13 @@
                     <p>
                         @Html.LabelFor(model => model.horaServico, htmlAttributes: new { @class = "control-label", @style = "margin-bottom: 5px" })
 
-                        @Html.EditorFor(model => model.horaServico, new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom: 5px" } })
+                        @Html.EditorFor(model => model.horaServico, new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom: 5px", @required = "true" } })
                         @Html.ValidationMessageFor(model => model.horaServico, "", new { @class = "text-danger" })
                     </p>
                     <p>
                         @Html.LabelFor(model => model.descServico, htmlAttributes: new { @class = "control-label", @style = "margin-bottom: 5px" })
 
-                        @Html.TextArea("descServico", (string)ViewBag.desc, new { @class = "form-control text-area", placeholder = "Digite a descrição do serviço", rows = "4", style = "resize:none; margin-bottom: 5px;", name = "descServico" })
+                        @Html.TextArea("descServico", (string)ViewBag.desc, new { @class = "form-control text-area", placeholder = "Digite a descrição do serviço", rows = "4", style = "resize:none; margin-bottom: 5px;", name = "descServico", @required = "true" })
                         @Html.ValidationMessageFor(model => model.descServico, "", new { @class = "text-danger" })
                     </p>
                 </div>

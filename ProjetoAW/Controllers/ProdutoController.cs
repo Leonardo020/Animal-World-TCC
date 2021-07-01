@@ -118,10 +118,11 @@ namespace ProjetoAW.Controllers
             return View(produtoFiltrado);
         }
 
-        public ActionResult DetalheProd(int id)
+        public ActionResult DetalheProd(/*int id*/)
         {
-            var produto = acProd.selecionaProdutoPorId(id);
-            return View(produto);
+            /*var produto = acProd.selecionaProdutoPorId(id);
+            return View(produto);*/
+            return View();
         }
 
         public ActionResult CadastroProd()

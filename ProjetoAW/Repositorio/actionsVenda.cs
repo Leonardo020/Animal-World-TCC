@@ -154,6 +154,8 @@ namespace ProjetoAW.Repositorio
                     dataVenda = Convert.ToDateTime(dr["data_venda"]),
                     tipoPagamento = dr["tipo_pagamento"].ToString(),
                     valorTotal = Convert.ToDecimal(dr["valor_total"]),
+                    codEntrega = Convert.ToInt32(dr["cod_entrega"]),
+                    dataEntrega = Convert.ToDateTime(dr["data_entrega"]),
                 });
             }
 
@@ -216,7 +218,7 @@ namespace ProjetoAW.Repositorio
 
             cn.Desconectar();
 
-            return pedidos;
+            return venda;
         }
 
         public void concluiVenda(int id)

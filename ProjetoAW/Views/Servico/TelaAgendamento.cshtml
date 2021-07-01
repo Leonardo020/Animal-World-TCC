@@ -101,7 +101,7 @@
                 <div class="linhaTA1">
                     <p>
                         @Html.LabelFor(model => model.codAnimal, htmlAttributes: new { @class = "control-label", @style = "margin-bottom: 5px" })
-                        @Html.DropDownList("animais", null, "Selecione o animal", new { @class = "form-select", @style = "margin-bottom: 5px", @id = "pet" })
+                        @Html.DropDownList("animais", null, "Selecione o animal", new { @class = "form-select", @style = "margin-bottom: 5px", @id = "pet", @required = "true" })
                     </p>
                 </div>
             </div>
@@ -117,7 +117,6 @@
             <div>
                 @Html.EditorFor(model => model.codServico, new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom: 5px", @type = "hidden" } })
                 <button class="btn btn-success" id="btnAgendar"><i class="fas fa-calendar-check"></i> Agendar</button>
-                @ViewBag.Message
             </div>
         </div>
     </div>

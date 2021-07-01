@@ -83,7 +83,7 @@
         Listando registros de @Model.FirstItemOnPage a @Model.LastItemOnPage de um total de @Model.TotalItemCount
         <br />
         <div class="paginacao">
-            @Html.PagedListPager(Model, pagina => Url.Action("ListaFunc", new { pagina }))
+            @Html.PagedListPager(Model, pagina => Url.Action("Vitrine", new { pagina }))
         </div>
     </div>
 </div>
