@@ -9,70 +9,71 @@
 @using (Html.BeginForm("CadastroPet", "Animal", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    <div class="containerCadastro">
-        <div class="cardCadastro">
-            <div class="dadosCadastro">
-                <div class="linha">
-                    <p>@Html.LabelFor(model => model.nomeAnimal, htmlAttributes: new { @class = "control-label ", @style = "margin-bottom: 5px" }): @Html.EditorFor(model => model.nomeAnimal, new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom: 5px", @placeholder="Digite o nome do animal" } })</p>
-                    <p> @Html.LabelFor(model => model.idade, htmlAttributes: new { @class = "control-label", @style = "margin-bottom: 5px" }):@Html.EditorFor(model => model.idade, new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom: 5px", @placeholder = "Digite a idade do animal" } })</p>
-                </div>
-
-                <div class="linha">
-                    <p>
-                        @Html.LabelFor(model => model.codEspecie, htmlAttributes: new { @class = "control-label ", @style = "margin-bottom: 5px" }): @Html.DropDownList("especies", null, "Selecione a espécie do animal", new { @class = "form-select", @style = "margin-bottom: 5px" })
-                    </p>
-                    <p>
-                        @Html.LabelFor(model => model.codRaca, htmlAttributes: new { @class = "control-label ", @style = "margin-bottom: 5px" }): @Html.DropDownList("racas", null, "Selecione a raça do animal", new { @class = "form-select", @disabled = "true", @style = "margin-bottom: 5px" })
-                    </p>
-                </div>
-
-                <div class="linha">
-                    <p>
-                        @Html.LabelFor(model => model.codPorte, htmlAttributes: new { @class = "control-label", @style = "margin-bottom: 5px" }): @Html.DropDownList("portes", null, "Selecione o porte do animal", new { @class = "form-select", @style = "margin-bottom: 5px" })
-                    </p>
-                    <p>
-                        @Html.LabelFor(model => model.sexo, htmlAttributes: new { @class = "control-label", @style = "margin-bottom: 5px" }):
-                        <br />
-                        @Html.RadioButtonFor(model => model.sexo, "M", new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom: 5px" } }) Macho
-                        @Html.RadioButtonFor(model => model.sexo, "F", new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom: 5px" } }) Fêmea
-                    </p>
-                </div>
-
-                <div class="linha">
-                    <p>@Html.LabelFor(model => model.descricaoAnimal, htmlAttributes: new { @class = "control-label ", @style = "margin-bottom: 5px" }): @Html.TextArea("descAnimal", (string)ViewBag.desc, new { @class = "form-control", placeholder = "Digite a descrição do animal", rows = "4", style = "resize:none; margin-bottom: 5px", name = "descAnimal" })</p>
-                    <p>
-                        @Html.LabelFor(model => model.temperamento, htmlAttributes: new { @class = "control-label ", @style = "margin-bottom: 5px" }):
-                        <br />
-                        @Html.RadioButtonFor(model => model.temperamento, "Agressivo", new { htmlAttributes = new { @class = "form-control" }, @style = "margin-bottom: 5px" }) Agressivo
-                        @Html.RadioButtonFor(model => model.temperamento, "Tímido", new { htmlAttributes = new { @class = "form-control" }, @style = "margin-bottom: 5px" }) Tímido
-                        @Html.RadioButtonFor(model => model.temperamento, "Passivo-agressivo", new { htmlAttributes = new { @class = "form-control" }, @style = "margin-bottom: 5px" }) Passivo-agressivo
-                        <br />
-                        @Html.RadioButtonFor(model => model.temperamento, "Sociável", new { htmlAttributes = new { @class = "form -control" }, @style = "margin-bottom: 5px" }) Sociável
-                    </p>
-                </div>
-
-                <div class="linha btnCadastrar">
-                    <button class="btn btn-success btnCadastrar"><i class="fas fa-plus-square"></i> Cadastrar Animal</button>
-                </div>
-                 <p>@ViewBag.Message</p>
+<div class="containerCadastro">
+    <a class="btn btn-success" href="/Animal/ListaPet"><i class="fas fa-arrow-left"></i> Voltar</a>
+    <div class="cardCadastro">
+        <div class="dadosCadastro">
+            <div class="linha">
+                <p>@Html.LabelFor(model => model.nomeAnimal, htmlAttributes: new { @class = "control-label ", @style = "margin-bottom: 5px" }): @Html.EditorFor(model => model.nomeAnimal, new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom: 5px", @placeholder = "Digite o nome do animal" } })</p>
+                <p> @Html.LabelFor(model => model.idade, htmlAttributes: new { @class = "control-label", @style = "margin-bottom: 5px" }):@Html.EditorFor(model => model.idade, new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom: 5px", @placeholder = "Digite a idade do animal" } })</p>
             </div>
-            <div class="avatarCadastro">
-                <div class="container">
-                    <div class="wrapper">
-                        <div class="image">
-                            <img id="preview-img" src="" alt="">
-                        </div>
-                        <div id="cancel-btn">
-                            <i class="fas fa-times"></i>
-                        </div>
+
+            <div class="linha">
+                <p>
+                    @Html.LabelFor(model => model.codEspecie, htmlAttributes: new { @class = "control-label ", @style = "margin-bottom: 5px" }): @Html.DropDownList("especies", null, "Selecione a espécie do animal", new { @class = "form-select", @style = "margin-bottom: 5px" })
+                </p>
+                <p>
+                    @Html.LabelFor(model => model.codRaca, htmlAttributes: new { @class = "control-label ", @style = "margin-bottom: 5px" }): @Html.DropDownList("racas", null, "Selecione a raça do animal", new { @class = "form-select", @disabled = "true", @style = "margin-bottom: 5px" })
+                </p>
+            </div>
+
+            <div class="linha">
+                <p>
+                    @Html.LabelFor(model => model.codPorte, htmlAttributes: new { @class = "control-label", @style = "margin-bottom: 5px" }): @Html.DropDownList("portes", null, "Selecione o porte do animal", new { @class = "form-select", @style = "margin-bottom: 5px" })
+                </p>
+                <p>
+                    @Html.LabelFor(model => model.sexo, htmlAttributes: new { @class = "control-label", @style = "margin-bottom: 5px" }):
+                    <br />
+                    @Html.RadioButtonFor(model => model.sexo, "M", new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom: 5px" } }) Macho
+                    @Html.RadioButtonFor(model => model.sexo, "F", new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom: 5px" } }) Fêmea
+                </p>
+            </div>
+
+            <div class="linha">
+                <p>@Html.LabelFor(model => model.descricaoAnimal, htmlAttributes: new { @class = "control-label ", @style = "margin-bottom: 5px" }): @Html.TextArea("descAnimal", (string)ViewBag.desc, new { @class = "form-control", placeholder = "Digite a descrição do animal", rows = "4", style = "resize:none; margin-bottom: 5px", name = "descAnimal" })</p>
+                <p>
+                    @Html.LabelFor(model => model.temperamento, htmlAttributes: new { @class = "control-label ", @style = "margin-bottom: 5px" }):
+                    <br />
+                    @Html.RadioButtonFor(model => model.temperamento, "Agressivo", new { htmlAttributes = new { @class = "form-control" }, @style = "margin-bottom: 5px" }) Agressivo
+                    @Html.RadioButtonFor(model => model.temperamento, "Tímido", new { htmlAttributes = new { @class = "form-control" }, @style = "margin-bottom: 5px" }) Tímido
+                    @Html.RadioButtonFor(model => model.temperamento, "Passivo-agressivo", new { htmlAttributes = new { @class = "form-control" }, @style = "margin-bottom: 5px" }) Passivo-agressivo
+                    <br />
+                    @Html.RadioButtonFor(model => model.temperamento, "Sociável", new { htmlAttributes = new { @class = "form -control" }, @style = "margin-bottom: 5px" }) Sociável
+                </p>
+            </div>
+
+            <div class="linha btnCadastrar">
+                <button class="btn btn-success btnCadastrar"><i class="fas fa-plus-square"></i> Cadastrar Animal</button>
+            </div>
+            <p>@ViewBag.Message</p>
+        </div>
+        <div class="avatarCadastro">
+            <div class="container">
+                <div class="wrapper">
+                    <div class="image">
+                        <img id="preview-img" src="" alt="">
                     </div>
-                    <label id="labelFile" for="default-button"><i class="fas fa-paw"></i> Escolha a imagem do pet</label>
-                    <input type="file" name="file" id="default-button">
+                    <div id="cancel-btn">
+                        <i class="fas fa-times"></i>
+                    </div>
                 </div>
+                <label id="labelFile" for="default-button"><i class="fas fa-paw"></i> Escolha a imagem do pet</label>
+                <input type="file" name="file" id="default-button">
             </div>
         </div>
-
     </div>
+
+</div>
 }
 
 <script type="text/javascript">

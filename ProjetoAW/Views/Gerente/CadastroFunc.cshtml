@@ -89,46 +89,47 @@
 @using (Html.BeginForm("CadastroFunc", "Gerente", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    <div class="contCadastroFunc">
-        <div class="cadastroFunc">
-            <div class="dadosCF">
-                <div id="linha1Func">
-                    <p>
-                        @Html.LabelFor(model => model.nomeFunc, htmlAttributes: new { @class = "control-label", @required = "true" })
+<div class="contCadastroFunc">
+    <a class="btn btn-success" href="/Gerente/ListaFunc"><i class="fas fa-arrow-left"></i> Voltar</a>
+    <div class="cadastroFunc">
+        <div class="dadosCF">
+            <div id="linha1Func">
+                <p>
+                    @Html.LabelFor(model => model.nomeFunc, htmlAttributes: new { @class = "control-label", @required = "true" })
 
-                        @Html.EditorFor(model => model.nomeFunc, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.codFunc, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.nomeFunc, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.codFunc, "", new { @class = "text-danger" })
 
-                    </p>
-                    <p>
-                        @Html.LabelFor(model => model.emailFunc, htmlAttributes: new { @class = "control-label" })
+                </p>
+                <p>
+                    @Html.LabelFor(model => model.emailFunc, htmlAttributes: new { @class = "control-label" })
 
-                        @Html.EditorFor(model => model.emailFunc, new { htmlAttributes = new { @class = "form-control", @type="email", @required="true" } })
-                        @Html.ValidationMessageFor(model => model.emailFunc, "", new { @class = "text-danger" })
-                    </p>
-                </div>
-
-
-                <div id="linha1Func">
-                    <p>
-                        @Html.LabelFor(model => model.usuarioFunc, htmlAttributes: new { @class = "control-label", @required = "true" })
-                        @Html.EditorFor(model => model.usuarioFunc, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.usuarioFunc, "", new { @class = "text-danger" })
-                    </p>
-
-                    <p>
-                        @Html.LabelFor(model => model.senhaFunc, htmlAttributes: new { @class = "control-label", @required = "true" })
-
-                        @Html.EditorFor(model => model.senhaFunc, new { htmlAttributes = new { @class = "form-control", @type="password"} })
-                        @Html.ValidationMessageFor(model => model.senhaFunc, "", new { @class = "text-danger" })
-
-                    </p>
-                </div>
-                <div class="botaoCF">
-                    <input type="submit" class="btn btn-success" value="Confirmar Cadastro" id="btnCF" />
-                </div>
-                <p>@ViewBag.Message</p>
+                    @Html.EditorFor(model => model.emailFunc, new { htmlAttributes = new { @class = "form-control", @type = "email", @required = "true" } })
+                    @Html.ValidationMessageFor(model => model.emailFunc, "", new { @class = "text-danger" })
+                </p>
             </div>
+
+
+            <div id="linha1Func">
+                <p>
+                    @Html.LabelFor(model => model.usuarioFunc, htmlAttributes: new { @class = "control-label", @required = "true" })
+                    @Html.EditorFor(model => model.usuarioFunc, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.usuarioFunc, "", new { @class = "text-danger" })
+                </p>
+
+                <p>
+                    @Html.LabelFor(model => model.senhaFunc, htmlAttributes: new { @class = "control-label", @required = "true" })
+
+                    @Html.EditorFor(model => model.senhaFunc, new { htmlAttributes = new { @class = "form-control", @type = "password" } })
+                    @Html.ValidationMessageFor(model => model.senhaFunc, "", new { @class = "text-danger" })
+
+                </p>
+            </div>
+            <div class="botaoCF">
+                <input type="submit" class="btn btn-success" value="Confirmar Cadastro" id="btnCF" />
+            </div>
+            <p>@ViewBag.Message</p>
         </div>
     </div>
+</div>
 }
