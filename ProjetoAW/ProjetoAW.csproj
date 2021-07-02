@@ -202,7 +202,6 @@
     <Compile Include="Repositorio\actionsProduto.cs" />
     <Compile Include="Repositorio\actionsServico.cs" />
     <Compile Include="Repositorio\actionsVenda.cs" />
-    <Compile Include="Repositorio\baseCRUD.cs" />
     <Compile Include="Repositorio\Conexao.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -392,7 +391,8 @@
     <Content Include="Views\Venda\ListaItensVenda.cshtml" />
     <Content Include="Views\Gerente\ListaPets.cshtml" />
     <Content Include="Views\Gerente\CadastroFornecedor.cshtml" />
-    <Content Include="Views\Animal\ListaPets.cshtml" />
+    <Content Include="Views\Produto\FiltraPorEspecie.cshtml" />
+    <Content Include="Views\Produto\FiltraPorFornecedor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

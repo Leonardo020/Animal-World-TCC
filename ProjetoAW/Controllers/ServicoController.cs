@@ -2,8 +2,10 @@
 using ProjetoAW.Repositorio;
 using System;
 using System.IO;
+using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using X.PagedList;
 
 namespace ProjetoAW.Controllers
 {
@@ -198,14 +200,15 @@ namespace ProjetoAW.Controllers
             return RedirectToAction("Login", "Home");
         }
 
-        public ActionResult ListaServicos()
+        public ActionResult ListaServicos(int? pagina)
         {
             if ((Session["usuario"] == null) || (Session["senha"] == null))
             {
                 TempData["warning"] = "Esteja logado para acessar a lista de serviços!";
                 return RedirectToAction("Login", "Home");
             }
-            var servicos = acServico.consultaServico();
+            int paginaNumero = (pagina ?? 1);
+            var servicos = acServico.consultaServico().OrderBy(p => p.codServico).ToPagedList(paginaNumero, 10);
             return View(servicos);
         }
 

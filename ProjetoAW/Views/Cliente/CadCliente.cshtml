@@ -23,8 +23,8 @@
         }
 
         .contCadastroCli {
-            height: 350px;
-            padding-top: 3.4rem;
+            height: auto;
+            /* padding-top: 3.4rem; */
             width: 100%;
             display: flex;
             flex-direction: column;
@@ -80,17 +80,20 @@
             background-color: #43b581;
             color: white;
         }
+
+        .btn-start{
+            margin-top: 25px;
+        }
     </style>
 </head>
 
-<div>
-    <h2 class="--main-title">Cadastro de Cliente</h2>
+<div class="container">
+    <a class="btn btn-success btn-start" href="/Home/Home"><i class="fas fa-arrow-left"></i> Voltar</a><h2 class="--main-title">Cadastro de Cliente</h2>
 </div>
 
 @using (Html.BeginForm("CadCliente", "Cliente", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
 <div class="contCadastroCli">
-    <a class="btn btn-success" href="/Home/Home"><i class="fas fa-arrow-left"></i> Voltar</a>
     <div class="cadastroCli">
         <form method="get" action="." class="formCC">
             <div class="dadosCC">

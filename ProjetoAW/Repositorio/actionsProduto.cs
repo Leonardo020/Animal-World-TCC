@@ -47,6 +47,7 @@ namespace ProjetoAW.Repositorio
                     nomeFornecedor = dr["nome_fornecedor"].ToString(),
                     nomeCategoria = dr["nome_categoria"].ToString(),
                     nomeEspecie = dr["nome_especie"].ToString(),
+                    isComercializavel = Convert.ToBoolean(dr["isComercializavel"]),
                     /*isFavorite = Convert.ToBoolean(dr["isFavorite"].ToString()),*/
                     /*codFornecedor = Convert.ToInt32(dr["cod_fornecedor"]),
                     codCategoria = Convert.ToInt32(dr["cod_categoria"]),
@@ -71,7 +72,7 @@ namespace ProjetoAW.Repositorio
         {
             List<Produto> produtos = new List<Produto>();
 
-            MySqlCommand cmd = new MySqlCommand($@"select pr.cod_produto, nome_produto, desc_produto, quantidade_estoque, valor_unitario, imagem_produto, nome_fornecedor, nome_categoria, nome_especie from produto pr
+            MySqlCommand cmd = new MySqlCommand($@"select pr.cod_produto, nome_produto, desc_produto, quantidade_estoque, valor_unitario, imagem_produto, nome_fornecedor, nome_categoria, nome_especie, isComercializavel from produto pr
                                                     inner join fornecedor frn on pr.cod_fornecedor = frn.cod_fornecedor
                                                     inner join categoria ca on pr.cod_categoria = ca.cod_categoria
                                                     inner join especie es on pr.cod_especie = es.cod_especie
@@ -93,6 +94,7 @@ namespace ProjetoAW.Repositorio
                     nomeFornecedor = dr["nome_fornecedor"].ToString(),
                     nomeCategoria = dr["nome_categoria"].ToString(),
                     nomeEspecie = dr["nome_especie"].ToString(),
+                    isComercializavel = Convert.ToBoolean(dr["isComercializavel"])
                     /*isFavorite = Convert.ToBoolean(dr["isFavorite"].ToString()),*/
                     /*codFornecedor = Convert.ToInt32(dr["cod_fornecedor"]),
                     codCategoria = Convert.ToInt32(dr["cod_categoria"]),
@@ -131,6 +133,7 @@ namespace ProjetoAW.Repositorio
                 produto.nomeFornecedor = dr["nome_fornecedor"].ToString();
                 produto.nomeCategoria = dr["nome_categoria"].ToString();
                 produto.nomeEspecie = dr["nome_especie"].ToString();
+                produto.isComercializavel = Convert.ToBoolean(dr["isComercializavel"]);
             }
 
             cn.Desconectar();
@@ -303,7 +306,6 @@ namespace ProjetoAW.Repositorio
                     desconto.codDesconto = Convert.ToInt32(dr["cod_desconto"]);
                     desconto.desconto = Convert.ToDecimal(dr["desconto"]);
                     desconto.isDesconto = Convert.ToBoolean(dr["isDesconto"]);
-
                 }
             }
 
@@ -370,6 +372,65 @@ namespace ProjetoAW.Repositorio
                     nomeFornecedor = dr["nome_fornecedor"].ToString(),
                     nomeCategoria = dr["nome_categoria"].ToString(),
                     nomeEspecie = dr["nome_especie"].ToString(),
+                    isComercializavel = Convert.ToBoolean(dr["isComercializavel"])
+                });
+            }
+
+            cn.Desconectar();
+
+            return produtos;
+        }
+
+        public List<Produto> consultaProdutoPorEspecie(int id)
+        {
+            List<Produto> produtos = new List<Produto>();
+            MySqlCommand cmd = new MySqlCommand("call consultaProdutoPorEspecie(@id);", cn.Conectar());
+            cmd.Parameters.AddWithValue("@id", id);
+            MySqlDataReader dr = cmd.ExecuteReader();
+
+            while (dr.Read())
+            {
+                produtos.Add(new Produto
+                {
+                    codProduto = Convert.ToInt32(dr["cod_produto"]),
+                    nomeProduto = dr["nome_produto"].ToString(),
+                    descProduto = dr["desc_produto"].ToString(),
+                    quantidadeEstoque = Convert.ToInt32(dr["quantidade_estoque"]),
+                    valorUnitario = Convert.ToDecimal(dr["valor_unitario"]),
+                    imagemProduto = dr["imagem_produto"].ToString(),
+                    nomeFornecedor = dr["nome_fornecedor"].ToString(),
+                    nomeCategoria = dr["nome_categoria"].ToString(),
+                    nomeEspecie = dr["nome_especie"].ToString(),
+                    isComercializavel = Convert.ToBoolean(dr["isComercializavel"])
+                });
+            }
+
+            cn.Desconectar();
+
+            return produtos;
+        }
+
+        public List<Produto> consultaProdutoPorFornecedor(int id)
+        {
+            List<Produto> produtos = new List<Produto>();
+            MySqlCommand cmd = new MySqlCommand("call consultaProdutoPorFornecedor(@id);", cn.Conectar());
+            cmd.Parameters.AddWithValue("@id", id);
+            MySqlDataReader dr = cmd.ExecuteReader();
+
+            while (dr.Read())
+            {
+                produtos.Add(new Produto
+                {
+                    codProduto = Convert.ToInt32(dr["cod_produto"]),
+                    nomeProduto = dr["nome_produto"].ToString(),
+                    descProduto = dr["desc_produto"].ToString(),
+                    quantidadeEstoque = Convert.ToInt32(dr["quantidade_estoque"]),
+                    valorUnitario = Convert.ToDecimal(dr["valor_unitario"]),
+                    imagemProduto = dr["imagem_produto"].ToString(),
+                    nomeFornecedor = dr["nome_fornecedor"].ToString(),
+                    nomeCategoria = dr["nome_categoria"].ToString(),
+                    nomeEspecie = dr["nome_especie"].ToString(),
+                    isComercializavel = Convert.ToBoolean(dr["isComercializavel"])
                 });
             }
 
@@ -398,6 +459,7 @@ namespace ProjetoAW.Repositorio
                     nomeFornecedor = dr["nome_fornecedor"].ToString(),
                     nomeCategoria = dr["nome_categoria"].ToString(),
                     nomeEspecie = dr["nome_especie"].ToString(),
+                    isComercializavel = Convert.ToBoolean(dr["isComercializavel"])
                 });
             }
 
@@ -406,7 +468,7 @@ namespace ProjetoAW.Repositorio
             return produtos;
         }
 
-        public void verificaFavorito(int id, int sessao, bool isFavorite)
+        /*public void verificaFavorito(int id, int sessao, bool isFavorite)
         {
 
             var produto = new Produto();
@@ -456,7 +518,7 @@ namespace ProjetoAW.Repositorio
 
             cmd.ExecuteNonQuery();
             cn.Desconectar();
-        }
+        }*/
 
         public List<Produto> consultaLixeira()
         {
@@ -501,7 +563,7 @@ namespace ProjetoAW.Repositorio
                 produto.codFornecedor = Convert.ToInt32(dr["cod_fornecedor"]);
                 produto.codCategoria = Convert.ToInt32(dr["cod_categoria"]);
                 produto.codEspecie = Convert.ToInt32(dr["cod_especie"]);
-                produto.isFavorite = Convert.ToBoolean(dr["isFavorito"].ToString());
+                produto.isComercializavel = Convert.ToBoolean(dr["isComercializavel"]);
             }
 
             cn.Desconectar();

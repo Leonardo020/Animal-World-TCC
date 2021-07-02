@@ -88,7 +88,7 @@ namespace ProjetoAW.Controllers
                 return View(produtos);
             }
 
-            else
+            else 
             {
                 var produtos = acProd.consultaProduto().OrderBy(p => p.codProduto).ToPagedList(paginaNumero, 10);
                 if (Session["descontoProd"] != null)
@@ -103,11 +103,28 @@ namespace ProjetoAW.Controllers
 
         }
 
-        [HttpPost]
-        public ActionResult Vitrine(FormCollection frm)
+        public ActionResult FiltraPorEspecie(int? pagina, int id)
         {
+            carregaGroups();
+            int paginaNumero = (pagina ?? 1);
+            var produtos = acProd.consultaProdutoPorEspecie(id).OrderBy(p => p.codProduto).ToPagedList(paginaNumero, 10);
+            return View(produtos);
+        }
+
+        public ActionResult FiltraPorFornecedor(int? pagina, int id)
+        {
+            carregaGroups();
+            int paginaNumero = (pagina ?? 1);
+            var produtos = acProd.consultaProdutoPorFornecedor(id).OrderBy(p => p.codProduto).ToPagedList(paginaNumero, 10);
+            return View(produtos);
+        }
+
+        [HttpPost]
+        public ActionResult Vitrine(int? pagina, FormCollection frm)
+        {
+            int paginaNumero = (pagina ?? 1);
             var filtro = frm["filtro"];
-            var produtos = acProd.consultaProduto(filtro);
+            var produtos = acProd.consultaProduto(filtro).ToPagedList(paginaNumero, 10);
             carregaGroups();
             return View(produtos);
         }
@@ -118,11 +135,10 @@ namespace ProjetoAW.Controllers
             return View(produtoFiltrado);
         }
 
-        public ActionResult DetalheProd(/*int id*/)
+        public ActionResult DetalheProd(int id)
         {
             var produto = acProd.selecionaProdutoPorId(id);
             return View(produto);
-            return View();
         }
 
         public ActionResult CadastroProd()
@@ -208,7 +224,7 @@ namespace ProjetoAW.Controllers
             return View(produtoAtualizado);
         }
 
-        [HttpPost]
+        /*[HttpPost]
         public JsonResult AtualizaFavorito(int id, bool isFavorite)
         {
             try
@@ -224,7 +240,7 @@ namespace ProjetoAW.Controllers
             return new JsonResult { Data = produto, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
 
-        /*public JsonResult DeletaFavorito()
+        public JsonResult DeletaFavorito()
         {
             try
             {
@@ -276,9 +292,10 @@ namespace ProjetoAW.Controllers
         }
 
         [HttpPost]
-        public ActionResult ListaProd(string search)
+        public ActionResult ListaProd(string search, int? pagina)
         {
-            var produtos = acProd.consultaProdutoPorNome(search);
+            int paginaNumero = (pagina ?? 1);
+            var produtos = acProd.consultaProdutoPorNome(search).OrderBy(a => a.codProduto).ToPagedList(paginaNumero, 10); 
             return View(produtos);
         }
 
