@@ -31,13 +31,17 @@
             <th>
                 Senha
             </th>
-            <th>
+            <th class="linha">
                 @using (Html.BeginForm("ListaFunc", "Gerente", FormMethod.Get))
                 {
-                    <button type="submit" class="btn btn-default --border btnPesquisa">
+                    <button type="submit" class="btn btn-default --border btnPesquisa spacing-button">
                         <i class="fas fa-sync-alt"></i>
                     </button>
                 }
+
+                <a class="btn btn-success" href="/Gerente/CadastroFunc">
+                    <i class="fas fa-plus"></i>
+                </a>
             </th>
         </tr>
 

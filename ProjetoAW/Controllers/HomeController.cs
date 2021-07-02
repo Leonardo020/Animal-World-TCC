@@ -14,9 +14,15 @@ namespace ProjetoAW.Controllers
         {
             var produtos = acProd.consultaProdutoPorRelevancia();
             var desconto = acProd.verificaDesconto();
-            if(desconto != null)
+            if (desconto != null)
             {
                 Session["descontoProd"] = desconto.desconto;
+
+                foreach (var produto in produtos)
+                {
+                    produto.descontoProd = produto.valorUnitario - produto.valorUnitario * desconto.desconto;
+                }
+
             }
 
             else

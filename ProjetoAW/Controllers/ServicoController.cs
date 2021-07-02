@@ -137,9 +137,9 @@ namespace ProjetoAW.Controllers
                 acServico.atualizaServico(servico);
                 TempData["success"] = "Alteração do serviço realizada com sucesso";
             }
-            catch
+            catch (Exception e)
             {
-                TempData["error"] = "Ocorreu um erro ao tentar alterar o serviço";
+                TempData["error"] = "Ocorreu um erro ao tentar alterar o serviço" + e;
             }
             var servicoAtualizado = acServico.selecionaServicoPorId(servico.codServico);
             ViewBag.desc = servicoAtualizado.descServico;

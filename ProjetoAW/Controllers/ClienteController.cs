@@ -87,9 +87,10 @@ namespace ProjetoAW.Controllers
         }
 
         [HttpPost]
-        public ActionResult ListaClientes(string search)
+        public ActionResult ListaClientes(int? pagina, string search)
         {
-            var clientes = acCli.consultaClientePorNome(search);
+            int paginaNumero = (pagina ?? 1);
+            var clientes = acCli.consultaClientePorNome(search).OrderBy(a => a.codCli).ToPagedList(paginaNumero, 10);
             return View(clientes);
         }
 

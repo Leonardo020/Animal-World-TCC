@@ -2,85 +2,87 @@
 
 @{ ViewBag.Title = "CadastroProd"; }
 
-<h2 class="--main-title">Cadastro de Produto</h2>
+<div class="container">
+    <a class="btn btn-success btn-start" href="/Produto/ListaProd"><i class="fas fa-arrow-left"></i> Voltar</a>
+    <h2 class="--main-title">Cadastro de Produto</h2>
+</div>
 
 @using (Html.BeginForm("CadastroProd", "Produto", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-@Html.AntiForgeryToken()
-<div class="containerCadastro">
-    <a class="btn btn-success" href="/Prouto/ListaProd"><i class="fas fa-arrow-left"></i></a>
-    <div class="cardCadastro">
-        <div class="dadosCadastro">
-            <div class="linha">
-                <p>
-                    @Html.LabelFor(model => model.nomeProduto, htmlAttributes: new { @class = "control-label", @style = "margin-bottom: 5px" })
-                    @Html.EditorFor(model => model.nomeProduto, new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom: 5px", @placeholder = "Digite o nome do produto", @required = "true" } })
-                    @Html.ValidationMessageFor(model => model.nomeProduto, "", new { @class = "text-danger" })
-                </p>
-                <p>
-                    @Html.LabelFor(model => model.quantidadeEstoque, htmlAttributes: new { @class = "control-label", @style = "margin-bottom: 5px" })
-                    @Html.EditorFor(model => model.quantidadeEstoque, new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom: 5px", @placeholder = "Digite a quantidade do produto", @required = "true" } })
-                    @Html.ValidationMessageFor(model => model.quantidadeEstoque, "", new { @class = "text-danger" })
-                </p>
-            </div>
-            <div class="linha">
-                <p>
-                    @Html.LabelFor(model => model.codFornecedor, htmlAttributes: new { @class = "control-label", @style = "margin-bottom: 5px" })
-                    @Html.DropDownList("fornecedores", null, "Selecione o Fornecedor", new { @class = "form-select", @style = "margin-bottom: 5px", @required = "true" })
-                </p>
-                <p>
-                    @Html.LabelFor(model => model.codEspecie, htmlAttributes: new { @class = "control-label", @style = "margin-bottom: 5px" })
-                    @Html.DropDownList("especies", null, "Selecione a espécie do animal", new { @class = "form-select", @style = "margin-bottom: 5px", @required = "true" })
-                </p>
-            </div>
-            <div class="linha">
-                <p>
-                    @Html.LabelFor(model => model.valorUnitario, htmlAttributes: new { @class = "control-label", @style = "margin-bottom: 5px" })
-
-                    @Html.EditorFor(model => model.valorUnitario, new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom: 5px", @placeholder = "Digite o valor do produto (R$)", @id = "valor", @onkeyup = "formatarMoeda()", @required = "true" } })
-                    @Html.ValidationMessageFor(model => model.valorUnitario, "", new { @class = "text-danger" })
-                </p>
-                <p>
-                    @Html.LabelFor(model => model.codCategoria, htmlAttributes: new { @class = "control-label", @style = "margin-bottom: 5px" })
-                    @Html.DropDownList("categorias", null, "Selecione a categoria", new { @class = "form-select", @style = "margin-bottom: 5px", @required = "true" })
-                </p>
-            </div>
-            <div class="linha">
-                <p>
-                    @Html.LabelFor(model => model.descProduto, htmlAttributes: new { @class = "control-label", @style = "margin-bottom: 5px" })
-                    @Html.TextArea("descProduto", (string)ViewBag.desc, new { @class = "form-control text-areaProd", placeholder = "Digite a descrição do produto", rows = "4", cols = "2", style = "resize:none; margin-bottom: 5px", name = "descProduto", @required = "true" })
-                    @Html.ValidationMessageFor(model => model.descProduto, "", new { @class = "text-danger" })
-                </p>
-            </div>
-            <div class="linha btnCadastrar">
-                <button type="submit" class="btn btn-success btnCadastrar"><i class="fas fa-plus-square"></i> Cadastrar Produto</button>
-            </div>
-            <p>@ViewBag.Message</p>
-        </div>
-        <div class="avatarCadastro">
-            <div class="container containerProd">
-                <div class="wrapper wrapperProd">
-                    <div class="image">
-                        @if (Html.LabelFor(model => model.imagemProduto) != null)
-                        {
-                            <img id="preview-img" src="~/img/free-heart-icon.png" alt="">
-                        }
-                        else
-                        {
-
-                            <img id="preview-img" src="" alt="">
-                        }
-                    </div>
-                    <div id="cancel-btn">
-                        <i class="fas fa-times"></i>
-                    </div>
+    @Html.AntiForgeryToken()
+    <div class="containerCadastro">
+        <div class="cardCadastro">
+            <div class="dadosCadastro">
+                <div class="linha">
+                    <p>
+                        @Html.LabelFor(model => model.nomeProduto, htmlAttributes: new { @class = "control-label", @style = "margin-bottom: 5px" })
+                        @Html.EditorFor(model => model.nomeProduto, new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom: 5px", @placeholder = "Digite o nome do produto", @required = "true" } })
+                        @Html.ValidationMessageFor(model => model.nomeProduto, "", new { @class = "text-danger" })
+                    </p>
+                    <p>
+                        @Html.LabelFor(model => model.quantidadeEstoque, htmlAttributes: new { @class = "control-label", @style = "margin-bottom: 5px" })
+                        @Html.EditorFor(model => model.quantidadeEstoque, new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom: 5px", @placeholder = "Digite a quantidade do produto", @required = "true" } })
+                        @Html.ValidationMessageFor(model => model.quantidadeEstoque, "", new { @class = "text-danger" })
+                    </p>
                 </div>
-                <label id="labelFile" class="btnProd" for="default-button"><i class="fas fa-upload"></i> Escolha a imagem do produto</label>
-                <input type="file" name="file" id="default-button">
+                <div class="linha">
+                    <p>
+                        @Html.LabelFor(model => model.codFornecedor, htmlAttributes: new { @class = "control-label", @style = "margin-bottom: 5px" })
+                        @Html.DropDownList("fornecedores", null, "Selecione o Fornecedor", new { @class = "form-select", @style = "margin-bottom: 5px", @required = "true" })
+                    </p>
+                    <p>
+                        @Html.LabelFor(model => model.codEspecie, htmlAttributes: new { @class = "control-label", @style = "margin-bottom: 5px" })
+                        @Html.DropDownList("especies", null, "Selecione a espécie do animal", new { @class = "form-select", @style = "margin-bottom: 5px", @required = "true" })
+                    </p>
+                </div>
+                <div class="linha">
+                    <p>
+                        @Html.LabelFor(model => model.valorUnitario, htmlAttributes: new { @class = "control-label", @style = "margin-bottom: 5px" })
+
+                        @Html.EditorFor(model => model.valorUnitario, new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom: 5px", @placeholder = "Digite o valor do produto (R$)", @id = "valor", @onkeyup = "formatarMoeda()", @required = "true" } })
+                        @Html.ValidationMessageFor(model => model.valorUnitario, "", new { @class = "text-danger" })
+                    </p>
+                    <p>
+                        @Html.LabelFor(model => model.codCategoria, htmlAttributes: new { @class = "control-label", @style = "margin-bottom: 5px" })
+                        @Html.DropDownList("categorias", null, "Selecione a categoria", new { @class = "form-select", @style = "margin-bottom: 5px", @required = "true" })
+                    </p>
+                </div>
+                <div class="linha">
+                    <p>
+                        @Html.LabelFor(model => model.descProduto, htmlAttributes: new { @class = "control-label", @style = "margin-bottom: 5px" })
+                        @Html.TextArea("descProduto", (string)ViewBag.desc, new { @class = "form-control text-areaProd", placeholder = "Digite a descrição do produto", rows = "4", cols = "2", style = "resize:none; margin-bottom: 5px", name = "descProduto", @required = "true" })
+                        @Html.ValidationMessageFor(model => model.descProduto, "", new { @class = "text-danger" })
+                    </p>
+                </div>
+                <div class="linha btnCadastrar">
+                    <button type="submit" class="btn btn-success btnCadastrar"><i class="fas fa-plus-square"></i> Cadastrar Produto</button>
+                </div>
+                <p>@ViewBag.Message</p>
+            </div>
+            <div class="avatarCadastro">
+                <div class="container containerProd">
+                    <div class="wrapper wrapperProd">
+                        <div class="image">
+                            @if (Html.LabelFor(model => model.imagemProduto) != null)
+                            {
+                                <img id="preview-img" src="~/img/sem-foto.jpg" alt="">
+                            }
+                            else
+                            {
+
+                                <img id="preview-img" src="" alt="">
+                            }
+                        </div>
+                        <div id="cancel-btn">
+                            <i class="fas fa-times"></i>
+                        </div>
+                    </div>
+                    <label id="labelFile" class="btnProd" for="default-button"><i class="fas fa-upload"></i> Escolha a imagem do produto</label>
+                    <input type="file" name="file" id="default-button">
+                </div>
             </div>
         </div>
-    </div>
-</div>}
+    </div>}
 
 <script type="text/javascript">
     const wrapper = document.querySelector(".wrapper");

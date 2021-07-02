@@ -172,9 +172,6 @@ namespace ProjetoAW.Controllers
             carrinho.valorTotal -= itemExclusao.valorProduto;
             carrinho.qtdItensVenda -= itemExclusao.quantidadePedido;
             carrinho.itemPedido.Remove(itemExclusao);
-            /*if (carrinho.qtdItensVenda == 1)
-            {
-            }*/
             Session["Carrinho"] = carrinho;
             Session["qtdCarrinho"] = carrinho.qtdItensVenda;
 
@@ -272,7 +269,7 @@ namespace ProjetoAW.Controllers
                 carrinho.itemPedido.Clear();
                 Session["Carrinho"] = null;
                 Session["qtdCarrinho"] = 0;
-                return RedirectToAction("ListaPedido");
+                return RedirectToAction("DadosPedido");
             }
 
             catch (Exception e)

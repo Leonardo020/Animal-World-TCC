@@ -253,6 +253,7 @@
     <Content Include="img\sair.png" />
     <Content Include="img\search_black_24dp.svg" />
     <Content Include="img\search_white_24dp.svg" />
+    <Content Include="img\sem-foto.jpg" />
     <Content Include="img\services1.jpg" />
     <Content Include="img\services2.jpg" />
     <Content Include="img\servicos.png" />

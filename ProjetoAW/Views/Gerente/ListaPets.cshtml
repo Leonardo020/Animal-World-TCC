@@ -1,6 +1,5 @@
-﻿@using X.PagedList.Mvc;
+﻿@model IEnumerable<ProjetoAW.Models.Animal>
 
-@model X.PagedList.PagedList<ProjetoAW.Models.Animal>
 @{
     ViewBag.Title = "ListaPets";
 }
@@ -80,9 +79,4 @@
         }
 
     </table>
-    Listando registros de @Model.FirstItemOnPage a @Model.LastItemOnPage de um total de @Model.TotalItemCount
-    <br />
-    <div class="paginacao">
-        @Html.PagedListPager(Model, pagina => Url.Action("ListaPets", new { pagina }))
-    </div>
 </div>

@@ -88,7 +88,7 @@ namespace ProjetoAW.Controllers
                 return View(produtos);
             }
 
-            else 
+            else
             {
                 var produtos = acProd.consultaProduto().OrderBy(p => p.codProduto).ToPagedList(paginaNumero, 10);
                 if (Session["descontoProd"] != null)
@@ -210,7 +210,11 @@ namespace ProjetoAW.Controllers
                     file.SaveAs(path);
                     prod.imagemProduto = file2;
                 }
-                prod.descProduto = frm["descProduto"];
+
+                else
+                {
+                    prod.descProduto = frm["descProduto"];
+                }
                 acProd.atualizaProduto(prod);
                 TempData["success"] = "Atualização do produto efetuado com sucesso";
             }
@@ -295,7 +299,7 @@ namespace ProjetoAW.Controllers
         public ActionResult ListaProd(string search, int? pagina)
         {
             int paginaNumero = (pagina ?? 1);
-            var produtos = acProd.consultaProdutoPorNome(search).OrderBy(a => a.codProduto).ToPagedList(paginaNumero, 10); 
+            var produtos = acProd.consultaProdutoPorNome(search).OrderBy(a => a.codProduto).ToPagedList(paginaNumero, 10);
             return View(produtos);
         }
 
