@@ -146,7 +146,7 @@
             padding: 8px;
         }
 
-        .element-spacing{
+        .element-spacing {
             padding: 15px;
         }
     </style>
@@ -202,6 +202,21 @@
                     <div class="PagamentoInfo">
                         <h5>@Html.DisplayNameFor(model => model.tipoPagamento): @Html.DisplayFor(modelItem => item.tipoPagamento)</h5>
                     </div>
+
+                    @if (item.codEntrega != 0)
+                    {
+                        <div class="PagamentoInfo">
+                            <h5>@Html.DisplayNameFor(model => model.tipoPagamento): @Html.DisplayFor(modelItem => item.tipoPagamento)</h5>
+                        </div>
+
+                    }
+
+                    else
+                    {
+                        <div class="PagamentoInfo">
+                            <h5>Retirar na loja</h5>
+                        </div>
+                    }
                     <div class="TotalInfo">
                         <h5 id="valor">@Html.DisplayNameFor(model => model.valorTotal): @Html.DisplayFor(modelItem => item.valorTotal)</h5>
                     </div>

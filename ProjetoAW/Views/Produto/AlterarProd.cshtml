@@ -8,6 +8,7 @@
     @Html.AntiForgeryToken()
     @Html.EditorFor(model => model.codProduto, new { htmlAttributes = new { @class = "form-control", @hidden = "true"} })
     <div class="containerCadastro">
+        <a class="btn btn-success" href="/Prouto/ListaProd"><i class="fas fa-arrow-left"></i></a>
         <div class="cardCadastro">
             <div class="avatarCadastro">
                 <div class="container containerProd">
@@ -34,12 +35,12 @@
                 <div class="linha">
                     <p>
                         @Html.LabelFor(model => model.nomeProduto, htmlAttributes: new { @class = "control-label", @style = "margin-bottom: 5px" })
-                        @Html.EditorFor(model => model.nomeProduto, new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom: 5px", @placeholder = "Digite o nome do produto" } })
+                        @Html.EditorFor(model => model.nomeProduto, new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom: 5px", @placeholder = "Digite o nome do produto", @required = "true" } })
                         @Html.ValidationMessageFor(model => model.nomeProduto, "", new { @class = "text-danger" })
                     </p>
                     <p>
                         @Html.LabelFor(model => model.quantidadeEstoque, htmlAttributes: new { @class = "control-label", @style = "margin-bottom: 5px" })
-                        @Html.EditorFor(model => model.quantidadeEstoque, new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom: 5px", @placeholder = "Digite a quantidade do produto" } })
+                        @Html.EditorFor(model => model.quantidadeEstoque, new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom: 5px", @placeholder = "Digite a quantidade do produto", @required = "true" } })
                         @Html.ValidationMessageFor(model => model.quantidadeEstoque, "", new { @class = "text-danger" })
                     </p>
                 </div>
@@ -57,7 +58,7 @@
                     <p>
                         @Html.LabelFor(model => model.valorUnitario, htmlAttributes: new { @class = "control-label", @style = "margin-bottom: 5px" })
 
-                        @Html.EditorFor(model => model.valorUnitario, new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom: 5px", @placeholder = "Digite o valor do produto (R$)", @id = "valor", @onkeyup = "formatarMoeda()" } })
+                        @Html.EditorFor(model => model.valorUnitario, new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom: 5px", @placeholder = "Digite o valor do produto (R$)", @id = "valor", @onkeyup = "formatarMoeda()", @required = "true" } })
                         @Html.ValidationMessageFor(model => model.valorUnitario, "", new { @class = "text-danger" })
                     </p>
                     <p>
@@ -68,7 +69,7 @@
                 <div class="linha">
                     <p>
                         @Html.LabelFor(model => model.descProduto, htmlAttributes: new { @class = "control-label", @style = "margin-bottom: 5px" })
-                        @Html.TextArea("descProduto", (string)ViewBag.desc, new { @class = "form-control text-areaProd", placeholder = "Digite a descrição do produto", rows = "4", cols = "2", style = "resize:none; margin-bottom: 5px", name = "descProduto" })
+                        @Html.TextArea("descProduto", (string)ViewBag.desc, new { @class = "form-control text-areaProd", placeholder = "Digite a descrição do produto", rows = "4", cols = "2", style = "resize:none; margin-bottom: 5px", name = "descProduto", @required = "true" })
                         @Html.ValidationMessageFor(model => model.descProduto, "", new { @class = "text-danger" })
                     </p>
                 </div>

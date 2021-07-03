@@ -11,67 +11,67 @@
     @Html.AntiForgeryToken()
     @Html.EditorFor(model => model.codServico, new { htmlAttributes = new { @class = "form-control", @hidden = "true" } })
     @Html.EditorFor(model => model.imagemServico, new { htmlAttributes = new { @class = "form-control", @hidden = "true" } })
-    <div class="containerCadastro">
-        <div class="cardCadastro">
-            <div class="avatarCadastro">
-                <div class="container containerProd">
-                    <div class="wrapper wrapperProd">
-                        <div class="image">
-                            @if (Html.DisplayFor(model => model.imagemServico) == null)
-                            {
-                                <img id="preview-img" src="~/img/free-heart-icon.png" alt=""> }
-                            else
-                            {
-                                <img id="preview-img" src="@Html.DisplayFor(model => model.imagemServico)" alt="">
-                            }
-                        </div>
-                        <div id="cancel-btn">
-                            <i class="fas fa-times"></i>
-                        </div>
+<div class="containerCadastro">
+    <a class="btn btn-success" href="/Servico/ListaServicos"><i class="fas fa-arrow-left"></i> Voltar</a>
+    <div class="cardCadastro">
+        <div class="avatarCadastro">
+            <div class="container containerProd">
+                <div class="wrapper wrapperProd">
+                    <div class="image">
+                        @if (Html.DisplayFor(model => model.imagemServico) == null)
+                        {
+                            <img id="preview-img" src="~/img/free-heart-icon.png" alt=""> }
+                        else
+                        {
+                            <img id="preview-img" src="@Html.DisplayFor(model => model.imagemServico)" alt="">
+                        }
                     </div>
-                    <label class="btnServ" id="labelFile" for="default-button"><i class="fas fa-upload"></i> Escolha a imagem do serviço</label>
-                    <input type="file" name="file" id="default-button">
+                    <div id="cancel-btn">
+                        <i class="fas fa-times"></i>
+                    </div>
                 </div>
+                <label class="btnServ" id="labelFile" for="default-button"><i class="fas fa-upload"></i> Escolha a imagem do serviço</label>
+                <input type="file" name="file" id="default-button">
             </div>
-            <div class="dadosCadastro">
-                <div class="linha">
-                    <p>
-                        @Html.LabelFor(model => model.nomeServico, htmlAttributes: new { @class = "control-label", @style = "margin-bottom: 5px" })
+        </div>
+        <div class="dadosCadastro">
+            <div class="linha">
+                <p>
+                    @Html.LabelFor(model => model.nomeServico, htmlAttributes: new { @class = "control-label", @style = "margin-bottom: 5px" })
 
-                        @Html.EditorFor(model => model.nomeServico, new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom: 5px" } })
-                        @Html.ValidationMessageFor(model => model.nomeServico, "", new { @class = "text-danger" })
-                    </p>
-                  
-                    <p>
-                        @Html.LabelFor(model => model.valorServico, htmlAttributes: new { @class = "control-label", @style = "margin-bottom: 5px" })
+                    @Html.EditorFor(model => model.nomeServico, new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom: 5px", @required = "true" } })
+                    @Html.ValidationMessageFor(model => model.nomeServico, "", new { @class = "text-danger" })
+                </p>
 
-                        @Html.EditorFor(model => model.valorServico, new { htmlAttributes = new { @class = "form-control currency", @style = "margin-bottom: 5px"} })
-                        @Html.ValidationMessageFor(model => model.valorServico, "", new { @class = "text-danger" })
-                    </p>
-                </div>
+                <p>
+                    @Html.LabelFor(model => model.valorServico, htmlAttributes: new { @class = "control-label", @style = "margin-bottom: 5px" })
 
-                <div class="linha">
-                    <p>
-                        @Html.LabelFor(model => model.horaServico, htmlAttributes: new { @class = "control-label", @style = "margin-bottom: 5px" })
+                    @Html.EditorFor(model => model.valorServico, new { htmlAttributes = new { @class = "form-control currency", @style = "margin-bottom: 5px", @required = "true" } })
+                    @Html.ValidationMessageFor(model => model.valorServico, "", new { @class = "text-danger" })
+                </p>
+            </div>
 
-                        @Html.EditorFor(model => model.horaServico, new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom: 5px" } })
-                        @Html.ValidationMessageFor(model => model.horaServico, "", new { @class = "text-danger" })
-                    </p>
-                    <p>
-                        @Html.LabelFor(model => model.descServico, htmlAttributes: new { @class = "control-label", @style = "margin-bottom: 5px" })
+            <div class="linha">
+                <p>
+                    @Html.LabelFor(model => model.horaServico, htmlAttributes: new { @class = "control-label", @style = "margin-bottom: 5px" })
 
-                        @Html.TextArea("descServico", (string)ViewBag.desc, new { @class = "form-control text-area", placeholder = "Digite a descrição do serviço", rows = "4", style = "resize:none; margin-bottom: 5px;", name = "descServico" })
-                        @Html.ValidationMessageFor(model => model.descServico, "", new { @class = "text-danger" })
-                    </p>
-                </div>
-                <br />
-                <div class="linha">
-                    <button type="submit" class="btn btn-success btnCadServico"><i class="fas fa-edit"></i> Alterar</button>
-                </div>
-                <p>@ViewBag.Message</p>
+                    @Html.EditorFor(model => model.horaServico, new { htmlAttributes = new { @class = "form-control", @style = "margin-bottom: 5px", @required = "true" } })
+                    @Html.ValidationMessageFor(model => model.horaServico, "", new { @class = "text-danger" })
+                </p>
+                <p>
+                    @Html.LabelFor(model => model.descServico, htmlAttributes: new { @class = "control-label", @style = "margin-bottom: 5px" })
+
+                    @Html.TextArea("descServico", (string)ViewBag.desc, new { @class = "form-control text-area", placeholder = "Digite a descrição do serviço", rows = "4", style = "resize:none; margin-bottom: 5px;", name = "descServico", @required = "true" })
+                    @Html.ValidationMessageFor(model => model.descServico, "", new { @class = "text-danger" })
+                </p>
+            </div>
+            <br />
+            <div class="linha">
+                <button type="submit" class="btn btn-success btnCadServico"><i class="fas fa-edit"></i> Alterar</button>
             </div>
         </div>
     </div>
+</div>
 }
 
 <script>

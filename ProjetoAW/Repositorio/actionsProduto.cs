@@ -78,6 +78,8 @@ namespace ProjetoAW.Repositorio
                                                     order by " + filtro ?? string.Empty, cn.Conectar());
             MySqlDataReader dr = cmd.ExecuteReader();
 
+
+
             while (dr.Read())
             {
                 produtos.Add(new Produto
