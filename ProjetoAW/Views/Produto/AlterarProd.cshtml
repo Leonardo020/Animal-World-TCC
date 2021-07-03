@@ -2,13 +2,17 @@
 
 @{ ViewBag.Title = "AlterarProd"; }
 
-<h2 class="--main-title">Alteração de Produto</h2>
+
+<div class="container">
+    <a class="btn btn-success btn-start" href="/Produto/ListaProd"><i class="fas fa-arrow-left"></i> Voltar</a>
+    <h2 class="--main-title">Alteração de Produto</h2>
+</div>
+
 @using (Html.BeginForm("AlterarProd", "Produto", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    @Html.EditorFor(model => model.codProduto, new { htmlAttributes = new { @class = "form-control", @hidden = "true"} })
+    @Html.EditorFor(model => model.codProduto, new { htmlAttributes = new { @class = "form-control", @hidden = "true" } })
     <div class="containerCadastro">
-        <a class="btn btn-success" href="/Prouto/ListaProd"><i class="fas fa-arrow-left"></i></a>
         <div class="cardCadastro">
             <div class="avatarCadastro">
                 <div class="container containerProd">
@@ -76,7 +80,6 @@
                 <div class="linha btnCadastrar">
                     <button type="submit" class="btn btn-success btnCadastrar"><i class="fas fa-edit"></i> Alterar Produto</button>
                 </div>
-                <p>@ViewBag.Message</p>
             </div>
         </div>
     </div>

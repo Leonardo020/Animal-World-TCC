@@ -784,7 +784,7 @@ input[type="file"] {
     font-size: 60px !important;
 }
 
-/*layout paginação*/
+/*layout listas*/
 .paginacao {
     margin-top: 5px;
     padding: 2px;
@@ -814,6 +814,13 @@ input[type="file"] {
             transition-duration: 0.6s;
         }
 
+.btn-start {
+    margin-top: 25px;
+}
+
+.spacing-button{
+    margin-right: 5.5px;
+}
 /* footer */
 footer {
     color: white;

@@ -30,6 +30,7 @@ namespace ProjetoAW.Models
         [Required(ErrorMessage = "Informe a espécie a que se destina o produto")]
         [Display(Name = "Espécie")]
         public int codEspecie { get; set; }
+        public bool isComercializavel { get; set; }
         //atributos extras
         public string nomeCategoria { get; set; }
         public string nomeFornecedor { get; set; }

@@ -32,7 +32,6 @@
             height: 450px;
             background-color: white;
             border-radius: 10px;
-            border: 1px solid #000;
             margin-top: 2rem;
         }
 
@@ -41,13 +40,11 @@
         }
 
         .cardDetalhe {
-            padding: 20px;
             display: flex;
             flex-direction: column;
         }
 
         .cardDetalhe1 {
-            margin: 2rem;
             width: 40%;
         }
 
@@ -67,8 +64,7 @@
         }
 
         #detalheImg {
-            height: 300px;
-            width: 200px;
+            height: auto;
         }
 
         #qntDet {
@@ -79,6 +75,15 @@
             margin-top: 1.2rem;
             font-size: 1.8rem;
         }
+
+        .spacing-border{
+            margin-top: 15px;
+        }
+
+        #estoque{
+            color: #43b581;
+            font-size: 19px;
+        }
     </style>
 </head>
 
@@ -87,25 +92,25 @@
 {
     <div class="contDetalhe">
         <div>
-            <h2> Detalhes do produto:</h2>
+            <h2 class="--main-title"> Detalhes do produto:</h2>
         </div>
-        <div class="detalhes">
+        <div class="detalhes spacing-border">
             <div class="cardDetalhe">
 
-                <!--<img src="@Model.imagemProduto" id="detalheImg">-->
+                <img src="@Model.imagemProduto" id="detalheImg">
             </div>
-            <div class="cardDetalhe1">
-                <!--<h6>@Model.nomeProduto</h6>
-                <p id="precoVit">@Model.valorUnitario</p> -->
-                @Html.DisplayFor(modelItem => model.quantidadeEstoque);
-                <input type="number" value="1" id="qntDet" />
-                <button type="submit" class="btn btn-success" id="addCarrinho"><i class="fas fa-shopping-cart"></i>Adicionar ao Carrinho</button>
-                <h3>Detalhe do Produto:</h3>
-                <br/>
-                <p>
+            <div class="cardDetalhe1 spacing-border">
+                <h6>@Model.nomeProduto</h6>
+                <p id="estoque" class="spacing-border" style="font-weight: 600">@Html.DisplayFor(model => model.valorUnitario)</p>
+                <p id="estoque" class="spacing-border">Em estoque: @Model.quantidadeEstoque</p> 
+                <input id="labelValor" type="number" value="1" class="form-control spacing-border"/>
+                <a class="btn btn-success spacing-border" id="addCarrinho" href="/Venda/AdicionarItemCarrinho/@Model.codProduto"><i class="fas fa-shopping-cart"></i> Adicionar ao Carrinho</a>
+                <h3 class="spacing-border">Detalhe do Produto:</h3>
+                <br />
+                <p class="spacing-border">
                     @Model.descProduto
                 </p>
-                <br/>
+                <br />
                 <a href="/Produto/Vitrine">Voltar para a vitrine.</a>
             </div>
         </div>

@@ -36,7 +36,7 @@ namespace ProjetoAW.Controllers
 
             var qtdTotal = 0;
 
-            if(carrinho.qtdItensVenda > produto.quantidadeEstoque || carrinho.qtdItensVenda < produto.quantidadeEstoque)
+            if (carrinho.qtdItensVenda > produto.quantidadeEstoque)
             {
                 TempData["warning"] = "Quantidade em estoque incompatível com a alterada";
                 return RedirectToAction("MeuCarrinho");
@@ -172,16 +172,13 @@ namespace ProjetoAW.Controllers
             carrinho.valorTotal -= itemExclusao.valorProduto;
             carrinho.qtdItensVenda -= itemExclusao.quantidadePedido;
             carrinho.itemPedido.Remove(itemExclusao);
-            /*if (carrinho.qtdItensVenda == 1)
-            {
-            }*/
             Session["Carrinho"] = carrinho;
             Session["qtdCarrinho"] = carrinho.qtdItensVenda;
 
             return RedirectToAction("MeuCarrinho");
         }
 
-        public ActionResult DadosEntrega(Venda venda)
+        public ActionResult DadosEntrega()
         {
             if ((Session["usuario"] == null) || (Session["senha"] == null))
             {
@@ -229,7 +226,7 @@ namespace ProjetoAW.Controllers
             return View(vendas);
         }
 
-        public ActionResult CadastrarVenda(Venda venda)
+        public ActionResult CadastrarVenda(Venda venda, int id = 0)
         {
             try
             {
@@ -260,14 +257,19 @@ namespace ProjetoAW.Controllers
                     acVenda.cadastraItemVenda(itemPedido);
                 }
 
-                entrega.dataEntrega = venda.dataVenda.AddDays(14);
-                entrega.codCli = venda.codCli;
-                entrega.codPedido = idVenda;
-
-                acEntrega.cadastraEntrega(entrega);
-
-                return RedirectToAction("VendaRealizada", idVenda);
-
+                if (id != 1)
+                {
+                    entrega.dataEntrega = venda.dataVenda.AddDays(14);
+                    entrega.codCli = venda.codCli;
+                    entrega.codPedido = idVenda;
+                    acEntrega.cadastraEntrega(entrega);
+                }
+                TempData["success"] = "Venda cadastrada com sucesso!";
+                carrinho.valorTotal = 0;
+                carrinho.itemPedido.Clear();
+                Session["Carrinho"] = null;
+                Session["qtdCarrinho"] = 0;
+                return RedirectToAction("DadosPedido");
             }
 
             catch (Exception e)
@@ -284,7 +286,8 @@ namespace ProjetoAW.Controllers
             carrinho.itemPedido.Clear();
             Session["Carrinho"] = null;
             Session["qtdCarrinho"] = 0;
-            return View();
+            TempData["success"] = "Venda cadastrada com sucesso!";
+            return RedirectToAction("DadosPedido");
         }
 
         public ActionResult ListaPedido(int? pagina)

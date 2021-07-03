@@ -130,8 +130,6 @@ namespace ProjetoAW.Repositorio
                     cepCli = Convert.ToUInt64(dr["cep"]).ToString(@"00000\-000"),
                     estadoCli = dr["estado"].ToString(),
                     cidadeCli = dr["cidade"].ToString(),
-                    usuarioCli = dr["usuario_cli"].ToString(),
-                    senhaCli = dr["senha_cli"].ToString(),
                 });
             }
 

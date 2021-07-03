@@ -103,11 +103,28 @@ namespace ProjetoAW.Controllers
 
         }
 
-        [HttpPost]
-        public ActionResult Vitrine(FormCollection frm)
+        public ActionResult FiltraPorEspecie(int? pagina, int id)
         {
+            carregaGroups();
+            int paginaNumero = (pagina ?? 1);
+            var produtos = acProd.consultaProdutoPorEspecie(id).OrderBy(p => p.codProduto).ToPagedList(paginaNumero, 10);
+            return View(produtos);
+        }
+
+        public ActionResult FiltraPorFornecedor(int? pagina, int id)
+        {
+            carregaGroups();
+            int paginaNumero = (pagina ?? 1);
+            var produtos = acProd.consultaProdutoPorFornecedor(id).OrderBy(p => p.codProduto).ToPagedList(paginaNumero, 10);
+            return View(produtos);
+        }
+
+        [HttpPost]
+        public ActionResult Vitrine(int? pagina, FormCollection frm)
+        {
+            int paginaNumero = (pagina ?? 1);
             var filtro = frm["filtro"];
-            var produtos = acProd.consultaProduto(filtro);
+            var produtos = acProd.consultaProduto(filtro).ToPagedList(paginaNumero, 10);
             carregaGroups();
             return View(produtos);
         }
@@ -193,7 +210,11 @@ namespace ProjetoAW.Controllers
                     file.SaveAs(path);
                     prod.imagemProduto = file2;
                 }
-                prod.descProduto = frm["descProduto"];
+
+                else
+                {
+                    prod.descProduto = frm["descProduto"];
+                }
                 acProd.atualizaProduto(prod);
                 TempData["success"] = "Atualização do produto efetuado com sucesso";
             }
@@ -207,7 +228,7 @@ namespace ProjetoAW.Controllers
             return View(produtoAtualizado);
         }
 
-        [HttpPost]
+        /*[HttpPost]
         public JsonResult AtualizaFavorito(int id, bool isFavorite)
         {
             try
@@ -223,7 +244,7 @@ namespace ProjetoAW.Controllers
             return new JsonResult { Data = produto, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
 
-        /*public JsonResult DeletaFavorito()
+        public JsonResult DeletaFavorito()
         {
             try
             {
@@ -275,9 +296,10 @@ namespace ProjetoAW.Controllers
         }
 
         [HttpPost]
-        public ActionResult ListaProd(string search)
+        public ActionResult ListaProd(string search, int? pagina)
         {
-            var produtos = acProd.consultaProdutoPorNome(search);
+            int paginaNumero = (pagina ?? 1);
+            var produtos = acProd.consultaProdutoPorNome(search).OrderBy(a => a.codProduto).ToPagedList(paginaNumero, 10);
             return View(produtos);
         }
 

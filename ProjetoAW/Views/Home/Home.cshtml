@@ -135,31 +135,31 @@
     <div class="categorias">
         <div class="linha">
             <div class="circuloEspecie">
-                <a href="/Produto/Vitrine/1" class="actionLink">
+                <a href="/Produto/FiltraPorEspecie/1" class="actionLink">
                     <img class="img-responsive" height="70" width="70" src="~/img/cao.png" />
                     <h3 class="text-center">Cães</h3>
                 </a>
             </div>
             <div class="circuloEspecie">
-                <a href="/Produto/Vitrine/2" class="actionLink">
+                <a href="/Produto/FiltraPorEspecie/2" class="actionLink">
                     <img class="img-responsive" height="70" width="70" src="~/img/gato.png" />
                     <h3 class="text-center">Gatos</h3>
                 </a>
             </div>
             <div class="circuloEspecie">
-                <a href="/Produto/Vitrine/3" class="actionLink">
+                <a href="/Produto/FiltraPorEspecie/3" class="actionLink">
                     <img class="img-responsive" height="70" width="70" src="~/img/papagaio.png" />
                     <h3 class="text-center">Pássaros</h3>
                 </a>
             </div>
             <div class="circuloEspecie">
-                <a href="/Produto/Vitrine/4" class="actionLink">
+                <a href="/Produto/FiltraPorEspecie/4" class="actionLink">
                     <img class="img-responsive" height="70" width="70" src="~/img/coelho.png" />
                     <h3 class="text-center">Roedores</h3>
                 </a>
             </div>
             <div class="circuloEspecie">
-                <a href="/Produto/Vitrine/5" class="actionLink">
+                <a href="/Produto/FiltraPorEspecie/5" class="actionLink">
                     <img class="img-responsive" height="70" width="70" src="~/img/tartaruga.png" />
                     <h3 class="text-center">Répteis</h3>
                 </a>
@@ -191,48 +191,51 @@
             <div class="linhaVitrine">
                 @foreach (var item in Model)
                 {
-                    var id = item.codProduto;
+                    if (item.isComercializavel)
+                    {
+                        var id = item.codProduto;
 
-                    <div class="cardVitrine">
-                        @if (item.isFavorite)
-                        {
-                            <i class="fas fa-heart favVit" id="@id" name="@item.isFavorite.ToString()" value="@item.isFavorite.ToString()" onclick="changeColor(this)" style="color: #43b581"></i>
-                        }
-                        else
-                        {
-                            <i class="far fa-heart favVit" id="@id" name="@item.isFavorite.ToString()" value="@item.isFavorite.ToString()" onclick="changeColor(this)"></i>
+                        <div class="cardVitrine">
+                            @if (item.isFavorite)
+                            {
+                                <i class="fas fa-heart favVit" id="@id" name="@item.isFavorite.ToString()" value="@item.isFavorite.ToString()" onclick="changeColor(this)" style="color: #43b581"></i>
+                            }
+                            else
+                            {
+                                <i class="far fa-heart favVit" id="@id" name="@item.isFavorite.ToString()" value="@item.isFavorite.ToString()" onclick="changeColor(this)"></i>
 
-                        }
-                        @if (item.imagemProduto != null)
-                        {
-                            <a href="/Produto/DetalheProd/@id"><img src="@item.imagemProduto" id="imgVit" /></a>
-                        }
-                        else
-                        {
-                            <img class="card-img-right flex-auto d-none d-md-block" data-src=" " alt="Thumbnail [300x300]" style="width: 300px; height: 300px;" src="~/Images/image-not-found.jpg" data-holder-rendered="true">
-                        }
+                            }
+                            @if (item.imagemProduto != null)
+                            {
+                                <a href="/Produto/DetalheProd/@id"><img src="@item.imagemProduto" id="imgVit" /></a>
+                            }
+                            else
+                            {
+                                <img class="card-img-right flex-auto d-none d-md-block" data-src=" " alt="Thumbnail [300x300]" style="width: 300px; height: 300px;" src="~/Images/image-not-found.jpg" data-holder-rendered="true">
+                            }
 
-                        <hr />
-                        @Html.ActionLink(item.nomeProduto, "DetalheProd", new { id = item.codProduto }, new { @class = "actionProduto" })
+                            <hr />
+                            @Html.ActionLink(item.nomeProduto, "DetalheProd", new { id = item.codProduto }, new { @class = "actionProduto" })
 
-                        @if (item.descontoProd != 0)
-                        {
-                            <s id="valor">@Html.DisplayFor(modelItem => item.valorUnitario)</s>
-                            <h5 class="precoVit">@Html.DisplayFor(modelItem => item.descontoProd)</h5>
-                        }
+                            @if (item.descontoProd != 0)
+                            {
+                                <s id="valor">@Html.DisplayFor(modelItem => item.valorUnitario)</s>
+                                <h5 class="precoVit">@Html.DisplayFor(modelItem => item.descontoProd)</h5>
+                            }
 
-                        else
-                        {
-                            <h5 class="precoVit"> @Html.DisplayFor(modelItem => item.valorUnitario)</h5>
-                        }
-                        @using (Html.BeginForm("AdicionarItemCarrinho", "Venda", FormMethod.Post))
-                        {
-                            <input type="hidden" name="id" value="@item.codProduto" />
-                            <input type="hidden" name="preco" value="@item.valorUnitario" />
-                            <input type="hidden" name="quantidade" value="1" />
-                            <button class="btn btn-success addCarrinho"><i class="fas fa-shopping-cart"></i> Adicionar ao Carrinho</button>
-                        }
-                    </div>
+                            else
+                            {
+                                <h5 class="precoVit"> @Html.DisplayFor(modelItem => item.valorUnitario)</h5>
+                            }
+                            @using (Html.BeginForm("AdicionarItemCarrinho", "Venda", FormMethod.Post))
+                            {
+                                <input type="hidden" name="id" value="@item.codProduto" />
+                                <input type="hidden" name="preco" value="@item.valorUnitario" />
+                                <input type="hidden" name="quantidade" value="1" />
+                                <button class="btn btn-success addCarrinho"><i class="fas fa-shopping-cart"></i> Adicionar ao Carrinho</button>
+                            }
+                        </div>
+                    }
                 }
             </div>
         </div>

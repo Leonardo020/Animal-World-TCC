@@ -59,11 +59,7 @@
     {
         <div class="CardMarc">
             <img class="marcaImg" src="@item.imagemFornecedor">
-            @using(Html.BeginForm("Vitrine", "Produto", FormMethod.Post))
-            {
-                <input type="hidden" value="@item.codFornecedor"/>
-                <input type="submit" class="btn button-a button-big button-rouded btn-success" id="acessoMarca" value="Confira os produtos!">
-            }
+            <a class="btn button-a button-big button-rouded btn-success" href="/Produto/FiltraPorFornecedor/@item.codFornecedor" id="acessoMarca">Confira os produtos!</a>
         </div>
     }
 </div>

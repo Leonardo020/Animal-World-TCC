@@ -28,6 +28,12 @@ namespace ProjetoAW.Controllers
                 TempData["warning"] = "Esteja logado para acessar o arquivo morto!";
                 return RedirectToAction("Login", "Home");
             }
+
+            else if (Session["nivel0"] == null)
+            {
+                TempData["warning"] = "Você não tem acesso a essa página";
+                return RedirectToAction("Home", "Home");
+            }
             return View();
         }
 
@@ -54,6 +60,12 @@ namespace ProjetoAW.Controllers
                 TempData["warning"] = "Esteja logado para atualizar o funcionário!";
                 return RedirectToAction("Login", "Home");
             }
+
+            else if (Session["nivel0"] == null)
+            {
+                TempData["warning"] = "Você não tem acesso a essa página";
+                return RedirectToAction("Home", "Home");
+            }
             var func = acFunc.selecionaFuncionarioPorId(id);
             return View(func);
         }
@@ -65,7 +77,6 @@ namespace ProjetoAW.Controllers
             {
                 acFunc.atualizaFuncionario(func);
                 TempData["success"] = "Funcionário atualizado com sucesso!";
-
             }
 
             catch (Exception e)
@@ -104,6 +115,12 @@ namespace ProjetoAW.Controllers
                 TempData["warning"] = "Esteja logado para cadastrar um fornecedor!";
                 return RedirectToAction("Login", "Home");
             }
+
+            else if (Session["nivel0"] == null)
+            {
+                TempData["warning"] = "Você não tem acesso a essa página";
+                return RedirectToAction("Home", "Home");
+            }
             return View();
         }
 
@@ -138,6 +155,12 @@ namespace ProjetoAW.Controllers
             {
                 TempData["warning"] = "Esteja logado para cadastrar um desconto!";
                 return RedirectToAction("Login", "Home");
+            }
+
+            else if (Session["nivel0"] == null)
+            {
+                TempData["warning"] = "Você não tem acesso a essa página";
+                return RedirectToAction("Home", "Home");
             }
             return View();
         }
@@ -210,6 +233,11 @@ namespace ProjetoAW.Controllers
                 TempData["warning"] = "Esteja logado para consultar a lista de agendamentos!";
                 return RedirectToAction("Login", "Home");
             }
+            else if (Session["nivel0"] == null)
+            {
+                TempData["warning"] = "Você não tem acesso a essa página";
+                return RedirectToAction("Home", "Home");
+            }
             int paginaNumero = (pagina ?? 1);
             var agendamentos = acAgenda.consultaAgendamento().OrderBy(a => a.codAgenda).ToPagedList(paginaNumero, 10);
             return View(agendamentos);
@@ -222,15 +250,21 @@ namespace ProjetoAW.Controllers
                 TempData["warning"] = "Esteja logado para consultar a lista de funcionários!";
                 return RedirectToAction("Login", "Home");
             }
+            else if (Session["nivel0"] == null)
+            {
+                TempData["warning"] = "Você não tem acesso a essa página";
+                return RedirectToAction("Home", "Home");
+            }
             int paginaNumero = (pagina ?? 1);
             var funcionarios = acFunc.consultaFuncionario().OrderBy(f => f.codFunc).ToPagedList(paginaNumero, 10);
             return View(funcionarios);
         }
 
         [HttpPost]
-        public ActionResult ListaFunc(string search)
+        public ActionResult ListaFunc(int? pagina, string search)
         {
-            var funcionarios = acFunc.consultaFuncionarioPorNome(search);
+            int paginaNumero = (pagina ?? 1);
+            var funcionarios = acFunc.consultaFuncionarioPorNome(search).OrderBy(f => f.codFunc).ToPagedList(paginaNumero, 10);
             return View(funcionarios);
         }
 
@@ -240,6 +274,11 @@ namespace ProjetoAW.Controllers
             {
                 TempData["warning"] = "Esteja logado para consultar a lista de animais!";
                 return RedirectToAction("Login", "Home");
+            }
+            else if (Session["nivel0"] == null)
+            {
+                TempData["warning"] = "Você não tem acesso a essa página";
+                return RedirectToAction("Home", "Home");
             }
             var animais = acAnimal.consultaAnimalPorCliente(id);
             return View(animais);
@@ -252,6 +291,11 @@ namespace ProjetoAW.Controllers
             {
                 TempData["warning"] = "Esteja logado para acessar o arquivo morto!";
                 return RedirectToAction("Login", "Home");
+            }
+            else if (Session["nivel0"] == null)
+            {
+                TempData["success"] = "Você não tem acesso a essa página";
+                return RedirectToAction("Home", "Home");
             }
             return View();
         }
